@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Sidebar Nih Bos</title>
+        <link rel="stylesheet" href="coba.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <nav>
+                <div class="sidebar">
+                    <div>
+                        <img src="../img/LogoJTI.jpeg" alt="" style="width: 54px; height: 57px; margin-left: 96px; margin-top: 38px;">
+                    </div>
+                    <ul class="nav-links">
+                        <li class="beranda">
+                            <a href="#">
+                                <i class='bx bx-grid-alt'></i>
+                                <span class="link_name">Beranda</span>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="icon-link">
+                                <a href="#">
+                                    <span class="link_name_1">Informasi Ruangan</span>
+                                </a>
+                                <i class='bx bxs-chevron-down arrow'></i>
+                            </div>
+                            <ul class="sub-menu">
+                                <li>
+                                    <i class='bx bx-list-ul'></i>
+                                    <a href="#">Daftar Ruang</a>
+                                </li>
+                                <li>
+                                    <i class='bx bx-calendar'></i>
+                                    <a href="#">Jadwal Ruang</a>
+                                </li>
+                                <li>
+                                    <i class='bx bx-map-alt'></i>
+                                    <a href="#">Denah Ruang</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="icon-link">
+                                <a href="#">
+                                    <span class="link_name_1">Peminjaman</span>
+                                </a>
+                                <i class='bx bxs-chevron-down arrow'></i>
+                            </div>
+                            <ul class="sub-menu">
+                                <li>
+                                    <i class='bx bxs-user'></i>
+                                    <a href="#">Pinjam Ruangan</a>
+                                </li>
+                                <li>
+                                    <i class='bx bx-book-bookmark'></i>
+                                    <a href="#">Antrean Peminjaman</a>
+                                </li>
+                                <li>
+                                    <i class='bx bx-rotate-left'></i>
+                                    <a href="#">Pengembalian</a>
+                                </li>
+                                <li>
+                                    <i class='bx bx-history' ></i>
+                                    <a href="#">Riwayat</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>            
+            <main>
+                <header>
+                    <!-- <i class='bx bx-menu' style="color: #fff; margin: 20px; width: 1000px; height: 40px;"></i>
+                     -->
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="39.403" height="40" viewBox="0 0 24 24" style="fill: #fff;"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path></svg>
+                    </a>
+                    
+                    <a href="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="39.403" height="40" viewBox="0 0 24 24" style="fill: #fff;"><path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path></svg>
+                    </a>
+                    
+                </header>
+                <div class="content">
+                    <div class="tujupuluh">
+                        <h1>
+                            Antrean Peminjaman
+                        </h1>                    
+                    </div>
+                    <table>                        
+                        <div class="cari" style="display: flex; gap: 16px;">
+                            <div class="search-box">
+                                <input type="text" placeholder="Search...">
+                            </div>
+                            <div class="search">
+                                <button>Search...</button>
+                            </div>                            
+                        </div>                                    
+                    </table>
+                    <div class="tujupuluh">
+                        <table>
+                            <thead>
+                                <tr>                                
+                                    <th>ID Ruang</th>
+                                    <th>Nama Ruang</th>
+                                    <th>Deskripsi</th>
+                                    <th>Lantai</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <tbody>
+                            
+                        </tbody>                    
+                    </div> 
+                </div>             
+            </main>
+           
+        </div>  
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        
+        for (var i = 0; i < arrow.length; i++){
+            arrow[i].addEventListener("click", (e)=>{
+                let arrowParent = e.target.parentElement.parentElement;
+                console.log(arrowParent);
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+    </script>
+    </body>
+</html>
