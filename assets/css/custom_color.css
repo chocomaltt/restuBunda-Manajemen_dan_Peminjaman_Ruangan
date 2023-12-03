@@ -29,6 +29,19 @@
     background-color: var(--warna-hijau);
 }
 
+.btn-kuning{
+    color: var(--warna-biru);
+    background-color: var(--warna-kuning);
+}
+
+.btn-kuning:hover{
+    background-color: var(--warna-kuning);
+}
+
+.btn-kuning:active{
+    background-color: var(--warna-kuning);
+}
+
 .bg-biru{
     background-color: var(--warna-biru);
 }
@@ -70,6 +83,8 @@
 }
 
 .bg-user-default{
+    padding: 0;
+    margin: 0;
     background-color: var(--warna-biru); 
     opacity: 1;
     background-image: url(../../assets/img/gedung_sipil.png);
@@ -77,3 +92,8 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.rotate {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }

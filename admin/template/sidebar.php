@@ -1,20 +1,20 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Document</title> -->
+<!-- </head> -->
+<!-- <body> -->
+        <div class="container-fluid p-0 m-0 sidebar bg-white z-3 position-absolute start-0" style="width:20%; height: 100vh;">
     <style>
         .hover-effect:hover, .active{
             border-radius: 3px !important;
             background-color: #F3C623;
         }
     </style>
-</head>
-<body>
-    <div class="sidebar bg-white z-3 position-absolute start-0" style="width:20%; height: 100vh;">
         <div class="d-flex flex-row justify-content-center align-items-center mt-4" style="height: 15%;">
             <img src="../../assets/img/logo_jti_baru.png" alt="logo JTI Polinema" style="width: 54px; height: 57px;">
         </div>
@@ -77,16 +77,16 @@
             </div>
         </div>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
         function activateMenu(event){
             event.preventDefault();
             const menu = document.querySelectorAll('.list-group-item');
             menu.forEach((menu =>{
-                menu.classList.remove('active');
+                menu.classList.remove(' active');
             }));
-            event.parentNode.parentNode.classList.add('active');
+            event.parentNode.parentNode.classList.add(' active');
         }
     </script>
-</body>
-</html>
+<!-- </body>
+</html> -->
