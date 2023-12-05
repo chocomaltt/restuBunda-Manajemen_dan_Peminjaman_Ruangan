@@ -27,7 +27,7 @@
     </style>
 </head>
 <body>
-    <div class="d-flex flex-row position-absolute end-0 p-0 m-0" style="width: 80%;">
+    <div class="d-flex flex-row position-relative" style="width: 80vw;">
         <header class="z-1 navbar sticky-top bg-biru flex-md-nowrap shadow pe-4 shadow-none w-100">
             <!-- <i class="h2 bi bi-list putih"></i> -->
             <div class="d-flex flex-row w-100 justify-content-between">
@@ -53,7 +53,6 @@
             </div>
         </header>
     </div>
-    <button id="openPopup" onclick="openPopup()">Buka Pop-up</button>
 
 <div id="popupOverlay" class="popupOff">
   <div id="popupContent">
@@ -123,19 +122,14 @@
     padding: 20px;
     border-radius: 25px;
     width: 70%;
-    /* max-width: 1129x; */
     text-align: center;
   }
 
   /* Styling untuk tombol tutup */
   #closePopup {
-    /* padding: 10px 20px; */
-    /* background-color: #ccc; */
     border-radius: 30px;
     cursor: pointer;
   }
-
-  /* Hover style pada tombol tutup */
 </style>
 
 <script>

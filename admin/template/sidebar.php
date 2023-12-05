@@ -8,7 +8,7 @@
     <title>Document</title> -->
 <!-- </head> -->
 <!-- <body> -->
-        <div class="container-fluid p-0 m-0 sidebar bg-white z-3 position-absolute start-0" style="width:20%; height: 100vh;">
+        <div class="container-fluid p-0 m-0 sidebar bg-white z-3 position-fixed start-0" style="width:20%; height: 100vh;">
     <style>
         .hover-effect:hover, .active{
             border-radius: 3px !important;
