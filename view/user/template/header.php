@@ -1,4 +1,4 @@
-<!-- HAPUS ../../ SEBELUM RUN INDEX.PHP -->
+<!-- HAPUS  SEBELUM RUN INDEX.PHP -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css">
-    <link rel="stylesheet" href="../../assets/css/custom_color.css">
+    <link rel="stylesheet" href="assets/css/custom_color.css">
     <style>
         @font-face {
             font-family: 'Plus Jakarta Sans';
@@ -16,9 +16,7 @@
             url('assets/font/PlusJakartaSans-Italic-VariableFont_wght.ttf') format('.ttf');
         }
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow: hidden;
-        
+            font-family: 'Plus Jakarta Sans', sans-serif;        
         }
 
         .custom-label{
@@ -46,7 +44,7 @@
 
                     <ul class="dropdown-menu dropdown-menu-end mt-2">
                         <li class="list-group-item" id="openPopup"><button class="dropdown-item" onclick="openPopup()">Ganti Password</button></li>
-                        <li class="list-group-item"><a href="../../login.php" class="dropdown-item">Logout</a></li>
+                        <li class="list-group-item"><a href="login.php" class="dropdown-item">Logout</a></li>
                     </ul>
                 </div>
 

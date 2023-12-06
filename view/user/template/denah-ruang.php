@@ -6,16 +6,16 @@
         <div class="container" style="padding: 40px 100px;">
             <div class="row row-cols-2 d-flex justify-content-start">
                 <div class="col">
-                    <img src="../../assets/img/denah gedung TI 5-6-7-8-1.png" alt="" style="width: 80%; margin: 30px;">
+                    <img src="assets/img/denah gedung TI 5-6-7-8-1.png" alt="" style="width: 80%; margin: 30px;">
                 </div>
                 <div class="col">
-                    <img src="../../assets/img/denah gedung TI 5-6-7-8-2.png" alt="" style="width: 80%; margin: 30px;">
+                    <img src="assets/img/denah gedung TI 5-6-7-8-2.png" alt="" style="width: 80%; margin: 30px;">
                 </div>
                 <div class="col">
-                    <img src="../../assets/img/denah gedung TI 5-6-7-8-3.png" alt="" style="width: 80%; margin: 30px;">
+                    <img src="assets/img/denah gedung TI 5-6-7-8-3.png" alt="" style="width: 80%; margin: 30px;">
                 </div>
                 <div class="col">
-                    <img src="../../assets/img/denah gedung TI 5-6-7-8-4.png" alt="" style="width: 80%; margin: 30px;">
+                    <img src="assets/img/denah gedung TI 5-6-7-8-4.png" alt="" style="width: 80%; margin: 30px;">
                 </div>
             </div>
         </div>

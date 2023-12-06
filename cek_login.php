@@ -1,36 +1,71 @@
-     <?php
-if(session_status() === PHP_SESSION_NONE)
-    session_start();
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verifikasi reCAPTCHA
+    $recaptchaSecretKey = "6Ld5qhgpAAAAAGVQJeOny9_1CAUQL9aIu4qBduan";
+    $recaptchaResponse = $_POST["g-recaptcha-response"];
 
-// include "config/koneksi.php";
-// include "function/pesan_kilat.php";
-// include "function/anti_injection.php";
+    $recaptchaUrl = "https://www.google.com/recaptcha/api/siteverify";
+    $recaptchaData = [
+        "secret" => $recaptchaSecretKey,
+        "response" => $recaptchaResponse,
+    ];
 
-header("Location: admin/template/home.php");
+    $recaptchaOptions = [
+        "http" => [
+            "method" => "POST",
+            "content" => http_build_query($recaptchaData),
+        ],
+    ];
 
-// $username = antiinjection($koneksi, $_POST['username']);
-// $password = antiinjection($koneksi, $_POST['password']);
+    $recaptchaContext = stream_context_create($recaptchaOptions);
+    $recaptchaResult = json_decode(file_get_contents($recaptchaUrl, false, $recaptchaContext), true);
 
-// $query = "SELECT username, level, salt, password as hashed_password FROM user WHERE username = '$username'";
-// $result = mysqli_query($koneksi, $query);
-// $row = mysqli_fetch_assoc($result);
-// mysqli_close($koneksi);
-// $salt = $row['salt'];
-// $hashed_password = $row['hashed_password'];
-// header("Location: index.php");
-// if($salt !== null && $hashed_password !== null){
-//     $combined_password  = $salt . $password;
-
-//     if(password_verify($combined_password, $hashed_password)){
-//         $_SESSION['username'] = $row['username'];
-//         $_SESSION['level'] = $row['level'];
-//         header("Location: index.php");
-//     } else {
-//         pesan('danger', "Login gagal. Password Anda Salah.");
-//         header("Location: login.php");
-//     }
-// } else {
-//     pesan('warning', "Username tidak ditemukan.");
-//     header("Location: login.php");
-// }
+    // Cek apakah reCAPTCHA valid
+    if ($recaptchaResult["success"]) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        include "config/koneksi.php";
+        include "function/pesan_kilat.php";
+        include "function/anti_injection.php";
+        
+        $username = antiinjection($koneksi, $_POST['username']);
+        $password = antiinjection($koneksi, $_POST['password']);
+        
+        $query = "SELECT Username, LevelID, Salt, Password as hashed_password FROM Akun WHERE Username = '$username'";
+        $result = mysqli_query($koneksi, $query);
+        
+        // Tambahkan kode untuk menampilkan query jika terjadi kesalahan
+        if (!$result) {
+            die('Error in query: ' . mysqli_error($koneksi));
+        }
+        
+        $row = mysqli_fetch_assoc($result);
+        mysqli_close($koneksi);
+        
+        $salt = $row['Salt'];
+        $hashed_password = $row['hashed_password'];
+        
+        if ($salt !== null && $hashed_password !== null) {
+            $combined_password = $salt . $password;
+            if (password_verify($combined_password, $hashed_password)) {
+                $_SESSION['username'] = $row['Username']; // Perbaiki penulisan kolom 'Username'
+                $_SESSION['level'] = $row['LevelID'];    // Perbaiki penulisan kolom 'LevelID'
+                header("location:index.php");
+            } else {
+                // pesan('danger', "Login gagal. Password Anda Salah.");
+                // header("Location: login.php");
+                echo "Login gagal. Password Anda Salah.";
+            }
+        } else {
+            // pesan('warning', "Username tidak ditemukan.");
+            // header("Location: login.php");
+            echo "Username tidak ditemukan.";
+        }
+    } else {
+        // Tampilkan pesan error jika reCAPTCHA tidak valid
+        echo "reCAPTCHA verification failed.";
+    }
+}
 ?>

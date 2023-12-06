@@ -11,11 +11,12 @@
             </div>
             <div class="d-flex flex-column w-100 h-100">
                 <?php
-                include "header.php";
+                    include "header.php";
+                    // include "beranda.php";
                     // include "beranda.php";
                     // include "daftar-ruang.php";
                     // include "jadwal-ruang.php";
-                    include "denah-ruang.php";
+                    // include "denah-ruang.php";
                 ?>
             </div>
         </div>
