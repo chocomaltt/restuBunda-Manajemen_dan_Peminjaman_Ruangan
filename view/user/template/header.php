@@ -16,9 +16,7 @@
             url('assets/font/PlusJakartaSans-Italic-VariableFont_wght.ttf') format('.ttf');
         }
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow: hidden;
-        
+            font-family: 'Plus Jakarta Sans', sans-serif;        
         }
 
         .custom-label{

@@ -2,6 +2,7 @@
 if(session_status() === PHP_SESSION_NONE)
     session_start();
 include "function/pesan_kilat.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
