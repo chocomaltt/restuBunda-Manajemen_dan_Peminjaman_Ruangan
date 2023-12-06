@@ -9,6 +9,7 @@ if(!empty($_SESSION['level'])){
     // require 'function/fungsi.php';
     if($_SESSION['level']==1){
         include 'view/admin/template/sidebar.php';
+        include 'view/admin/template/header.php';
         if(!empty($_GET['page'])){
             include 'view/admin/' . $_GET['page'];
         } else {
