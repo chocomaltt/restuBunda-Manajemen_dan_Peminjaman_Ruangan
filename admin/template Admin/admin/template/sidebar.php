@@ -8,9 +8,9 @@
     <title>Document</title> -->
 <!-- </head> -->
 <!-- <body> -->
-    <div class="container-fluid p-0 m-0 sidebar bg-white z-3 position-fixed start-0" style="width:20%; height: 100vh;">
+        <div class="container-fluid p-0 m-0 sidebar bg-white z-3 position-fixed start-0" style="width:20%; height: 100vh;">
     <style>
-        .hover-effect:hover, .list-group-item.aktif{
+        .hover-effect:hover, .active{
             border-radius: 3px !important;
             background-color: #F3C623;
         }
@@ -24,21 +24,21 @@
                 <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="mb-1">
                 <path d="M9.56242 6.37492V2.83325H14.1666V6.37492H9.56242ZM2.83325 8.49992V2.83325H7.43742V8.49992H2.83325ZM9.56242 14.1666V8.49992H14.1666V14.1666H9.56242ZM2.83325 14.1666V10.6249H7.43742V14.1666H2.83325ZM3.54159 7.79158H6.72909V3.54159H3.54159V7.79158ZM10.2708 13.4583H13.4583V9.20825H10.2708V13.4583ZM10.2708 5.66659H13.4583V3.54159H10.2708V5.66659ZM3.54159 13.4583H6.72909V11.3333H3.54159V13.4583Z" fill="#10375C"/>
                 </svg>
-                <a href="#" class="link-dark link-underline link-underline-opacity-0 aktif" onclick="activateMenu(event)">Beranda</a>
+                <a href="#" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">Beranda</a>
                 </li>
             </ul>
             <div class="collapseButton mx-4">
-                <a href="#collapseInformasi" class="d-flex flex-row justify-content-between align-items-center text-decoration-none hitam" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseInformasi">Informasi Ruangan<img src="../../assets/img/vector-down.png" alt=""></a>
+                <a href="#collapseInformasi" class="list-group-item d-flex flex-row justify-content-between align-items-center" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseInformasi">Informasi Ruangan<img src="../../assets/img/vector-down.png" alt=""></a>
             </div>
             <div class="collapse mx-4" id="collapseInformasi">
                 <ul class="list-group gap-2">
                         <li class="list-group-item hover-effect" style="border-style: none;" >
-                        <a href="home.php?page=daftar-ruang" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">
+                        <a href="#" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">
                         <img src="../../assets/img/daftar-ruangan.png" alt="" class="pb-1">
                         <span class="ms-2">Daftar Ruang</span></a></li>
 
                         <li class="list-group-item hover-effect" style="border-style: none;" >
-                        <a href="home.php?page=jadwal-ruang" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">
+                        <a href="#" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">
                         <img src="../../assets/img/jadwal.png" alt="" class="pb-1">
                         <span class="ms-2">Jadwal Ruang</span></a></li>
 
@@ -49,7 +49,7 @@
                 </ul>
             </div>
             <div class="collapseButton mx-4">
-                <a href="#collapsePeminjaman" class="d-flex flex-row justify-content-between align-items-center text-decoration-none hitam" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapsePeminjaman">Peminjaman<img src="../../assets/img/vector-down.png" alt=""></a>
+                <a href="#collapsePeminjaman" class="list-group-item d-flex flex-row justify-content-between align-items-center" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapsePeminjaman">Peminjaman<img src="../../assets/img/vector-down.png" alt=""></a>
             </div>
             <div class="collapse mx-4" id="collapsePeminjaman">
                 <ul class="list-group gap-2">
@@ -79,56 +79,14 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-       function setActiveMenu() {
-            const menuItems = document.querySelectorAll('.list-group-item');
-
-            menuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    menuItems.forEach(menu => {
-                        menu.classList.remove('aktif');
-                    });
-
-                    this.classList.add('aktif');
-                });
-            });
-        }
-
-        function activateMenu(event) {
+        function activateMenu(event){
             event.preventDefault();
-            const menuItem = event.target.closest('.list-group-item');
-            menuItem.click();
+            const menu = document.querySelectorAll('.list-group-item');
+            menu.forEach((menu =>{
+                menu.classList.remove(' active');
+            }));
+            event.parentNode.parentNode.classList.add(' active');
         }
-
-        // <button onclick="sendPage('ruang1')">Ruang 1</button>
-
-        function sendPage(page) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "home.php", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            // xhttp.onreadystatechange = function() {
-            // if (this.readyState == 4 && this.status == 200) {
-            //     // Tanggapan dari home.php jika diperlukan
-            // }
-            // };
-            xhttp.send("page=" + page);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const collapseButtons = document.querySelectorAll('.collapseButton');
-            
-            collapseButtons.forEach(button => {
-                button.addEventListener('click', function(event) {
-                if (!event.target.closest('.collapse')) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                });
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            setActiveMenu();
-        });
     </script>
 <!-- </body>
 </html> -->
