@@ -62,7 +62,7 @@
                     <h2 class="judul">Antrean Peminjaman</h2>
                     <?php
                         // include "function/fungsi.php";
-                        $result = readData($koneksi,'Peminjaman',["COUNT(*) AS total"], "StatusPeminjaman='Menunggu Konfirmasi'");
+                        $result = readData($koneksi,'Peminjaman',["COUNT(*) AS total"], '',"StatusPeminjaman='Menunggu Konfirmasi'");
                     ?>
                         <h1 class="angka"><?php echo$result[0]['total'];?></h1>
                         <a href="index.php?page=peminjaman.php" class="link"><h2 class="info">Lihat Lebih Banyak
@@ -81,7 +81,7 @@
                     <h2 class="judul">Antrean Pengembalian</h2>
                     <?php
                         // include "function/fungsi.php";
-                        $result = readData($koneksi,'Peminjaman',["COUNT(*) AS total"], "StatusPengembalian='Menunggu Konfirmasi'");
+                        $result = readData($koneksi,'Peminjaman',["COUNT(*) AS total"], '', "StatusPengembalian='Menunggu Konfirmasi'");
                     ?>
                         <h1 class="angka"><?php echo$result[0]['total'];?></h1>
                         <a href="index.php?page=pengembalian.php" class="link"><h2 class="info">Lihat Lebih Banyak

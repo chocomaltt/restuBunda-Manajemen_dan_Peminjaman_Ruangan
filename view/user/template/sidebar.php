@@ -16,7 +16,7 @@
         }
     </style>
         <div class="d-flex flex-row justify-content-center align-items-center mt-4" style="height: 15%;">
-            <img src="../../assets/img/logo_jti_baru.png" alt="logo JTI Polinema" style="width: 54px; height: 57px;">
+            <img src="assets/img/logo_jti_baru.png" alt="logo JTI Polinema" style="width: 54px; height: 57px;">
         </div>
         <div class="d-flex flex-column justify-content-start mx-1 gap-3">
             <ul class="list-group">
@@ -28,34 +28,34 @@
                 </li>
             </ul>
             <div class="collapseButton mx-4">
-                <a href="#collapseInformasi" class="list-group-item d-flex flex-row justify-content-between align-items-center" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseInformasi">Informasi Ruangan<img src="../../assets/img/vector-down.png" alt=""></a>
+                <a href="#collapseInformasi" class="list-group-item d-flex flex-row justify-content-between align-items-center" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseInformasi">Informasi Ruangan<img src="assets/img/vector-down.png" alt=""></a>
             </div>
             <div class="collapse mx-4" id="collapseInformasi">
                 <ul class="list-group gap-2">
                         <li class="list-group-item hover-effect" style="border-style: none;" >
                         <a href="index.php?page=daftar-ruang.php" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">
-                        <img src="../../assets/img/daftar-ruangan.png" alt="" class="pb-1">
+                        <img src="assets/img/daftar-ruangan.png" alt="" class="pb-1">
                         <span class="ms-2">Daftar Ruang</span></a></li>
 
                         <li class="list-group-item hover-effect" style="border-style: none;" >
                         <a href="#" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">
-                        <img src="../../assets/img/jadwal.png" alt="" class="pb-1">
+                        <img src="assets/img/jadwal.png" alt="" class="pb-1">
                         <span class="ms-2">Jadwal Ruang</span></a></li>
 
                         <li class="list-group-item hover-effect" style="border-style: none;" >
                         <a href="#" class="link-dark link-underline link-underline-opacity-0" onclick="activateMenu(event)">
-                        <img src="../../assets/img/house-plan 1.png" alt="" class="pb-1">
+                        <img src="assets/img/house-plan 1.png" alt="" class="pb-1">
                         <span class="ms-2">Denah Ruang</span></a></li>
                 </ul>
             </div>
             <div class="collapseButton mx-4">
-                <a href="#collapsePeminjaman" class="list-group-item d-flex flex-row justify-content-between align-items-center" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapsePeminjaman">Peminjaman<img src="../../assets/img/vector-down.png" alt=""></a>
+                <a href="#collapsePeminjaman" class="list-group-item d-flex flex-row justify-content-between align-items-center" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapsePeminjaman">Peminjaman<img src="assets/img/vector-down.png" alt=""></a>
             </div>
             <div class="collapse mx-4" id="collapsePeminjaman">
                 <ul class="list-group gap-2">
                     <li class="list-group-item hover-effect" style="border-style: none;">
                     <a href="#" class="link-dark link-underline link-underline-opacity-0">
-                    <img src="../../assets/img/pinjam.png" alt="" class="pb-1">
+                    <img src="assets/img/pinjam.png" alt="" class="pb-1">
                     <span class="ms-2">Pinjam Ruangan</span></a></li>
 
                     <li class="list-group-item hover-effect" style="border-style: none;">
@@ -66,12 +66,12 @@
                         
                     <li class="list-group-item hover-effect" style="border-style: none;">
                     <a href="#" class="link-dark link-underline link-underline-opacity-0" style="border-style: none;">
-                    <img src="../../assets/img/borrow 1.png" alt="" class="pb-1">
+                    <img src="assets/img/borrow 1.png" alt="" class="pb-1">
                     <span class="ms-2">Pengembalian</span></a></li>
 
                     <li class="list-group-item hover-effect" style="border-style: none;">
                     <a href="#" class="link-dark link-underline link-underline-opacity-0">
-                    <img src="../../assets/img/return 1.png" alt="" class="pb-1">
+                    <img src="assets/img/return 1.png" alt="" class="pb-1">
                     <span class="ms-2">Riwayat</span></a></li>
                 </ul>
             </div>

@@ -14,7 +14,7 @@ function insertData($conn, $table, $data) {
     return $result;
 }
 
-function readData($conn, $mainTable, $columns = array(), $conditions = array(), $whereConditions = array()) {
+function readData($conn, $mainTable, $columns = array(), $conditions = array(), $whereCondition = "") {
     // Construct SQL query based on provided parameters
     if (empty($columns)) {
         $columnList = "*"; // Ambil semua kolom
@@ -33,9 +33,9 @@ function readData($conn, $mainTable, $columns = array(), $conditions = array(), 
         }
     }
 
-    // Add WHERE conditions if provided
-    if (!empty($whereConditions)) {
-        $sql .= " WHERE " . implode(" AND ", $whereConditions);
+    // Add WHERE condition if provided
+    if (!empty($whereCondition)) {
+        $sql .= " WHERE $whereCondition";
     }
 
     // Perform query
@@ -51,8 +51,6 @@ function readData($conn, $mainTable, $columns = array(), $conditions = array(), 
 
     return $data;
 }
-
-
 
 
 
