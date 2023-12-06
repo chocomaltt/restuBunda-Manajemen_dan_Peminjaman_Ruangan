@@ -37,7 +37,7 @@ include "function/pesan_kilat.php";
                 <h2 class="text-white fw-medium">Selamat Datang</h2>
             </div>
             <div class="col bg-biru d-flex flex-column justify-content-center align-items-center">
-                <form id="loginForm" action="cek_login.php" class="d-flex flex-column gap-3 w-75 px-3 py-5 bg-white rounded-4" method="post">
+                <form id="loginForm" action="cek_login.php" class="d-flex flex-column gap-3 w-75 px-3 py-5 bg-white rounded-4" method="post" onsubmit="return validateForm()">
                     <div class="w-100 justify-content-center">
                         <img src="assets/img/logo_jti_baru.png" style="width: 13%;" class="justify-content-center" alt="">
                     </div>
@@ -51,7 +51,7 @@ include "function/pesan_kilat.php";
                         <label for="floatingPassword">Password</label>
                     </div>
                     <!-- recaptcha v2 -->
-                    <div class="g-recaptcha" data-sitekey="6Ld5qhgpAAAAAPaPpVpRRO2_4TfMCMZMqHDKgObt" data-callback="onSubmit"></div>
+                    <div class="g-recaptcha" data-sitekey="6Ld5qhgpAAAAAPaPpVpRRO2_4TfMCMZMqHDKgObt"></div>
 
                     <div class="d-flex justify-content-between">
                         <div class="form-check text-start mt-2 ">
@@ -64,12 +64,21 @@ include "function/pesan_kilat.php";
             </div>
         </div>
     </section>
-
     <script>
-        function onSubmit(token) {
-            document.getElementById("loginForm").submit();
-        }
-    </script>
+function validateForm() {
+    // Mengambil nilai captcha response
+    var captchaResponse = grecaptcha.getResponse();
 
+    // Memeriksa apakah captcha telah diisi
+    if (captchaResponse.length == 0) {
+        // Jika captcha kosong, tampilkan pesan kesalahan dan batalkan pengiriman formulir
+        alert("Harap isi captcha sebelum melanjutkan.");
+        return false;
+    }
+
+    // Jika captcha telah diisi, lanjutkan pengiriman formulir
+    return true;
+}
+</script>
 </body>
 </html>
