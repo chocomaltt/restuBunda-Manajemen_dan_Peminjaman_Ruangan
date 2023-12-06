@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="../../assets/css/custom_color.css"> -->
 
 
-<div class="z-0 position-absolute end-0 w-75" style=" height: 90%;">
-    <div class="d-flex flex-column h-100 justify-content-center align-items-center">
+<div class="position-absolute end-0 w-100 vh-100" style="z-index: 0; max-width: 80%;">
+    <div class="w-100 vh-100 position-relative d-flex flex-column justify-content-center align-items-center" style="z-index: 0; margin-top: 20px; padding: 0 30px;">
         <h1 class="text-light fw-normal">SISTEM PEMINJAMAN RUANGAN</h1>
         <h2 class="text-light fw-normal mb-5">JURUSAN TEKNOLOGI INFORMASI</h2>
 

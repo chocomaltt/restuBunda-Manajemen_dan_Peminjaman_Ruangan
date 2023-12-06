@@ -1,11 +1,14 @@
 :root{
     --warna-biru: #10375C !important;
-    --warna-hijau: #127782 !important;
-    --warna-hijau-subtle: #127681 !important;
+    --warna-hijau: #127681 !important;
     --warna-putih: #fff !important;
     --warna-hitam: #222 !important;
     --warna-background: #f4f6ff !important;
     --warna-kuning: #F3C623 !important;
+}
+
+.hitam{
+    color: var(--warna-hitam);
 }
 
 .biru{
@@ -45,6 +48,10 @@
 
 .bg-biru{
     background-color: var(--warna-biru);
+}
+
+.bg-hijau{
+    background-color: var(--warna-hijau);
 }
 
 .bg-default{
@@ -89,20 +96,12 @@
     background-color: var(--warna-biru);
     /* opacity: 1; */
     background-image: url(../../assets/img/gedung_sipil.png);
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.rotate {
-    transform: rotate(180deg);
-    transition: transform 0.3s ease;
-  }
 
 .tableHead{
     padding: 1rem;
-}
-
-.table-striped tbody tr:nth-of-type(odd){
-    background-color: var(--warna-biru) ;
 }
