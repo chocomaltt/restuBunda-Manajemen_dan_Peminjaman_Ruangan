@@ -37,32 +37,32 @@
                 </tr>
             </thead>
             <tbody>
-            <?php
-                        $no = 1;
-                        $joinConditions = array(
-                            "jadwalruang" => "ruang.RuangID = jadwalruang.RuangID"
-                        );
-                        $query = readData($koneksi, "ruang",'',$joinConditions);
-                        if(!empty($query)) {
-                            foreach ($query as $row){
+                <?php
+                    $no = 1;
+                    $joinConditions = array(
+                        "jadwalruang" => "ruang.RuangID = jadwalruang.RuangID",
+                    );
+                    $query = readData($koneksi, "ruang",'', $joinConditions);
+                    if(!empty($query)) {
+                        foreach ($query as $row){
+                ?>
+                <tr>
+                    <td scope="row"><?= $no++; ?></td>
+                    <td><?= $row['NamaRuang']; ?></td>
+                    <td><?= $row['JenisRuang']; ?></td>
+                    <td><?= $row['DeskripsiRuang']; ?></td>
+                    <td><?= $row['Lantai']; ?></td>
+                    <td><?= $row['Kapasitas']; ?></td>
+                    <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span><span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span></td>
+                    <?php
+                        }
+                        } else {
                     ?>
-                    <tr>
-                        <td scope="row"><?= $no++; ?></td>
-                        <td><?= $row['NamaRuang']; ?></td>
-                        <td><?= $row['JenisRuang']; ?></td>
-                        <td><?= $row['DeskripsiRuang']; ?></td>
-                        <td><?= $row['Lantai']; ?></td>
-                        <td><?= $row['Kapasitas']; ?></td>
-                        <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span><span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span></td>
-                        <?php
-                            }
-                            } else {
-                        ?>
-                        <td colspan="4">Tidak Ada Data Tersedia</td>
-                        <?php
-                            }
-                        ?>
-                    </tr>
+                    <td colspan="4">Tidak Ada Data Tersedia</td>
+                    <?php
+                        }
+                    ?>
+                </tr>
             </tbody>
         </table>
     </div>
