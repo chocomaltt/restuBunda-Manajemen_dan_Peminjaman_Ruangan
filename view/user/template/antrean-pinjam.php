@@ -1,4 +1,4 @@
-<div class="position-absolute end-0 w-100 vh-100" style="z-index: 0; max-width: 80%;">
+<div class="container position-absolute end-0 w-100 vh-100" style="z-index: 0; max-width: 80%;">
     <div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
        <p class="text-white fw-bold fs-2">ANTREAN PEMINJAMAN</p>
         <!-- <div class="d-flex gap-2" style="align-items: center;">
@@ -24,6 +24,7 @@
                 background-color: rgb(18, 119, 130,0.5) !important;
             }
     </style>
+    <div class="table-responsive">
         <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
             <thead>
                 <tr>
@@ -65,5 +66,6 @@
                 </tr>
             </tbody>
         </table>
+    </div>
     </div>
 </div>

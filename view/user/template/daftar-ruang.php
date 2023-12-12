@@ -27,41 +27,41 @@
         <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
             <thead>
                 <tr>
-                    <th class="tableHead">ID Ruang</th>
+                    <th class="tableHead">No</th>
                     <th class="tableHead">Nama Ruang</th>
+                    <th class="tableHead">Jenis Ruang</th>
                     <th class="tableHead">Deskripsi</th>
                     <th class="tableHead">Lantai</th>
+                    <th class="tableHead">Kapasitas</th>
                     <th class="tableHead">Status</th>
                 </tr>
             </thead>
             <tbody>
+                <?php
+                    $no = 1;
+                    $joinConditions = array(
+                        "jadwalruang" => "ruang.RuangID = jadwalruang.RuangID",
+                    );
+                    $query = readData($koneksi, "ruang",'', $joinConditions);
+                    if(!empty($query)) {
+                        foreach ($query as $row){
+                ?>
                 <tr>
-                    <td>1</td>
-                    <td>Ruang A</td>
-                    <td>Ruang pertemuan</td>
-                    <td>Lantai 2</td>
+                    <td scope="row"><?= $no++; ?></td>
+                    <td><?= $row['NamaRuang']; ?></td>
+                    <td><?= $row['JenisRuang']; ?></td>
+                    <td><?= $row['DeskripsiRuang']; ?></td>
+                    <td><?= $row['Lantai']; ?></td>
+                    <td><?= $row['Kapasitas']; ?></td>
                     <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span><span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Ruang B</td>
-                    <td>Ruang kelas</td>
-                    <td>Lantai 1</td>
-                    <td><span class="py-2 px-4 bg-secondary-subtle me-2 rounded fw-bold" style="font-size:small">Terpakai</span><span class="p-2 bg-warning rounded fw-bold" style="font-size:small">Tidak Terpakai</span></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Ruang C</td>
-                    <td>Ruang laboratorium</td>
-                    <td>Lantai 3</td>
-                    <td><span class="py-2 px-4 bg-secondary-subtle me-2 rounded fw-bold" style="font-size:small">Terpakai</span><span class="p-2 bg-warning rounded fw-bold" style="font-size:small">Tidak Terpakai</span></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Ruang D</td>
-                    <td>Ruang teori</td>
-                    <td>Lantai 4</td>
-                    <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span><span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span></td>
+                    <?php
+                        }
+                        } else {
+                    ?>
+                    <td colspan="4">Tidak Ada Data Tersedia</td>
+                    <?php
+                        }
+                    ?>
                 </tr>
             </tbody>
         </table>
