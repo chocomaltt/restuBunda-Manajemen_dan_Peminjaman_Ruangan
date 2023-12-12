@@ -1,15 +1,19 @@
 <div class="position-absolute end-0 w-100 vh-100" style="z-index: 0; max-width: 80%;">
     <div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">       
     <p class="text-white fw-bold fs-2">JADWAL RUANG</p>
-        <div class="d-flex gap-2" style="align-items: center;">
-            <div style="width: 30%;">
-                <input type="search" name="" id="" placeholder="Pilih Ruang" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <div style="width: 18%;">
-                <input type="search" name="" id="" placeholder="Tentukan Tanggal" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <button class="bg-biru text-white" style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
+        <!-- Form Pencarian -->
+<form method="post" action="">
+    <div class="d-flex gap-2" style="align-items: center;">
+        <div style="width: 30%;">
+            <input type="search" name="keyword" placeholder="Pilih Keyword" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
         </div>
+        <div style="width: 18%;">
+            <input type="date" name="tanggal" placeholder="Tentukan Tanggal" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+        </div>
+        <button type="submit" name="search" class="bg-biru text-white" style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
+    </div>
+</form>
+
         <style>  
             .table-striped-green{
                 background-color: var(--warna-putih);
@@ -26,50 +30,102 @@
                 background-color: rgb(18, 119, 130,0.5) !important;
             }
         </style>
+        
         <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
             <thead>
                 <tr>
                     <th class="tableHead">Kelas</th>
                     <th class="tableHead">Nama Ruang</th>
+                    <th class="tableHead">Hari</th>
                     <th class="tableHead">Lantai</th>
                     <th class="tableHead">Mata Kuliah</th>
                     <th class="tableHead">Dosen</th>
-                    <th class="tableHead">Waktu</th>
+                    <th class="tableHead">Waktu Mulai</th>
+                    <th class="tableHead">Waktu Akhir</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>TI-2E</td>
-                    <td>RT 01</td>
-                    <td>5</td>
-                    <td>Basis Data Lanjut</td>
-                    <td>Yan Watequlis Syaifuddin</td>
-                    <td>07.00-10.15</td>
-                </tr>
-                <tr>
-                    <td>TI-2B</td>
-                    <td>RT 07</td>
-                    <td>5</td>
-                    <td>GUI</td>
-                    <td>Anugrah</td>
-                    <td>07.00-10.15</td>
-                </tr>
-                <tr>
-                    <td>TI-1G</td>
-                    <td>LPR 07</td>
-                    <td>7</td>
-                    <td>Dasar Pemrograman</td>
-                    <td>Vivi Nur Wijayaningrum</td>
-                    <td>07.00-10.15</td>
-                </tr>
-                <tr>
-                    <td>TI-4E</td>
-                    <td>LSI 01</td>
-                    <td>6</td>
-                    <td>Bahasa Inggris Untuk Bisnis</td>
-                    <td>Pak Faiz</td>
-                    <td>07.00-10.15</td>
-                </tr>
+                <?php
+                $joinConditions = array(
+                    "ruang" => "jadwalruang.RuangID = ruang.RuangID",
+                    "hari" => "jadwalruang.HariID = hari.HariID",
+                    "sesi" => "jadwalruang.SesiMulaiID = sesi.SesiID",
+                    "matakuliah" => "jadwalruang.MataKuliahID = matakuliah.MataKuliahID",
+                    "akun" => "jadwalruang.AkunID = akun.AkunID",
+                    "kelas" => "jadwalruang.KelasID = kelas.KelasID"
+                );
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            // Cek apakah form pencarian dikirimkan
+                            if (isset($_POST['search'])) {
+                                $keyword = $_POST['keyword'];
+                                $tanggal = $_POST['tanggal'];
+                                // Inisialisasi kondisi pencarian
+                                $searchConditions = array();
+                        
+                                // Buat kondisi pencarian berdasarkan keyword jika diisi
+                                if (!empty($keyword)) {
+                                    $searchConditions = "(
+                                        ruang.NamaRuang LIKE '%$keyword%' OR
+                                        hari.NamaHari LIKE '%$keyword%' OR
+                                        sesi.JudulSesi LIKE '%$keyword%' OR
+                                        matakuliah.NamaMataKuliah LIKE '%$keyword%' OR
+                                        akun.Nama LIKE '%$keyword%' OR
+                                        kelas.NamaKelas LIKE '%$keyword%'
+                                    )";
+                                }
+                        
+                                // Buat kondisi pencarian berdasarkan tanggal jika diisi
+                                if (!empty($tanggal)) {
+                                    $searchConditions[] = "DATE(jadwalruang.WaktuMulai) = '$tanggal'";
+                                }
+                        
+                                // Gabungkan kondisi pencarian dengan kondisi join sebelumnya
+                                // $conditions = array_merge($joinConditions, $searchConditions);
+                        
+                                // Lakukan query dengan kondisi pencarian
+                                $query = readData($koneksi, "jadwalruang",'',$joinConditions, $searchConditions,);
+                            }
+                        } else {
+                            // Jika form pencarian tidak dikirimkan, tampilkan semua data
+                            $query = readData($koneksi, "jadwalruang", '', $joinConditions);
+                        }
+                        
+                        
+                        // $query = readData($koneksi, "jadwalruang",'',$joinConditions);
+                        if (!empty($query)) {
+                            foreach ($query as $row) {
+                                ?>
+                                <tr>
+                                    <td><?= $row['NamaKelas']; ?></td>
+                                    <td><?= $row['NamaRuang']; ?></td>
+                                    <td><?= $row['NamaHari']; ?></td>
+                                    <td><?= $row['JudulSesi']; ?></td>
+                                    <td><?= $row['NamaMataKuliah']; ?></td>
+                                    <td><?= $row['Nama']; ?></td>
+                                    <td><?php
+                                        $querySesi = readData($koneksi, "sesi", '', '', 'sesiID ='.$row['SesiMulaiID']);
+                                        foreach ($querySesi as $rows) {
+                                            echo $row['WaktuMulai'];
+                                        }
+                                    ?></td>
+                                    <td><?php
+                                        $querySesi = readData($koneksi, "sesi", '', '', 'sesiID ='.$row['SesiAkhirID']);
+                                        foreach ($querySesi as $rows) {
+                                            echo $row['WaktuSelesai'];
+                                        }
+                                    ?></td>
+                                    <td><?= $row['NamaMataKuliah']; ?></td>
+                                </tr>
+                                <?php
+                            }
+                        } else {
+                            ?>
+                            <tr>
+                                <td colspan="8">Tidak Ada Data Tersedia</td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
             </tbody>
         </table>
     </div>

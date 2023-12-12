@@ -77,6 +77,17 @@ function validateForm() {
         return false;
     }
 
+    // Mengambil nilai checkbox Remember Me
+    var rememberMeCheckbox = document.getElementById("rememberMe");
+    var rememberMeValue = rememberMeCheckbox.checked ? 1 : 0;
+
+    // Menambahkan nilai Remember Me ke input tersembunyi
+    var hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+    hiddenInput.setAttribute("name", "rememberMe");
+    hiddenInput.setAttribute("value", rememberMeValue);
+    document.getElementById("loginForm").appendChild(hiddenInput);
+
     // Jika captcha telah diisi, lanjutkan pengiriman formulir
     return true;
 }
