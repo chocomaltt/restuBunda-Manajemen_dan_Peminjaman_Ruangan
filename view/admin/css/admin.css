@@ -364,3 +364,40 @@ table .cari .search {
 .link{
   text-decoration: none;
 }
+
+#popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.popupOff {
+  display: none;
+}
+
+.popupOn {
+  display: flex;
+}
+
+/* Styling untuk konten pop-up */
+#popupContent {
+  z-index: 11;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 25px;
+  width: 70%;
+  text-align: center;
+}
+
+/* Styling untuk tombol tutup */
+#closePopup {
+  border-radius: 30px;
+  cursor: pointer;
+}

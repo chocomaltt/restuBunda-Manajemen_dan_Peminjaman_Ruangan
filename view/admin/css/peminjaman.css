@@ -56,6 +56,9 @@ body {
 .sidebar .nav-links .sub-menu li:hover {
   background: #f3c623;
 }
+.sidebar .nav-links .sub-menu .active {
+  background: #f3c623 !important;
+}
 .sidebar .nav-links li .icon-link {
   display: flex;
   align-items: center;
@@ -71,11 +74,11 @@ body {
   transition: all 0.3s ease;
 }
 .icon-link a {
-    width: 100%;
+  width: 100%;
 }
-  
+
 .arrow {
-    cursor: pointer;
+  cursor: pointer;
 }
 .sidebar .nav-links li.showMenu i.arrow {
   transform: rotate(-180deg);
@@ -189,39 +192,25 @@ header {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
-  
+  margin-top: 5px;
 }
-tr{
-  justify-content: space-between  ;
-  border: none;
-}
-
- td{
-  border: none;
-  font-size: 0.8em;
-  text-align: center;
-  padding: 8px;
-  width: 100%;
-}
-
-th {
+tr {
+  text-align: left;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
   color: #000;
-  font-size: 0.8em;
-  text-align: start;
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+  border: 1px solid #000;
+  border-radius: 10px;
 }
 
 .search-box {
+  width: 296px;
   height: 42px;
   border-radius: 30px;
   padding-left: 15px;
   opacity: 70%;
   border: 1px solid;
-  width: 100%;
 }
 
 .search-box:focus {
@@ -243,6 +232,18 @@ tr:nth-child(even) {
   background-color: #1a5389;
 }
 
+table .cari {
+  width: 300px;
+  height: 100px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+table .cari .search {
+  width: 10px;
+  height: 300px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
 .tambah {
   font-weight: 600;
   width: 87px;
@@ -255,60 +256,11 @@ tr:nth-child(even) {
   margin-left: auto;
   transition: all 0.3s ease-in-out;
 }
-
+.denahrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .tambah:hover {
   background-color: #155897;
-}
-
-button.btn-warning {
-    background-color: #f39c12;
-    color: #fff;
-    border: 1px solid #f39c12;
-    padding: 10px;
-    border-radius: 25%;
-}
-
-button.btn-warning:hover {
-    background-color: #e08e0b;
-    border: 1px solid #e08e0b;
-}
-
-/* Gaya Tombol Hapus */
-button.btn-danger {
-    background-color: #e74c3c;
-    color: #fff;
-    border: 1px solid #e74c3c;
-    padding: 10px;
-    border-radius: 25%;
-}
-
-button.btn-danger:hover {
-    background-color: #c04131;
-    border: 1px solid #c04131;
-}
-tbody tr {
-  background-color: #f2f2f2; /* Ganti dengan warna yang Anda inginkan */
-}
-tbody {
-  display: flex;
-}
-
-@media print {
-  table {
-      page-break-inside: auto; /* Membuat batas halaman di dalam elemen tabel */
-  }
-
-  thead tr {
-      display: table-row;
-      page-break-inside: avoid; /* Hindari pembatas halaman di dalam elemen thead */
-  }
-
-  tbody tr {
-      display: table-row;
-      page-break-inside: auto; /* Membuat batas halaman di dalam elemen tbody */
-  }
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
 }

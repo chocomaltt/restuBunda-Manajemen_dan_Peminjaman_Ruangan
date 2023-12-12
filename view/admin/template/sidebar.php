@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -93,4 +94,4 @@
                     </li>
                 </ul>
         </nav>
-    <!-- </div> -->
+        <!-- </div> -->
