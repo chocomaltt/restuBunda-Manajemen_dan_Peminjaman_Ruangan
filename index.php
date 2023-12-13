@@ -20,6 +20,7 @@ if(!empty($_SESSION['level'])){
     <div class="d-flex vw-100 vh-100">
         <div class="w-25 h-100 m-0 p-0">
             <?php
+
             include 'view/user/template/sidebar.php';
             ?>
         </div>

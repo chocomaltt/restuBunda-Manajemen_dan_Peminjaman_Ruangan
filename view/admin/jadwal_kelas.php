@@ -5,7 +5,7 @@
 <div class="content" style="display: flex; gap: 8px; flex-direction: column;">
     <div class="tujupuluh">
         <h1>
-            Jadwal Ruang
+            Jadwal Kelas
         </h1>
     </div>
     <div class="cari" style="display: flex; gap: 16px; align-items: center;">
@@ -35,7 +35,7 @@
                 $joinConditions = array(
                     "ruang" => "jadwalruang.RuangID = ruang.RuangID",
                     "hari" => "jadwalruang.HariID = hari.HariID",
-                    "sesi" => "jadwalruang.SesiID = sesi.SesiID",
+                    "sesi" => "jadwalruang.SesiMulaiID OR jadwalruang.SesiAkhirID = sesi.SesiID",
                     "matakuliah" => "jadwalruang.MataKuliahID = matakuliah.MataKuliahID",
                     "akun" => "jadwalruang.AkunID = akun.AkunID",
                 );

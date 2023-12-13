@@ -3,21 +3,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <main class="d-flex flex-column">
-    <!-- <header>
-    <a href="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="39.403" height="40" viewBox="0 0 24 24" style="fill: #fff;">
-            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
-        </svg>
-    </a>
-    <a href="">
-        <svg xmlns="http://www.w3.org/2000/svg" width="39.403" height="40" viewBox="0 0 24 24" style="fill: #fff;">
-            <path
-                d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z">
-            </path>
-        </svg>
-    </a>
 
-    </header> -->
     <div class="container-fluid">
         <div class="tujupuluh">
             <h1>
@@ -27,7 +13,11 @@
         <div class="cari" style="display: flex; gap: 16px; align-items: center;">
             <input class="search-box" type="text" placeholder=" Cari Pengguna">
             <button class="search-button">Cari</button>
-            <button class="tambah">Tambah</button>
+            <!-- <button class="tambah">Tambah</button> -->
+            <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                data-bs-whatever="@mdo">
+                <i class="bi bi-person-add"></i>Tambah
+            </button>
         </div>
         <table class="table" style="table-layout: auto;">
             <thead>
@@ -60,9 +50,11 @@
                     <td><?= $row['NamaKelas'] ?></td>
                     <td><?= $row['Keterangan']; ?></td>
                     <td>
-                        <a href="index.php?page=anggota/edit&id=<?php echo $row['AkunID']; ?>"
+                        <!-- <a href="index.php?page=anggota/edit&id=<?php echo $row['AkunID']; ?>"
                             class="btn btn-warning btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            Edit</a>
+                            Edit</a> -->
+                        <a role="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal"
+                            data-bs-whatever="@mdo">Edit</a>
                         <a href="fungsi/hapus.php?anggota=hapus&id=<?php echo $row['AkunID']; ?>"
                             onclick="javascript:return confirm('Hapus Data Anggota ?');"
                             class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
@@ -80,5 +72,85 @@
         </table>
     </div>
 </main>
-
+<div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Pengguna</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="../../function/tambah.php?user=tambah" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">Nama Pengguna :</label>
+                        <input type="text" name="idUser" class="form-control" id="id">
+                    </div>
+                    <div class=" mb-3">
+                        <label for="id" class="col-form-label">Kelas :</label>
+                        <input type="text" name="passUser" class="form-control" id="id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">Level :</label>
+                        <!-- <input type="text" name="passUser" class="form-control" id="id"> -->
+                        <select name="levelID" id="label" class="form-select">
+                            <option selected>Pilih Level</option>
+                            <option value="Level">Admin</option>
+                            <option value="Level">Dosen</option>
+                            <option value="Level">Mahasiswa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
+                            class="bi bi-x-lg"></i>Simpan</button>
+                    <button type="submit" class="btn btn-danger" aria-hidden="true"><i
+                            class="bi bi-floppy"></i>Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+<div class="modal fade" id="editModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Ruangan</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="../../function/tambah.php?user=tambah" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">Nama Pengguna :</label>
+                        <input type="text" name="idUser" class="form-control" id="id">
+                    </div>
+                    <div class=" mb-3">
+                        <label for="id" class="col-form-label">Kelas :</label>
+                        <input type="text" name="passUser" class="form-control" id="id">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">Level :</label>
+                        <!-- <input type="text" name="passUser" class="form-control" id="id"> -->
+                        <select name="levelID" id="label" class="form-select">
+                            <option selected>Pilih Level</option>
+                            <option value="Level">Admin</option>
+                            <option value="Level">Dosen</option>
+                            <option value="Level">Mahasiswa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
+                            class="bi bi-x-lg"></i>Ubah</button>
+                    <button type="submit" class="btn btn-danger" aria-hidden="true"><i
+                            class="bi bi-floppy"></i>Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
