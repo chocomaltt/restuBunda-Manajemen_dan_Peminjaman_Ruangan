@@ -1,6 +1,4 @@
 <?php
-
-
 function insertData($conn, $table, $data) {
 
     $columns = implode(", ", array_keys($data));
@@ -14,7 +12,7 @@ function insertData($conn, $table, $data) {
     return $result;
 }
 
-function readData($conn, $mainTable, $columns = array(), $conditions = array(), $whereCondition = "") {
+function readData($conn, $mainTable, $columns = '', $conditions = array(), $whereCondition = "") {
     // Construct SQL query based on provided parameters
     if (empty($columns)) {
         $columnList = "*"; // Ambil semua kolom
@@ -80,4 +78,12 @@ function deleteData($conn, $table, $columnIDName, $id) {
     return $result;
 }
 
+
+// Fungsi untuk mengatur cookie Remember Me
+function setRememberMeCookie($userID, $token) {
+    $cookieValue = $userID . ':' . $token;
+    $cookieExpire = time() + (30 * 24 * 60 * 60); // Cookie berlaku selama 30 hari
+
+    setcookie('remember_me', $cookieValue, $cookieExpire, '/');
+}
 ?>
