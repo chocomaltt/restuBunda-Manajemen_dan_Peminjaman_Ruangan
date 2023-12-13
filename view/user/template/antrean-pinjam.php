@@ -41,25 +41,31 @@
                     $joinConditions = array(
                         "ruang" => "peminjaman.RuangID = ruang.RuangID"
                     );
-                    $query = readData($koneksi, "peminjaman", '', $joinConditions, 'AkunID = '.$_SESSION['idUser'].' AND StatusPeminjaman = "Menunggu Konfirmasi"');
+                    $query = readData($koneksi, "peminjaman", '', $joinConditions, 'AkunID = '.$_SESSION['idUser']);
                     if (!empty($query)) {
                         foreach ($query as $row) {
                             ?>
                             <tr>
-                                <th scope="row">
+                                <td scope="row">
                                     <?= $no++; ?>
-                                </th>
-                                <td>
-                                    <?= $row['NamaRuang']; ?>
                                 </td>
                                 <td>
-                                    <?= $row['WaktuPinjam']."-".$row['WaktuKembali']; ?>
+                                    <?= $row['DeskripsiRuang']; ?>
+                                </td>
+                                <td>
+                                    <?= $row['WaktuPinjam']." - ".$row['WaktuKembali']; ?>
                                 </td>
                                 <td>
                                     <?= $row['Keperluan']; ?>
                                 </td>
                                 <td>
-                                    <?= $row['StatusPeminjaman']; ?>
+                                    <?php
+                                        if($row['StatusPeminjaman']=="Menunggu Konfirmasi"){
+                                    ?>
+                                            <span class="py-2 px-3 bg-biru me-2 rounded-pill fw-bold text-white" style="font-size:small">Menunggu</span>
+                                            <span class="py-2 px-4 bg-danger rounded-pill fw-bold text-white" style="font-size:small">Batalkan</span>
+                                        <?php }
+                                    ?>
                                 </td>
                                 <?php
                         }

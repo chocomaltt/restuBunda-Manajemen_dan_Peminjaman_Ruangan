@@ -11,11 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $peminjamanRuang = cekPeminjamanRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
 
     if (empty($jadwalRuang) && empty($peminjamanRuang)) {
-        // Penyisipan data
-        echo "Data berhasil disimpan.";
+        $queryiInsert = insertData($koneksi, 'peminjaman', $data);
+        if ($queryiInsert) {
+            // Jika penyisipan berhasil
+            echo '<script>alert("Data berhasil disimpan.");</script>';
+            echo '<script>window.location.href = "index.php?page=pinjam-ruangan.php";</script>';
+        }
     } else {
         // Menampilkan pesan jika waktu dan ruang tidak tersedia
-        echo 'Jadwal ruang tidak tersedia. Pilih waktu dan ruang lain.';
+        echo '<script>alert("Jadwal ruang tidak tersedia. Pilih waktu dan ruang lain.");</script>';
+        echo '<script>window.location.href = "index.php?page=pinjam-ruangan.php";</script>';
     }
 }
 ?>
