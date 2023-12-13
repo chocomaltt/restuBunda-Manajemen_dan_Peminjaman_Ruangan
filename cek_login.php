@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $recaptchaContext = stream_context_create($recaptchaOptions);
     $recaptchaResult = json_decode(file_get_contents($recaptchaUrl, false, $recaptchaContext), true);
 
+
     // Cek apakah reCAPTCHA valid
     if ($recaptchaResult["success"]) {
         if (session_status() === PHP_SESSION_NONE) {
@@ -33,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = antiinjection($koneksi, $_POST['username']);
         $password = antiinjection($koneksi, $_POST['password']);
         
-        $query = "SELECT Username, LevelID, Salt, Password as hashed_password FROM Akun WHERE Username = '$username'";
+        $query = "SELECT AkunID, Username, LevelID, Salt, Password as hashed_password FROM Akun WHERE Username = '$username'";
         $result = mysqli_query($koneksi, $query);
         
         // Tambahkan kode untuk menampilkan query jika terjadi kesalahan
@@ -50,8 +51,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($salt !== null && $hashed_password !== null) {
             $combined_password = $salt . $password;
             if (password_verify($combined_password, $hashed_password)) {
-                $_SESSION['username'] = $row['Username']; // Perbaiki penulisan kolom 'Username'
+                $_SESSION['idUser'] = $row['AkunID']; // Perbaiki penulisan kolom 'Username'
                 $_SESSION['level'] = $row['LevelID'];    // Perbaiki penulisan kolom 'LevelID'
+                echo "ooo";
+                // Tambahkan kode Remember Me
+                // if (isset($_POST['rememberMe']) && $_POST['rememberMe'] == 1) {
+                //     $expire = time() + 30 * 24 * 60 * 60; // Cookie berlaku selama 30 hari
+                //     setcookie('remembered_user', $row['Username'], $expire, '/');
+                // }
+                $rememberMe = isset($_POST['rememberMe']) ? $_POST['rememberMe'] : 0;
+
+                if ($rememberMe) {
+                    // Jika Remember Me diaktifkan, atur cookie
+                    setRememberMeCookie($userID, generateToken());
+                }
                 header("location:index.php");
             } else {
                 // pesan('danger', "Login gagal. Password Anda Salah.");
