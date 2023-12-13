@@ -59,3 +59,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Function to set the min attribute for datetime-local inputs
+    function setMinDatetime() {
+        // Get the current date and time in the required format (YYYY-MM-DDTHH:mm)
+        const currentDate = new Date().toISOString().slice(0, 16);
+
+        // Set the min attribute for the datetime-local inputs
+        document.getElementById('WaktuPinjam').min = currentDate;
+        document.getElementById('WaktuKembali').min = currentDate;
+
+        // Add an event listener to "WaktuPinjam" to update the min attribute of "WaktuKembali"
+        document.getElementById('WaktuPinjam').addEventListener('input', function () {
+            // Update the min attribute of "WaktuKembali" based on the selected value of "WaktuPinjam"
+            document.getElementById('WaktuKembali').min = this.value;
+        });
+    }
+
+    // Call the function to set the min attribute when the page loads
+    window.onload = setMinDatetime;
+</script>
+
