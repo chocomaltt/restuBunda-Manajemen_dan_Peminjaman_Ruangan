@@ -79,7 +79,6 @@ function deleteData($conn, $table, $columnIDName, $id) {
 }
 
 
-
 // Fungsi untuk mengatur cookie Remember Me
 function setRememberMeCookie($userID, $token) {
     $cookieValue = $userID . ':' . $token;
@@ -88,4 +87,3 @@ function setRememberMeCookie($userID, $token) {
     setcookie('remember_me', $cookieValue, $cookieExpire, '/');
 }
 ?>
-
