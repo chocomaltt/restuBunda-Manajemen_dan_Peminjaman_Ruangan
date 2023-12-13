@@ -47,7 +47,7 @@
                             </li>
                             <li>
                                 <i class='bx bx-calendar'></i>
-                                <a href="index.php?page=jadwal_ruang.php">Jadwal Ruang</a>
+                                <a href="index.php?page=jadwal_kelas.php">Jadwal Kelas</a>
                             </li>
                             <li>
                                 <i class='bx bx-map-alt'></i>

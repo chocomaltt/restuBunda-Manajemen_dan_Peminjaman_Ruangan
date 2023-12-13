@@ -3,20 +3,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <main>
-    <!-- <header>
-        <a href="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="39.403" height="40" viewBox="0 0 24 24" style="fill: #fff;">
-                <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path>
-            </svg>
-        </a>
-        <a href="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="39.403" height="40" viewBox="0 0 24 24" style="fill: #fff;">
-                <path
-                    d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z">
-                </path>
-            </svg>
-        </a>
-    </header> -->
+
     <div class="content" style="display: flex; gap: 8px; flex-direction: column;">
         <div class="denahrow">
             <h1>
@@ -30,7 +17,8 @@
                     style="width: 540px; height: 363px; border-radius: 20px;">
                 <div class="lt">
                     Denah Ruang Lantai 5
-                    <button class="detail">Detail</button>
+                    <a role="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModalDenah"
+                        data-bs-whatever="@mdo">Detail</a>
                 </div>
             </div>
             <div class="denah">
@@ -38,7 +26,8 @@
                     style="width: 540px; height: 363px; border-radius: 20px;">
                 <div class="lt">
                     Denah Ruang Lantai 6
-                    <button class="detail">Detail</button>
+                    <a role="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModalDenah"
+                        data-bs-whatever="@mdo">Detail</a>
                 </div>
             </div>
             <div class="denah">
@@ -46,7 +35,8 @@
                     style="width: 540px; height: 363px; border-radius: 20px;">
                 <div class="lt">
                     Denah Ruang Lantai 7
-                    <button class="detail">Detail</button>
+                    <a role="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModalDenah"
+                        data-bs-whatever="@mdo">Detail</a>
                 </div>
             </div>
             <div class="denah">
@@ -54,10 +44,42 @@
                     style="width: 540px; height: 363px; border-radius: 20px;">
                 <div class="lt">
                     Denah Ruang Lantai 8
-                    <button class="detail">Detail</button>
+                    <a role="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModalDenah"
+                        data-bs-whatever="@mdo">Detail</a>
                 </div>
             </div>
         </div>
 </main>
-
+<div class="modal fade" id="editModalDenah" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Denah</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="../../function/tambah.php?user=tambah" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">Upload Denah :</label>
+                        <input type="file" name="idUser" class="form-control" id="id"
+                            accept=".png, .jpg, .jpeg, .svg, .heic">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">Deskripsi :</label>
+                        <input type="text" name="passUser" class="form-control" id="id">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
+                            class="bi bi-x-lg"></i>Ubah</button>
+                    <button type="submit" class="btn btn-danger" aria-hidden="true"><i
+                            class="bi bi-floppy"></i>Hapus</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
