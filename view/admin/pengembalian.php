@@ -20,13 +20,13 @@
                 </a>
 
             </header> -->
-    <div class="content" style="display: flex; gap: 8px; flex-direction: column;">
+    <div class="table-responsive">
         <div class="tujupuluh">
             <h1>
                 Antrean Pengembalian
             </h1>
         </div>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Nama Peminjam</th>
@@ -37,10 +37,10 @@
                     <th>Aksi</th>
                 </tr>
             </thead>
-        </table>
-        <tbody>
+            <tbody>
 
-        </tbody>
+            </tbody>
+        </table>
         <!-- </div>  -->
     </div>
 </main>
