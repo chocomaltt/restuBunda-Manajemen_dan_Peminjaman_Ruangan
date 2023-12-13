@@ -66,7 +66,7 @@ body {
 }
 .sidebar .nav-links li i {
   height: 50px;
-  min-width: 78px;
+  /* min-width: 78px; */
   text-align: center;
   line-height: 50px;
   color: #10375c;
@@ -95,7 +95,7 @@ body {
   color: #10375c;
 }
 .sidebar .link_name_1 {
-  padding-left: 30px;
+  /* padding-left: 30px; */
   color: #10375c;
 }
 .sidebar .nav-links li .sub-menu {
@@ -189,20 +189,6 @@ header {
 .content {
   padding: 20px;
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 5px;
-}
-tr {
-  text-align: left;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-around;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 10px;
-}
 
 .search-box {
   width: 296px;
@@ -264,3 +250,18 @@ table .cari .search {
 .tambah:hover {
   background-color: #155897;
 }
+
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+tr {
+  text-align: left;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 10px;
+} */

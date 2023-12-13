@@ -1,4 +1,8 @@
-<main>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<main class="container-fluid">
     <!-- <header>
     <a href="">
         <svg xmlns="http://www.w3.org/2000/svg" width="39.403" height="40" viewBox="0 0 24 24" style="fill: #fff;">
@@ -14,7 +18,7 @@
     </a>
 
     </header> -->
-    <div class="content" style="display: flex; gap: 8px; flex-direction: column;">
+    <div class="table-responsive">
         <div class="tujupuluh">
             <h1>
                 Kelola Ruangan
@@ -25,7 +29,7 @@
             <button class="search-button">Cari</button>
             <button class="tambah">Tambah</button>
         </div>
-        <table>
+        <table class="table " style="table-layout: auto;">
             <thead>
                 <tr>
                     <th>No</th>
@@ -35,34 +39,38 @@
                     <th>Aksi</th>
                 </tr>
             </thead>
-        </table>
-        <tbody>
-            <?php
+            <tbody>
+                <?php
             $no = 1;
             $query = readData($koneksi, "ruang");
             if (!empty($query)) {
                 foreach ($query as $row) {
-            ?>
-                    <tr>
-                        <th scope="row"><?= $no++; ?></th>
-                        <td><?= $row['NamaRuang']; ?></td>
-                        <td><?= $row['JenisRuang']; ?></td>
-                        <td><?= $row['DeskripsiRuang']; ?></td>
-                        <td><?= $row['Lantai']; ?></td>
-                        <td>
-                            <a href="index.php?page=anggota/edit&id=<?php echo $row['RuangID']; ?>" class="btn btn-warning btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a>
-                            <a href="fungsi/hapus.php?anggota=hapus&id=<?php echo $row['RuangID']; ?>" onclick="javascript:return confirm('Hapus Data Anggota ?');" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
-                        </td>
+                    ?>
+                <tr>
+                    <td scope="row"><?= $no++; ?></td>
+                    <td><?= $row['NamaRuang']; ?></td>
+                    <!-- <td><?= $row['JenisRuang']; ?></td> -->
+                    <td><?= $row['DeskripsiRuang']; ?></td>
+                    <td><?= $row['Lantai']; ?></td>
+                    <td>
+                        <a href="index.php?page=anggota/edit&id=<?php echo $row['RuangID']; ?>"
+                            class="btn btn-warning btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            Edit</a>
+                        <a href="fungsi/hapus.php?anggota=hapus&id=<?php echo $row['RuangID']; ?>"
+                            onclick="javascript:return confirm('Hapus Data Anggota ?');"
+                            class="btn btn-danger btn-xs"><i class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+                    </td>
                     <?php
                 }
             } else {
-                    ?>
-                    <td colspan="4">Tidak Ada Data Tersedia</td>
-                <?php
-            }
                 ?>
-                    </tr>
-        </tbody>
+                    <td colspan="4">Tidak Ada Data Tersedia</td>
+                    <?php
+            }
+            ?>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     </div>

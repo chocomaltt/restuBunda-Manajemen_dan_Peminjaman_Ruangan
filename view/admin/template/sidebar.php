@@ -4,10 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title>Admin</title>
-    <link rel="stylesheet" href="view/admin/css/admin.css">
-    <link rel="stylesheet" href="view/admin/css/denah.css">
-    <link rel="stylesheet" href="view/admin/css/jadwal.css">
-    <link rel="stylesheet" href="view/admin/css/peminjaman.css">
+    <!-- <link rel="stylesheet" href="view/admin/css/jadwal.css"> -->
+    <!-- <link rel="stylesheet" href="view/admin/css/admin.css"> -->
+    <!-- <link rel="stylesheet" href="view/admin/css/denah.css"> -->
+    <link rel="stylesheet" href="view/admin/css/full.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="view/admin/css/peminjaman.css"> -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css">
@@ -17,10 +20,10 @@
         rel="stylesheet">
 </head>
 
-<body>
-    <div class="container">
+<body class="w-100">
+    <div class="container-fluid d-flex flex-row p-0">
         <nav>
-            <div class="sidebar">
+            <div class="sidebar d-flex flex-column">
                 <div>
                     <img src="view/admin/img/LogoJTI.jpeg" alt="logo"
                         style="width: 54px; height: 57px; margin-left: 96px; margin-top: 38px;">
@@ -29,12 +32,12 @@
                     <li class="beranda">
                         <a href="index.php?page=beranda.php">
                             <i class='bx bx-grid-alt'></i>
-                            <span class="link_name">Beranda</span>
+                            <span class="link_name ">Beranda</span>
                         </a>
                     </li>
                     <li>
-                        <div class="icon-link">
-                            <a href="#" class="link_name_1 arrow">Manajemen Ruangan</a>
+                        <div class="icon-link d-flex">
+                            <a href="#" class="link_name_1 arrow p-0">Manajemen Ruangan</a>
                             <i class='bx bxs-chevron-down arrow'></i>
                         </div>
                         <ul class="sub-menu">
@@ -53,15 +56,11 @@
                         </ul>
                     </li>
                     <li>
-                        <div class="icon-link">
-                            <a href="#" class="link_name_1 arrow">Manajemen Peminjaman</a>
+                        <div class="icon-link d-flex">
+                            <a href="#" class="link_name_1 arrow p-0">Manajemen Peminjaman</a>
                             <i class='bx bxs-chevron-down arrow'></i>
                         </div>
                         <ul class="sub-menu">
-                            <!-- <li>
-                                <i class='bx bxs-user'></i>
-                                <a href="#">Pinjam Ruangan</a>
-                            </li> -->
                             <li>
                                 <i class='bx bx-book-bookmark'></i>
                                 <a href="index.php?page=peminjaman.php">Antrean Peminjaman</a>
@@ -77,8 +76,8 @@
                         </ul>
                     </li>
                     <li>
-                        <div class="icon-link">
-                            <a href="#" class="link_name_1 arrow">Kelola Pengguna</a>
+                        <div class="icon-link d-flex`">
+                            <a href="#" class="link_name_1 arrow p-0">Kelola Pengguna</a>
                             <i class='bx bxs-chevron-down arrow'></i>
                         </div>
                         <ul class="sub-menu">
@@ -94,4 +93,3 @@
                     </li>
                 </ul>
         </nav>
-        <!-- </div> -->

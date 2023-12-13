@@ -18,15 +18,16 @@ if(!empty($_SESSION['level'])){
         include 'view/admin/template/footer.php';
     } else if ($_SESSION['level']==2||$_SESSION['level']==3){
         ?>
-            <body class="container-fluid bg-user-default m-0 p-0">
-                <div class="d-flex vw-100 vh-100">
-                    <div class="w-25 h-100 m-0 p-0">
-                        <?php
+
+<body class="container-fluid bg-user-default m-0 p-0">
+    <div class="d-flex vw-100 vh-100">
+        <div class="w-25 h-100 m-0 p-0">
+            <?php
                             include 'view/user/template/sidebar.php';
                             ?>
-                    </div>
-                    <div class="d-flex flex-column w-100 h-100">
-                        <?php
+        </div>
+        <div class="d-flex flex-column w-100 h-100">
+            <?php
                             include "view/user/template/header.php";
                             if(!empty($_GET['page'])){
                                 include 'view/user/template/' . $_GET['page'];
@@ -35,10 +36,10 @@ if(!empty($_SESSION['level'])){
                             }
                             include 'view/user/template/footer.php';
                         ?>
-                    </div>
-                </div>
-            </body>
-    <?php
+        </div>
+    </div>
+</body>
+<?php
     }
     }else {
     header("Location: login.php");
