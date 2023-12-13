@@ -60,10 +60,10 @@
                                 $keyword = $_POST['keyword'];
                                 $tanggal = $_POST['tanggal'];
                                 // Inisialisasi kondisi pencarian
-                                $searchConditions = array();
-                        
+                                // $searchConditions = array();
+
                                 // Buat kondisi pencarian berdasarkan keyword jika diisi
-                                if (!empty($keyword)) {
+                                if (!empty($keyword) && empty($tanggal)) {
                                     $searchConditions = "(
                                         ruang.NamaRuang LIKE '%$keyword%' OR
                                         hari.NamaHari LIKE '%$keyword%' OR
@@ -71,19 +71,31 @@
                                         matakuliah.NamaMataKuliah LIKE '%$keyword%' OR
                                         akun.Nama LIKE '%$keyword%' OR
                                         kelas.NamaKelas LIKE '%$keyword%'
-                                    )";
-                                }
-                        
+                                        ) ORDER BY hari.HariID ASC";
+                                    }
                                 // Buat kondisi pencarian berdasarkan tanggal jika diisi
-                                if (!empty($tanggal)) {
-                                    $searchConditions[] = "DATE(jadwalruang.WaktuMulai) = '$tanggal'";
+                                if (!empty($tanggal) && empty($keyword)) {
+                                    $hari = date('N', strtotime($tanggal));
+                                    $searchConditions = "jadwalruang.HariID = '$hari' ORDER BY hari.HariID ASC";
                                 }
-                        
+                                
+                                if(!empty($keyword) && !empty($tanggal)){
+                                    $hari = date('N', strtotime($tanggal));
+                                    $searchConditions = "(
+                                        ruang.NamaRuang LIKE '%$keyword%' OR
+                                        hari.NamaHari LIKE '%$keyword%' OR
+                                        sesi.JudulSesi LIKE '%$keyword%' OR
+                                        matakuliah.NamaMataKuliah LIKE '%$keyword%' OR
+                                        akun.Nama LIKE '%$keyword%' OR
+                                        kelas.NamaKelas LIKE '%$keyword%' AND
+                                        jadwalruang.HariID = '$hari'
+                                        ) ORDER BY hari.HariID ASC";
+                                    }
                                 // Gabungkan kondisi pencarian dengan kondisi join sebelumnya
                                 // $conditions = array_merge($joinConditions, $searchConditions);
                         
                                 // Lakukan query dengan kondisi pencarian
-                                $query = readData($koneksi, "jadwalruang",'',$joinConditions, $searchConditions,);
+                                $query = readData($koneksi, "jadwalruang",'',$joinConditions, $searchConditions);
                             }
                         } else {
                             // Jika form pencarian tidak dikirimkan, tampilkan semua data
@@ -99,7 +111,7 @@
                                     <td><?= $row['NamaKelas']; ?></td>
                                     <td><?= $row['NamaRuang']; ?></td>
                                     <td><?= $row['NamaHari']; ?></td>
-                                    <td><?= $row['JudulSesi']; ?></td>
+                                    <td><?= $row['Lantai']; ?></td>
                                     <td><?= $row['NamaMataKuliah']; ?></td>
                                     <td><?= $row['Nama']; ?></td>
                                     <td><?php
