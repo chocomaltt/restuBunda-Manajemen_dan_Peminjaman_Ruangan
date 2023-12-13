@@ -1,16 +1,18 @@
 <?php
 function insertData($conn, $table, $data) {
-
-    $columns = implode(", ", array_keys($data));
     $values = "'" . implode("', '", $data) . "'";
 
-    $sql = "INSERT INTO $table ($columns) VALUES ($values)";
+    $sql = "INSERT INTO $table VALUES ($values)";
     $result = $conn->query($sql);
 
-    $conn->close();
+    if ($result === false) {
+        // Handle error here if needed
+        return false;
+    }
 
     return $result;
 }
+
 
 function readData($conn, $mainTable, $columns = '', $conditions = array(), $whereCondition = "") {
     // Construct SQL query based on provided parameters
@@ -76,6 +78,41 @@ function deleteData($conn, $table, $columnIDName, $id) {
     $conn->close();
 
     return $result;
+}
+
+function cekJadwalRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
+    $hariPinjam = date('N', strtotime($waktuPinjam));
+    $hariKembali = date('N', strtotime($waktuKembali));
+
+    $selisihWaktu = strtotime($waktuKembali) - strtotime($waktuPinjam);
+    $minggu = 60 * 60 * 24 * 7; // Detik dalam satu minggu
+
+    $joinConditions = array(
+        'sesi s' => "jadwalruang.SesiMulaiID = s.SesiID",
+        'sesi p' => "jadwalruang.SesiAkhirID = p.SesiID"
+    );
+
+    if ($selisihWaktu > $minggu) {
+        // Jika lebih dari 1 minggu, lakukan pengecekan selama 7 hari
+        $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
+            (jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= 7) AND 
+            (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+    } else {
+        // Jika tidak, lakukan pengecekan pada hari pinjam sampai hari kembali
+        $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
+            ((jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= $hariKembali) OR 
+            (jadwalruang.HariID >= 1 AND jadwalruang.HariID <= $hariKembali)) AND 
+            (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+    }
+
+    return readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
+}
+
+function cekPeminjamanRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
+    $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangID' AND 
+        (peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam')";
+
+    return readData($koneksi, "peminjaman", '', '', $whereConditionsPeminjaman);
 }
 
 
