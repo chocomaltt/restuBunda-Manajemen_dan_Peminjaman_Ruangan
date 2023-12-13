@@ -36,7 +36,46 @@
                 </tr>
             </thead>
             <tbody>
-
+                <?php
+                $no = 1;
+                $joinConditions = array(
+                    "ruang" => "peminjaman.RuangID = ruang.RuangID",
+                    "akun" => "peminjaman.AkunID = akun.AkunID"
+                );
+                $query = readData($koneksi, "peminjaman", '', $joinConditions, 'peminjaman.StatusPeminjaman = "Menunggu Konfirmasi"');
+                if (!empty($query)) {
+                    foreach ($query as $row) {
+                        ?>
+                        <tr>
+                            <td>
+                                <?= $row['Nama']; ?>
+                            </td>
+                            <td>
+                                <?= $row['RuangID']; ?>
+                            </td>
+                            <td>
+                                <?= $row['NamaRuang']; ?>
+                            </td>
+                            <td>
+                                <?= $row['DeskripsiRuang']; ?>
+                            </td>
+                            <td>
+                                <?= $row['Lantai']; ?>
+                            </td>
+                            <td>
+                                <a href="index.php?page=anggota/edit&id=<?php echo $row['RuangID']; ?>"
+                                class="btn btn-warning btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Edit</a>
+                            </td>
+                            <?php
+                    }
+                } else {
+                    ?>
+                        <td colspan="4">Tidak Ada Data Tersedia</td>
+                        <?php
+                }
+                ?>
+                </tr>
             </tbody>
         </table>
         <!-- </div>  -->
