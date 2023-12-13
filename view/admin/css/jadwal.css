@@ -186,20 +186,7 @@ header {
 .content {
   padding: 20px;
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 5px;
-}
-tr {
-  text-align: left;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-around;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 10px;
-}
+
 
 .search-box {
   /* width: 200px; */
@@ -256,5 +243,50 @@ table .cari .search {
 .tambah:hover{
   background-color: #155897;
 }
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+tr th{
+  text-align: left;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
 
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
 
+th {
+  background-color: #f2f2f2;
+}
+
+tbody tr td {
+  padding: 8px;
+  text-align: left;
+}
+tbody {
+  text-align: center;
+}
+
+tbody tr {
+  background-color: #f8f9fa;
+}
+
+tbody th,
+tbody td {
+  padding: 10px;
+  border: 1px solid #dee2e6;
+}
+
+tbody th {
+  background-color: #007bff;
+  color: #fff;
+} */
