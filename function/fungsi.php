@@ -124,4 +124,3 @@ function setRememberMeCookie($userID, $token) {
     setcookie('remember_me', $cookieValue, $cookieExpire, '/');
 }
 ?>
-

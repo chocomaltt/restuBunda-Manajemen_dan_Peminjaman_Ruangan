@@ -24,7 +24,7 @@
                 background-color: rgb(18, 119, 130,0.5) !important;
             }
     </style>
-        <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
+        <table class="table-responsive table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
             <thead>
                 <tr>
                     <th class="tableHead">No</th>
@@ -34,6 +34,7 @@
                     <th class="tableHead">Lantai</th>
                     <th class="tableHead">Kapasitas</th>
                     <th class="tableHead">Status</th>
+                    <th class="tableHead">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +54,10 @@
                     <td><?= $row['DeskripsiRuang']; ?></td>
                     <td><?= $row['Lantai']; ?></td>
                     <td><?= $row['Kapasitas']; ?></td>
-                    <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span><span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span></td>
+                    <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span>
+                    <!-- <span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span> -->
+                </td>
+                    <td><a href="index.php?page=pinjam-ruangan.php" class="btn bg-primary px-3 py-1 text-white" role="button">Pinjam</a></td>
                     <?php
                         }
                         } else {

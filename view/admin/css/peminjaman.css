@@ -56,6 +56,9 @@ body {
 .sidebar .nav-links .sub-menu li:hover {
   background: #f3c623;
 }
+.sidebar .nav-links .sub-menu .active {
+  background: #f3c623 !important;
+}
 .sidebar .nav-links li .icon-link {
   display: flex;
   align-items: center;
@@ -63,7 +66,7 @@ body {
 }
 .sidebar .nav-links li i {
   height: 50px;
-  min-width: 78px;
+  /* min-width: 78px; */
   text-align: center;
   line-height: 50px;
   color: #10375c;
@@ -71,11 +74,11 @@ body {
   transition: all 0.3s ease;
 }
 .icon-link a {
-    width: 100%;
+  width: 100%;
 }
-  
+
 .arrow {
-    cursor: pointer;
+  cursor: pointer;
 }
 .sidebar .nav-links li.showMenu i.arrow {
   transform: rotate(-180deg);
@@ -92,7 +95,7 @@ body {
   color: #10375c;
 }
 .sidebar .link_name_1 {
-  padding-left: 30px;
+  /* padding-left: 30px; */
   color: #10375c;
 }
 .sidebar .nav-links li .sub-menu {
@@ -186,23 +189,9 @@ header {
 .content {
   padding: 20px;
 }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 5px;
-}
-tr {
-  text-align: left;
-  font-size: 20px;
-  display: flex;
-  justify-content: space-around;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 10px;
-}
 
 .search-box {
-  /* width: 200px; */
+  width: 296px;
   height: 42px;
   border-radius: 30px;
   padding-left: 15px;
@@ -226,7 +215,7 @@ tr {
 }
 
 .search-button:hover {
-    background-color: #1a5389;
+  background-color: #1a5389;
 }
 
 table .cari {
@@ -253,8 +242,26 @@ table .cari .search {
   margin-left: auto;
   transition: all 0.3s ease-in-out;
 }
-.tambah:hover{
+.denahrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tambah:hover {
   background-color: #155897;
 }
 
-
+/* table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+tr {
+  text-align: left;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 10px;
+} */
