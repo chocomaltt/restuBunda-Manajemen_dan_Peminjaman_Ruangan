@@ -15,8 +15,7 @@
 
             <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"
                 data-bs-whatever="@mdo">
-                <i class="bi bi-person-add"></i>Tambah
-            </button>
+                <i class="bi bi-person-add"></i>Tambah</button>
         </div>
         <table class="table " style="table-layout: auto;">
             <thead>
@@ -117,8 +116,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
                             class="bi bi-x-lg"></i>Simpan</button>
-                    <button type="submit" class="btn btn-danger" aria-hidden="true"><i
-                            class="bi bi-floppy"></i>Hapus</button>
+                    <button type="submit" class="btn btn-secondary" aria-hidden="true"><i
+                            class="bi bi-floppy"></i>Batal</button>
                 </div>
             </form>
         </div>
@@ -175,8 +174,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
                             class="bi bi-x-lg"></i>Ubah</button>
-                    <button type="submit" class="btn btn-danger" aria-hidden="true"><i
-                            class="bi bi-floppy"></i>Hapus</button>
+                    <!-- <button type="submit" class="btn btn-danger" aria-hidden="true"><i
+                            class="bi bi-floppy"></i>Hapus</button> -->
                 </div>
             </form>
         </div>
