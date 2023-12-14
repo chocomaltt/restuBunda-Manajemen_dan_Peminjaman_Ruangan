@@ -1,9 +1,10 @@
 <?php
-function insertData($conn, $table, $data) {
+function insertData($koneksi, $table, $data)
+{
     $values = "'" . implode("', '", $data) . "'";
 
     $sql = "INSERT INTO $table VALUES ($values)";
-    $result = $conn->query($sql);
+    $result = $koneksi->query($sql);
 
     if ($result === false) {
         // Handle error here if needed
@@ -14,7 +15,8 @@ function insertData($conn, $table, $data) {
 }
 
 
-function readData($conn, $mainTable, $columns = '', $conditions = array(), $whereCondition = "") {
+function readData($koneksi, $mainTable, $columns = '', $conditions = array(), $whereCondition = "")
+{
     // Construct SQL query based on provided parameters
     if (empty($columns)) {
         $columnList = "*"; // Ambil semua kolom
@@ -39,7 +41,7 @@ function readData($conn, $mainTable, $columns = '', $conditions = array(), $wher
     }
 
     // Perform query
-    $result = $conn->query($sql);
+    $result = $koneksi->query($sql);
     $data = array();
 
     // Fetch data if there are results
@@ -54,7 +56,8 @@ function readData($conn, $mainTable, $columns = '', $conditions = array(), $wher
 
 
 
-function updateData($conn, $table, $id, $data) {
+function updateData($koneksi, $table, $namaId, $id, $data)
+{
 
     $updateValues = "";
     foreach ($data as $key => $value) {
@@ -62,25 +65,30 @@ function updateData($conn, $table, $id, $data) {
     }
     $updateValues = rtrim($updateValues, ", ");
 
-    $sql = "UPDATE $table SET $updateValues WHERE id=$id";
-    $result = $conn->query($sql);
+    $sql = "UPDATE $table SET $updateValues WHERE $namaId=$id";
+    $result = $koneksi->query($sql);
 
-    $conn->close();
+    $koneksi->close();
 
     return $result;
 }
 
-function deleteData($conn, $table, $columnIDName, $id) {
+function deleteData($koneksi, $table, $columnIDName, $id)
+{
 
     $sql = "DELETE FROM $table WHERE $columnIDName=$id";
-    $result = $conn->query($sql);
+    $result = $koneksi->query($sql);
 
-    $conn->close();
+    $koneksi->close();
 
     return $result;
 }
 
-function cekJadwalRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
+function cekJadwalRuang($koneksi, $ruangID, $pinjam, $kembali)
+{
+    $waktuPinjam = date("H:i:s", strtotime($pinjam));
+    $waktuKembali = date("H:i:s", strtotime($kembali));
+
     $hariPinjam = date('N', strtotime($waktuPinjam));
     $hariKembali = date('N', strtotime($waktuKembali));
 
@@ -108,16 +116,21 @@ function cekJadwalRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
     return readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
 }
 
-function cekPeminjamanRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
+function cekPeminjamanRuang($koneksi, $ruangID, $pinjam, $kembali)
+{
+    $waktuPinjam = date("Y-m-d H:i:s", strtotime($pinjam));
+    $waktuKembali = date("Y-m-d H:i:s", strtotime($kembali));
+
     $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangID' AND 
-        (peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam')";
+        (peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam') ";
 
     return readData($koneksi, "peminjaman", '', '', $whereConditionsPeminjaman);
 }
 
 
 // Fungsi untuk mengatur cookie Remember Me
-function setRememberMeCookie($userID, $token) {
+function setRememberMeCookie($userID, $token)
+{
     $cookieValue = $userID . ':' . $token;
     $cookieExpire = time() + (30 * 24 * 60 * 60); // Cookie berlaku selama 30 hari
 
