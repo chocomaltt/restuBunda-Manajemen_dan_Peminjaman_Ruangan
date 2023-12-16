@@ -26,16 +26,10 @@
     </style>
 </head>
 <body>
-    <div class="d-flex flex-row position-relative" style="width: 80vw;">
+    <div class="d-flex flex-row position-fixed" style="width: 80vw;">
         <header class="z-1 navbar sticky-top bg-biru flex-md-nowrap shadow pe-4 shadow-none w-100">
             <!-- <i class="h2 bi bi-list putih"></i> -->
-            <div class="d-flex flex-row w-100 justify-content-between">
-                <a href="" class="d-flex justify-content-start ps-4 w-25">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="39.4" height="40" fill="white" class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
-                    </svg>
-                </a>
-
+            <div class="d-flex flex-row w-100 justify-content-end">
                 <div class="dropdown">
                     <a href="#" class="" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
                         <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
