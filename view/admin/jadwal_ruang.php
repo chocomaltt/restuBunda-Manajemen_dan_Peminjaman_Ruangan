@@ -10,7 +10,7 @@
     </div>
     <div class="cari" style="display: flex; gap: 16px; align-items: center;">
         <input class="search-box" type="text" placeholder=" Pilih Kelas atau Ruang" style="width: 296px;">
-        <input class="search-box" type="number" placeholder=" Tentukan Tanggal" style="width: 168px;">
+        <input class="search-box pe-2" type="date" placeholder=" Tentukan Tanggal" style="width: 168px;">
         <button class="search-button">Cari</button>
         <!-- <button class="tambah">Tambah</button> -->
         <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"
