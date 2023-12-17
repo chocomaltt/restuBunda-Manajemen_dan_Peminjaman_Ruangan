@@ -89,11 +89,11 @@ function cekJadwalPeminjamanRuang($koneksi, $ruangID, $pinjam, $kembali)
     $waktuPinjam = date("H:i:s", strtotime($pinjam));
     $waktuKembali = !empty($kembali) ? date("H:i:s", strtotime($kembali)) : null;
 
-    $tanggalPinjam = date("Y-m-d", strtotime($pinjam));
-    $tanggalKembali = !empty($kembali) ? date("Y-m-d", strtotime($kembali)) : null;
-
-    $hariPinjam = date('N', strtotime($waktuPinjam));
-    $hariKembali = !empty($waktuKembali) ? date('N', strtotime($waktuKembali)) : null;
+    $tanggalPinjam = date("Y-m-d H:i:s", strtotime($pinjam));
+    $tanggalKembali = !empty($kembali) ? date("Y-m-d H:i:s", strtotime($kembali)) : null;
+    
+    $hariPinjam = date('N', strtotime($pinjam));
+    $hariKembali = !empty($kembali) ? date('N', strtotime($kembali)) : null;
 
     $selisihWaktu = !empty($waktuKembali) ? strtotime($waktuKembali) - strtotime($waktuPinjam) : null;
     $minggu = 60 * 60 * 24 * 7; // Detik dalam satu minggu
@@ -123,7 +123,7 @@ function cekJadwalPeminjamanRuang($koneksi, $ruangID, $pinjam, $kembali)
         }
 
         $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangID' AND 
-            (peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam') ";
+            (peminjaman.WaktuPinjam <= '$tanggalKembali' AND peminjaman.WaktuKembali >= '$tanggalPinjam') ";
     }
 
     $jadwalRuang = readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
@@ -136,37 +136,10 @@ function cekJadwalPeminjamanRuang($koneksi, $ruangID, $pinjam, $kembali)
 // Fungsi untuk mengatur cookie Remember Me
 function checkRoomAvailability($koneksi, $ruangID, $Mulai, $Akhir)
 {
-    $hariMulai = date('N', strtotime($Mulai));
-    $hariSelesai = date('N', strtotime($Akhir));
-
-    $tanggalMulai = date("H:i:s", strtotime($Mulai));
-    $tanggalAkhir = date("H:i:s", strtotime($Akhir));
-
-    // Calculate the difference in days
-    $hariDifference = ($hariSelesai - $hariMulai + 7) % 7;
-
-    // Initialize the condition for HariMulai and HariSelesai
-    $hariCondition = " AND jadwalruang.HariID IN ($hariMulai, $hariSelesai)";
-
-    // Check if the difference in days is greater than 7
-    if ($hariDifference > 0) {
-        $hariCondition .= " OR (jadwalruang.HariID >= $hariMulai AND jadwalruang.HariID <= $hariSelesai)";
-    }
-
-    // Query to check if there are any schedules or bookings for the given room and time range
-    $query = "SELECT * FROM jadwalruang 
-              JOIN sesi p ON jadwalruang.SesiMulaiID = p.SesiID 
-              JOIN sesi s ON jadwalruang.SesiAkhirID = s.SesiID
-              WHERE RuangID = '$ruangID' AND (
-              (p.WaktuMulai <= '$tanggalMulai' AND s.WaktuSelesai >= '$tanggalMulai') OR
-              (p.WaktuMulai <= '$tanggalAkhir' AND s.WaktuSelesai >= '$tanggalAkhir') OR
-              (p.WaktuMulai >= '$tanggalMulai' AND s.WaktuSelesai <= '$tanggalAkhir') ) $hariCondition";
-    
-    // Execute the query
-    $result = mysqli_query($koneksi, $query);
+    $check = cekJadwalPeminjamanRuang($koneksi, $ruangID, $Mulai, $Akhir);
 
     // Check if there are any rows in the result set
-    if ($result && mysqli_num_rows($result) > 0) {
+    if (!empty($check)) {
         // Room is not available
         return false;
     } else {

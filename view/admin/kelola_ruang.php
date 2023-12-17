@@ -37,7 +37,7 @@
                         ?>
                         <tr>
                             <td scope="row">
-                                <?= $no++; ?>
+                            <?= $row['RuangID']; ?>
                             </td>
                             <td>
                                 <?= $row['NamaRuang']; ?>
