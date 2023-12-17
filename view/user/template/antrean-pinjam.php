@@ -29,46 +29,61 @@
                 </thead>
                 <tbody>
                     <?php
-                    $no = 1;
-                    $joinConditions = array(
-                        "ruang" => "peminjaman.RuangID = ruang.RuangID"
-                    );
-                    $query = readData($koneksi, "peminjaman", '', $joinConditions, 'AkunID = '.$_SESSION['idUser']);
+                   $no = 1;
+                   $joinConditions = array(
+                       "ruang" => "peminjaman.RuangID = ruang.RuangID"
+                   );
+                   $searchConditions = "AkunID = '".$_SESSION['idUser']."' AND peminjaman.StatusPeminjaman = 'Menunggu Konfirmasi' OR peminjaman.StatusPeminjaman = 'Disetujui'";
+                   $query = readData($koneksi, "peminjaman", '', $joinConditions, $searchConditions);
                     if (!empty($query)) {
                         foreach ($query as $row) {
-                            ?>
-                            <tr>
-                                <td scope="row">
-                                    <?= $no++; ?>
-                                </td>
-                                <td>
-                                    <?= $row['DeskripsiRuang']; ?>
-                                </td>
-                                <td>
-                                    <?= $row['WaktuPinjam']." - ".$row['WaktuKembali']; ?>
-                                </td>
-                                <td>
-                                    <?= $row['Keperluan']; ?>
-                                </td>
-                                <td>
-                                    <?php
-                                        if($row['StatusPeminjaman']=="Menunggu Konfirmasi"){
-                                    ?>
-                                            <span class="py-2 px-3 bg-biru me-2 rounded-pill fw-bold text-white" style="font-size:small">Menunggu</span>
-                                            <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white" style="font-size:small">Batalkan</span>
-                                        <?php }
-                                    ?>
-                                </td>
-                                <?php
-                        }
-                    } else {
                         ?>
+                        <tr>
+                            <td scope="row">
+                                <?= $no++; ?>
+                            </td>
+                            <td>
+                                <?= $row['DeskripsiRuang']; ?>
+                            </td>
+                            <td>
+                                <?= $row['WaktuPinjam'] . " - " . $row['WaktuKembali']; ?>
+                            </td>
+                            <td>
+                                <?= $row['Keperluan']; ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($row['StatusPeminjaman'] == "Menunggu Konfirmasi") {
+                                    ?>
+                                    <span class="py-2 px-3 bg-biru me-2 rounded-pill fw-bold text-white"
+                                        style="font-size:small">Menunggu</span>
+                                    <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white"
+                                        style="font-size:small" onclick="confirmCancellation()">Batalkan</span>
+                                <?php }
+                                ?>
+                            </td>
+                            <?php
+                    }
+                } else {
+                    ?>
                         <td colspan="4">Tidak Ada Data Tersedia</td>
                         <?php
-                    }
-                    ?>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                }
+                ?>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
+<script>
+    function confirmCancellation() {
+        // Use the built-in confirm dialog
+        const isConfirmed = confirm('Apakah Anda yakin ingin membatalkan peminjaman?');
+
+        // Check if the user clicked "OK"
+        if (isConfirmed) {
+            // Redirect to the specified page
+            window.location.href = 'index.php?page=controller/antrean-pinjam.php&id=<?= $row['PeminjamanID']; ?>';
+        }
+    }
+</script>

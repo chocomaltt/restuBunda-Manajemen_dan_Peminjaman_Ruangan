@@ -8,54 +8,68 @@
                 border-radius: 5px;
             }
 
-            .table-striped-green tbody tr td{
-                padding: 0.9rem; 
-            }  
+        .table-striped-green tbody tr td {
+            padding: 0.9rem;
+        }
 
-            .table-striped-green tbody tr:nth-of-type(odd){
-                background-color: rgb(18, 119, 130,0.5) !important;
-            }
+        .table-striped-green tbody tr:nth-of-type(odd) {
+            background-color: rgb(18, 119, 130, 0.5) !important;
+        }
     </style>
-        <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
-            <thead>
-                <tr>
-                    <th class="tableHead">ID Ruang</th>
-                    <th class="tableHead">Nama Ruang</th>
-                    <th class="tableHead">Waktu Peminjaman</th>
-                    <th class="tableHead">Kepentingan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>R.05.01</td>
-                    <td>RT 01</td>
-                    <td>20/11/2023 06.00 - 21/11/2023 06.00</td>
-                    <td>Rapat HMTI</td>
-                </tr>
-                <tr>
-                    <td>R.05.01</td>
-                    <td>RT 03</td>
-                    <td>20/11/2023 06.00 - 21/11/2023 06.00</td>
-                    <td>Seminar WRI</td>
-                </tr>
-                <tr>
-                    <td>R.05.01</td>
-                    <td>RT 02</td>
-                    <td>20/11/2023 06.00 - 21/11/2023 06.00</td>
-                    <td>Interview KPR</td>
-                </tr>
-                <tr>
-                    <td>R.05.01</td>
-                    <td>RT 04</td>
-                    <td>20/11/2023 06.00 - 21/11/2023 06.00</td>
-                    <td>Sidang Istimewa DPM</td>
-                </tr>
-                <tr>
-                    <td>R.05.01</td>
-                    <td>RT 08</td>
-                    <td>20/11/2023 06.00 - 21/11/2023 06.00</td>
-                    <td>Rapat USMA</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
+        <thead>
+            <tr>
+                <th class="tableHead">ID Ruang</th>
+                <th class="tableHead">Nama Ruang</th>
+                <th class="tableHead">Waktu Peminjaman</th>
+                <th class="tableHead">Kepentingan</th>
+                <th class="tableHead">Catatan Pengembalian</th>
+                <th class="tableHead">Status Peminjaman</th>
+                <th class="tableHead">Status Pengembalian</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $no = 1;
+            $joinConditions = array(
+                "ruang" => "peminjaman.RuangID = ruang.RuangID"
+            );
+            $searchConditions = "AkunID = '" . $_SESSION['idUser'] . "' AND peminjaman.StatusPengembalian = 'Disetujui' OR peminjaman.StatusPengembalian = 'Menunggu Konfirmasi'";
+            $query = readData($koneksi, "peminjaman", '', $joinConditions, $searchConditions);
+            if (!empty($query)) {
+                foreach ($query as $row) {
+                    ?>
+                    <tr>
+                        <td>
+                            <?= $row['RuangID'] ?>
+                        </td>
+                        <td>
+                            <?= $row['NamaRuang'] ?>
+                        </td>
+                        <td>
+                            <?= $row['WaktuPinjam'] . " - " . $row['WaktuKembali']; ?>
+                        </td>
+                        <td>
+                            <?= $row['Keperluan'] ?>
+                        </td>
+                        <td>
+                            <?= $row['CatatanPengembalian'] ?>
+                        </td>
+                        <td>
+                            <?= $row['StatusPeminjaman'] ?>
+                        </td>
+                        <td>
+                            <?= $row['StatusPengembalian'] ?>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            } else {
+                ?>
+                <td colspan="6">Tidak Ada Data Tersedia</td>
+                <?php
+            }
+            ?>
+        </tbody>
+    </table>
+</div>

@@ -62,16 +62,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // Check if Remember Me is selected
                     $rememberMe = isset($_POST['rememberMe']) ? $_POST['rememberMe'] : 0;
     
-                    if ($rememberMe) {
-                        // Generate a unique token
-                        $token = generateToken();
+                    // if ($rememberMe) {
+                    //     // Generate a unique token
+                    //     $token = generateToken();
     
-                        // Save the token in the database (you need a table for this purpose)
-                        saveRememberMeToken($row['AkunID'], $token);
+                    //     // Save the token in the database (you need a table for this purpose)
+                    //     saveRememberMeToken($row['AkunID'], $token);
     
-                        // Set the Remember Me cookie
-                        setRememberMeCookie($row['AkunID'], $token);
-                    }
+                    //     // Set the Remember Me cookie
+                    //     setRememberMeCookie($row['AkunID'], $token);
+                    // }
                     header("location:index.php");
                 } else {
                     echo "Login gagal. Password Anda Salah.";

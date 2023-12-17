@@ -1,20 +1,28 @@
 <div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <p class="text-white fw-bold fs-2">DAFTAR RUANG</p>
-    <div class="d-flex gap-2" style="align-items: center;">
-        <div style="width: 30%;">
-            <input type="search" name="" id="" placeholder="Pilih Ruang" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-        </div>
-        <div style="width: 18%;">
-            <input type="search" name="" id="" placeholder="Tentukan Tanggal" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-        </div>
-        <button class="bg-biru text-white" style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
-    </div>
-</div>
-<style>
-.table-striped-green {
-    background-color: var(--warna-putih);
-    border-radius: 5px;
-}
+    <form method="post" action="">
+            <div class="d-flex gap-2" style="align-items: center;">
+                <div style="width: 30%;">
+                    <input type="search" name="keyword" placeholder="Pilih Keyword"
+                        style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+                </div>
+                <div style="width: 18%;">
+                    <input type="datetime-local" name="tanggalMulai" id="" placeholder="Tentukan Tanggal"
+                        style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+                </div>
+                <div style="width: 18%;">
+                    <input type="datetime-local" name="tanggalAkhir" id="" placeholder="Tentukan Tanggal"
+                        style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+                </div>
+                <button type="submit" name="search" class="bg-biru text-white"
+                    style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
+            </div>
+        </form>
+    <style>
+        .table-striped-green{
+            background-color: var(--warna-putih);
+            border-radius: 5px;
+        }
 
 .table-striped-green tbody tr td {
     padding: 0.9rem;
@@ -40,55 +48,107 @@
         </thead>
         <tbody>
             <?php
+                // Include or define your functions (cekJadwalRuang, cekPeminjamanRuang, checkRoomAvailability)
+                
+
+
+                $status = false;
+                $roomAvailable = '';
+                // Check if the form is submitted
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
+                    $keyword = $_POST['keyword'];
+                    $tanggalMulai = $_POST['tanggalMulai'];
+                    $tanggalAkhir = $_POST['tanggalAkhir'];
+                    // Create search conditions based on the input
+                    if (!empty($keyword)) {
+                        $searchConditions = "(
+                            ruang.RuangID LIKE '%$keyword%' OR
+                            ruang.NamaRuang LIKE '%$keyword%' OR
+                            ruang.DeskripsiRuang LIKE '%$keyword%'
+                            )";
+                        
+                        $query = readData($koneksi, "ruang", '', '', $searchConditions);
+                    } else if($keyword == '' || !empty($tanggalMulai) || !empty($tanggalAkhir)){
+                        $query = readData($koneksi, "ruang", '', '');
+                    }
+
+                } else {
+                    // If the form is not submitted, fetch all data
+                    $query = readData($koneksi, "ruang", '', '');
+                }
+                // echo $roomAvailable ? 'ya' : 'tidak';
+                // Initialize a counter for table rows
                 $no = 1;
-                $joinConditions = array(
-                    "jadwalruang" => "ruang.RuangID = jadwalruang.RuangID",
-                );
-                $query = readData($koneksi, "ruang",'', $joinConditions);
-                if(!empty($query)) {
-                    foreach ($query as $row){
-            ?>
-            <tr>
-                <td scope="row"><?= $no++; ?></td>
-                <td><?= $row['NamaRuang']; ?></td>
-                <td><?= $row['JenisRuang']; ?></td>
-                <td><?= $row['DeskripsiRuang']; ?></td>
-                <td><?= $row['Lantai']; ?></td>
-                <td><?= $row['Kapasitas']; ?></td>
-                <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span>
-                <!-- <span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span> -->
-            </td>
-                <td><a href="index.php?page=pinjam-ruangan.php" class="btn bg-primary px-3 py-1 text-white fw-bold" role="button" style="font-size: small">Pinjam</a></td>
-                <?php
+                if (!empty($query)) {
+                    foreach ($query as $row) {
+                        ?>
+                        <tr>
+                            <td scope="row">
+                                <?= $no++; ?>
+                            </td>
+                            <td>
+                                <?= $row['NamaRuang']; ?>
+                            </td>
+                            <td>
+                                <?= $row['JenisRuang']; ?>
+                            </td>
+                            <td>
+                                <?= $row['DeskripsiRuang']; ?>
+                            </td>
+                            <td>
+                                <?= $row['Lantai']; ?>
+                            </td>
+                            <td>
+                                <?= $row['Kapasitas']; ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
+                                    if(!empty($_POST['tanggalMulai']) && !empty($_POST['tanggalAkhir'])){
+                                        $roomAvailable = checkRoomAvailability($koneksi, $row['RuangID'], $_POST['tanggalMulai'], $_POST['tanggalAkhir']);
+                                    }
+                                }
+                                ?>
+                                <span
+                                    class="py-2 px-4 <?php echo $roomAvailable ? 'bg-success' : 'bg-warning'; ?> me-2 rounded fw-bold"
+                                    style="font-size:small">
+                                    <?php echo $roomAvailable ? 'Tersedia' : 'Terpakai'; ?>
+                                </span>
+                            </td>
+                            <td>
+                                <?php echo $roomAvailable ? '<a href="index.php?page=pinjam-ruangan.php&idRuang=' . $row['RuangID'] . '&tglMulai='.$_POST['tanggalMulai'].'&tglSelesai='.$_POST['tanggalAkhir'].'" class="btn bg-primary px-3 py-1 text-white"
+                                    role="button" style="font-size: small">Pinjam</a>' : '' ?>
+                            </td>
+                            <?php
                     }
-                    } else {
+                } else {
+                    ?>
+                        <td colspan="8">Tidak Ada Data Tersedia</td>
+                        <?php
+                }
                 ?>
-                <td colspan="4">Tidak Ada Data Tersedia</td>
-                <?php
-                    }
-                ?>
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "pageLength": 5, // Jumlah baris per halaman
-            "language": {
-                "paginate": {
-                    "previous": "previous",
-                    "next": "next"
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "pageLength": 5, // Jumlah baris per halaman
+                "language": {
+                    "paginate": {
+                        "previous": "&lt;",
+                        "next": "&gt;"
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
-</script>
+    </script>

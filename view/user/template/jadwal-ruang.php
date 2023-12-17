@@ -17,17 +17,17 @@
         </div>
     </form>
 
-    <style>
-    .table-striped-green {
-        background-color: var(--warna-putih);
-        border-radius: 5px;
-    }
+        <style>
+            .table-striped-green {
+                background-color: var(--warna-putih);
+                border-radius: 5px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
 
-    .table-striped-green tbody tr td {
-        padding-left: 1.2rem;
-        padding-top: 0.9rem;
-        padding-bottom: 0.9rem;
-    }
+            .table-striped-green tbody tr td {
+                padding: 0.9rem;
+            }
 
     .table-striped-green tbody tr:nth-of-type(odd) {
         background-color: rgb(18, 119, 130, 0.5) !important;
@@ -65,106 +65,102 @@
                         $tanggal = $_POST['tanggal'];
                         // Inisialisasi kondisi pencarian
                         // $searchConditions = array();
-
+                
                         // Buat kondisi pencarian berdasarkan keyword jika diisi
                         if (!empty($keyword) && empty($tanggal)) {
                             $searchConditions = "(
-                                ruang.NamaRuang LIKE '%$keyword%' OR
-                                hari.NamaHari LIKE '%$keyword%' OR
-                                sesi.JudulSesi LIKE '%$keyword%' OR
-                                matakuliah.NamaMataKuliah LIKE '%$keyword%' OR
-                                akun.Nama LIKE '%$keyword%' OR
-                                kelas.NamaKelas LIKE '%$keyword%'
-                                ) ORDER BY hari.HariID ASC";
-                            }
+                                        ruang.NamaRuang LIKE '%$keyword%' OR
+                                        hari.NamaHari LIKE '%$keyword%' OR
+                                        sesi.JudulSesi LIKE '%$keyword%' OR
+                                        matakuliah.NamaMataKuliah LIKE '%$keyword%' OR
+                                        akun.Nama LIKE '%$keyword%' OR
+                                        kelas.NamaKelas LIKE '%$keyword%'
+                                        ) ORDER BY hari.HariID ASC";
+                        }
                         // Buat kondisi pencarian berdasarkan tanggal jika diisi
                         if (!empty($tanggal) && empty($keyword)) {
                             $hari = date('N', strtotime($tanggal));
                             $searchConditions = "jadwalruang.HariID = '$hari' ORDER BY hari.HariID ASC";
                         }
-                        
-                        if(!empty($keyword) && !empty($tanggal)){
+
+                        if (!empty($keyword) && !empty($tanggal)) {
                             $hari = date('N', strtotime($tanggal));
                             $searchConditions = "(
-                                ruang.NamaRuang LIKE '%$keyword%' OR
-                                hari.NamaHari LIKE '%$keyword%' OR
-                                sesi.JudulSesi LIKE '%$keyword%' OR
-                                matakuliah.NamaMataKuliah LIKE '%$keyword%' OR
-                                akun.Nama LIKE '%$keyword%' OR
-                                kelas.NamaKelas LIKE '%$keyword%' AND
-                                jadwalruang.HariID = '$hari'
-                                ) ORDER BY hari.HariID ASC";
-                            }
+                                        ruang.NamaRuang LIKE '%$keyword%' OR
+                                        hari.NamaHari LIKE '%$keyword%' OR
+                                        sesi.JudulSesi LIKE '%$keyword%' OR
+                                        matakuliah.NamaMataKuliah LIKE '%$keyword%' OR
+                                        akun.Nama LIKE '%$keyword%' OR
+                                        kelas.NamaKelas LIKE '%$keyword%' AND
+                                        jadwalruang.HariID = '$hari'
+                                        ) ORDER BY hari.HariID ASC";
+                        }
                         // Gabungkan kondisi pencarian dengan kondisi join sebelumnya
                         // $conditions = array_merge($joinConditions, $searchConditions);
                 
                         // Lakukan query dengan kondisi pencarian
-                        $query = readData($koneksi, "jadwalruang",'',$joinConditions, $searchConditions);
+                        $query = readData($koneksi, "jadwalruang", '', $joinConditions, $searchConditions);
                     }
                 } else {
                     // Jika form pencarian tidak dikirimkan, tampilkan semua data
                     $query = readData($koneksi, "jadwalruang", '', $joinConditions);
                 }
-                
-                
+
+
                 // $query = readData($koneksi, "jadwalruang",'',$joinConditions);
                 if (!empty($query)) {
                     foreach ($query as $row) {
                         ?>
-            <tr>
-                <td><?= $row['NamaKelas']; ?></td>
-                <td><?= $row['NamaRuang']; ?></td>
-                <td><?= $row['NamaHari']; ?></td>
-                <td><?= $row['Lantai']; ?></td>
-                <td><?= $row['NamaMataKuliah']; ?></td>
-                <td><?= $row['Nama']; ?></td>
-                <td><?php
-                        $querySesi = readData($koneksi, "sesi", '', '', 'sesiID ='.$row['SesiMulaiID']);
-                        foreach ($querySesi as $rows) {
-                            echo $row['WaktuMulai'];
-                        }
+                        <tr>
+                            <td>
+                                <?= $row['NamaKelas']; ?>
+                            </td>
+                            <td>
+                                <?= $row['NamaRuang']; ?>
+                            </td>
+                            <td>
+                                <?= $row['NamaHari']; ?>
+                            </td>
+                            <td>
+                                <?= $row['Lantai']; ?>
+                            </td>
+                            <td>
+                                <?= $row['NamaMataKuliah']; ?>
+                            </td>
+                            <td>
+                                <?= $row['Nama']; ?>
+                            </td>
+                            <td>
+                                <?php
+                                $querySesi = readData($koneksi, "sesi", '', '', 'sesiID =' . $row['SesiMulaiID']);
+                                foreach ($querySesi as $rows) {
+                                    echo $row['WaktuMulai'];
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $querySesi = readData($koneksi, "sesi", '', '', 'sesiID =' . $row['SesiAkhirID']);
+                                foreach ($querySesi as $rows) {
+                                    echo $row['WaktuSelesai'];
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?= $row['NamaMataKuliah']; ?>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                } else {
                     ?>
-                </td>
-                <td><?php
-                        $querySesi = readData($koneksi, "sesi", '', '', 'sesiID ='.$row['SesiAkhirID']);
-                        foreach ($querySesi as $rows) {
-                            echo $row['WaktuSelesai'];
-                        }
-                    ?>
-                </td>
-            </tr>
-            <?php
-                            }
-                        } else {
-                            ?>
-            <tr>
-                <td colspan="8">Tidak Ada Data Tersedia</td>
-            </tr>
-            <?php
+                    <tr>
+                        <td colspan="8">Tidak Ada Data Tersedia</td>
+                    </tr>
+                    <?php
                 }
-            ?>
-        </tbody>
-    </table>
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
-<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('#example').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "pageLength": 5, // Jumlah baris per halaman
-        "language": {
-            "paginate": {
-                "previous": "previous",
-                "next": "next"
-            }
-        }
-    });
-});
-</script>
-</script>
-<!-- </div> -->

@@ -82,4 +82,3 @@
     // Call the function to set the min attribute when the page loads
     window.onload = setMinDatetime;
 </script>
-
