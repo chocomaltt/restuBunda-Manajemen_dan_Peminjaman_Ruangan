@@ -27,12 +27,12 @@
 </head>
 <body>
     <div class="d-flex flex-row position-fixed" style="width: 80vw;">
-        <header class="z-1 navbar sticky-top bg-biru flex-md-nowrap shadow pe-4 shadow-none w-100">
+        <header class="navbar sticky-top bg-biru flex-md-nowrap shadow pe-4 shadow-none w-100">
             <!-- <i class="h2 bi bi-list putih"></i> -->
             <div class="d-flex flex-row w-100 justify-content-end">
-                <div class="dropdown">
-                    <a href="#" class="" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
-                        <svg  xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
+                <div class="dropdown z-4">
+                    <a href="#" class="w-100 h-100" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
                         </svg>
                     </a>
@@ -54,15 +54,12 @@
     <form action="" class="d-flex flex-column gap-3 bg-white" method="post">
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordOld" placeholder="Password Lama" name="passwordOld" required>
-            <!-- <label for="floatingPasswordOld" class="ps-3">Password Lama :</label> -->
         </div>
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordNew" placeholder="Password Baru" name="passwordNew" required>
-            <!-- <label for="floatingPasswordNew" class="ps-3">Password Baru :</label> -->
         </div>
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingRepeat" placeholder="Ulangi Password" name="repeatPassword" required>
-            <!-- <label for="floatingRepeat" class="ps-3">Ulangi Password :</label> -->
         </div>
     </form>
     <div class="d-flex flex-row justify-content-center gap-5">

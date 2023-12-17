@@ -1,4 +1,4 @@
-<div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
+<div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <p class="text-white fw-bold fs-2">DAFTAR RUANG</p>
     <div class="d-flex gap-2" style="align-items: center;">
         <div style="width: 30%;">
@@ -9,20 +9,22 @@
         </div>
         <button class="bg-biru text-white" style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
     </div>
-    <style>
-        .table-striped-green{
-            background-color: var(--warna-putih);
-            border-radius: 5px;
-        }
+</div>
+<style>
+.table-striped-green {
+    background-color: var(--warna-putih);
+    border-radius: 5px;
+}
 
-        .table-striped-green tbody tr td{
-            padding: 0.9rem; 
-        }  
+.table-striped-green tbody tr td {
+    padding: 0.9rem;
+}
 
-        .table-striped-green tbody tr:nth-of-type(odd){
-            background-color: rgb(18, 119, 130,0.5) !important;
-        }
+.table-striped-green tbody tr:nth-of-type(odd) {
+    background-color: rgb(18, 119, 130, 0.5) !important;
+}
 </style>
+<div class="w-100 position-relative" style="z-index: 0;padding: 0 30px;">
     <table id="example" class="table-responsive table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
         <thead>
             <tr>

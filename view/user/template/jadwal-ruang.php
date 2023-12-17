@@ -1,6 +1,6 @@
-<div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
+<div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <p class="text-white fw-bold fs-2">JADWAL RUANG</p>
-
+    
     <!-- Form Pencarian -->
     <form method="post" action="">
         <div class="d-flex gap-2" style="align-items: center;">
@@ -33,7 +33,8 @@
         background-color: rgb(18, 119, 130, 0.5) !important;
     }
     </style>
-
+</div>
+<div class="w-100 position-relative" style="z-index: 0; padding: 0 30px;">
     <table id="example" class="table-responsive table-striped-green biru" style="margin-top: 0.5rem;table-layout: auto;">
         <thead>
             <tr>
