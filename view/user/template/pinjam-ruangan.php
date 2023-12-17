@@ -1,4 +1,3 @@
-<div class="position-absolute end-0 w-100 vh-100 p-0" style="z-index: 0; max-width: 80%;">
     <div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
         <p class="text-white fw-bold fs-2">PEMINJAMAN</p>
         <div class="d-flex flex-column align-items-center">
@@ -58,7 +57,6 @@
             ?>
         </div>
     </div>
-</div>
 
 <script>
     // Function to set the min attribute for datetime-local inputs

@@ -1,4 +1,3 @@
-<div class="container position-absolute end-0 w-100 vh-100" style="z-index: 0; max-width: 80%;">
     <div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
         <p class="text-white fw-bold fs-2">ANTREAN PEMINJAMAN</p>
         <!-- <div class="d-flex gap-2" style="align-items: center;">
@@ -63,7 +62,7 @@
                                         if($row['StatusPeminjaman']=="Menunggu Konfirmasi"){
                                     ?>
                                             <span class="py-2 px-3 bg-biru me-2 rounded-pill fw-bold text-white" style="font-size:small">Menunggu</span>
-                                            <span class="py-2 px-4 bg-danger rounded-pill fw-bold text-white" style="font-size:small">Batalkan</span>
+                                            <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white" style="font-size:small">Batalkan</span>
                                         <?php }
                                     ?>
                                 </td>
@@ -71,8 +70,8 @@
                         }
                     } else {
                         ?>
-                            <td colspan="4">Tidak Ada Data Tersedia</td>
-                            <?php
+                        <td colspan="4">Tidak Ada Data Tersedia</td>
+                        <?php
                     }
                     ?>
                     </tr>
@@ -80,4 +79,3 @@
             </table>
         </div>
     </div>
-</div>

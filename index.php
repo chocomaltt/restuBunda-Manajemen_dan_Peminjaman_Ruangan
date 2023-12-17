@@ -26,7 +26,7 @@ if(!empty($_SESSION['level'])){
         </div>
         <div class="d-flex flex-column w-100 h-100 m-0 p-0">
             <?php
-                include "view/user/template/header.php";
+            include "view/user/template/header.php";
                 if(!empty($_GET['page'])){
                     include 'view/user/template/' . $_GET['page'];
                 } else {

@@ -1,3 +1,11 @@
+*{
+    box-sizing: border-box;
+}
+
+body::-webkit-scrollbar{
+    overflow: hidden;
+}
+
 :root{
     --warna-biru: #10375C !important;
     --warna-hijau: rgb(18, 118, 129) !important;
@@ -104,4 +112,34 @@
 
 .tableHead{
     padding: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    background-color: var(--warna-putih) !important;
+    border: none !important;
+    border-radius: 5px !important;
+    color: var(--warna-hitam) !important;
+    padding: 0.5rem 0.75rem !important;
+    margin: 0.30rem 0.30rem !important;
+    cursor: pointer !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: rgb(18, 118, 129) !important;
+    /* background-color: var(--warna-biru) !important; */
+    color: var(--warna-putih) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: rgb(18, 118, 129) !important;
+    /* background-color: rgb(18, 118, 129) !important; */
+    color: var(--warna-putih) !important;
+}
+
+.dataTables_info {
+color: var(--warna-putih) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .ellipsis {
+color: var(--warna-putih) !important;
 }
