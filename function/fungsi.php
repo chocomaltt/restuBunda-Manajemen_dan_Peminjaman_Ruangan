@@ -1,9 +1,10 @@
 <?php
-function insertData($conn, $table, $data) {
+function insertData($koneksi, $table, $data)
+{
     $values = "'" . implode("', '", $data) . "'";
 
     $sql = "INSERT INTO $table VALUES ($values)";
-    $result = $conn->query($sql);
+    $result = $koneksi->query($sql);
 
     if ($result === false) {
         // Handle error here if needed
@@ -14,7 +15,8 @@ function insertData($conn, $table, $data) {
 }
 
 
-function readData($conn, $mainTable, $columns = '', $conditions = array(), $whereCondition = "") {
+function readData($koneksi, $mainTable, $columns = '', $conditions = array(), $whereCondition = "")
+{
     // Construct SQL query based on provided parameters
     if (empty($columns)) {
         $columnList = "*"; // Ambil semua kolom
@@ -39,7 +41,7 @@ function readData($conn, $mainTable, $columns = '', $conditions = array(), $wher
     }
 
     // Perform query
-    $result = $conn->query($sql);
+    $result = $koneksi->query($sql);
     $data = array();
 
     // Fetch data if there are results
@@ -54,7 +56,8 @@ function readData($conn, $mainTable, $columns = '', $conditions = array(), $wher
 
 
 
-function updateData($conn, $table, $id, $data) {
+function updateData($koneksi, $table, $namaId, $id, $data)
+{
 
     $updateValues = "";
     foreach ($data as $key => $value) {
@@ -62,29 +65,37 @@ function updateData($conn, $table, $id, $data) {
     }
     $updateValues = rtrim($updateValues, ", ");
 
-    $sql = "UPDATE $table SET $updateValues WHERE id=$id";
-    $result = $conn->query($sql);
+    $sql = "UPDATE $table SET $updateValues WHERE $namaId=$id";
+    $result = $koneksi->query($sql);
 
-    $conn->close();
+    $koneksi->close();
 
     return $result;
 }
 
-function deleteData($conn, $table, $columnIDName, $id) {
+function deleteData($koneksi, $table, $columnIDName, $id)
+{
 
     $sql = "DELETE FROM $table WHERE $columnIDName=$id";
-    $result = $conn->query($sql);
+    $result = $koneksi->query($sql);
 
-    $conn->close();
+    $koneksi->close();
 
     return $result;
 }
 
-function cekJadwalRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
-    $hariPinjam = date('N', strtotime($waktuPinjam));
-    $hariKembali = date('N', strtotime($waktuKembali));
+function cekJadwalPeminjamanRuang($koneksi, $ruangID, $pinjam, $kembali)
+{
+    $waktuPinjam = date("H:i:s", strtotime($pinjam));
+    $waktuKembali = !empty($kembali) ? date("H:i:s", strtotime($kembali)) : null;
 
-    $selisihWaktu = strtotime($waktuKembali) - strtotime($waktuPinjam);
+    $tanggalPinjam = date("Y-m-d H:i:s", strtotime($pinjam));
+    $tanggalKembali = !empty($kembali) ? date("Y-m-d H:i:s", strtotime($kembali)) : null;
+    
+    $hariPinjam = date('N', strtotime($pinjam));
+    $hariKembali = !empty($kembali) ? date('N', strtotime($kembali)) : null;
+
+    $selisihWaktu = !empty($waktuKembali) ? strtotime($waktuKembali) - strtotime($waktuPinjam) : null;
     $minggu = 60 * 60 * 24 * 7; // Detik dalam satu minggu
 
     $joinConditions = array(
@@ -92,35 +103,58 @@ function cekJadwalRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
         'sesi p' => "jadwalruang.SesiAkhirID = p.SesiID"
     );
 
-    if ($selisihWaktu > $minggu) {
-        // Jika lebih dari 1 minggu, lakukan pengecekan selama 7 hari
-        $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
-            (jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= 7) AND 
+    // Check for all rooms based on the provided time and day conditions
+    if (empty($ruangID)) {
+        $whereConditionsJadwal = "(jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= $hariKembali) AND 
             (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        $whereConditionsPeminjaman = "(peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam') ";
     } else {
-        // Jika tidak, lakukan pengecekan pada hari pinjam sampai hari kembali
-        $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
-            ((jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= $hariKembali) OR 
-            (jadwalruang.HariID >= 1 AND jadwalruang.HariID <= $hariKembali)) AND 
-            (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        // Jika lebih dari 1 minggu, lakukan pengecekan selama 7 hari
+        if (!empty($selisihWaktu) && $selisihWaktu > $minggu) {
+            $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
+                (jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= 7) AND 
+                (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        } else {
+            // Jika tidak, lakukan pengecekan pada hari pinjam sampai hari kembali
+            $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
+                ((jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= $hariKembali) OR 
+                (jadwalruang.HariID >= 1 AND jadwalruang.HariID <= $hariKembali)) AND 
+                (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        }
+
+        $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangID' AND 
+            (peminjaman.WaktuPinjam <= '$tanggalKembali' AND peminjaman.WaktuKembali >= '$tanggalPinjam') ";
     }
 
-    return readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
-}
+    $jadwalRuang = readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
+    $peminjamanRuang = readData($koneksi, "peminjaman", '', '', $whereConditionsPeminjaman);
 
-function cekPeminjamanRuang($koneksi, $ruangID, $waktuPinjam, $waktuKembali) {
-    $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangID' AND 
-        (peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam')";
-
-    return readData($koneksi, "peminjaman", '', '', $whereConditionsPeminjaman);
+    return array('jadwalRuang' => $jadwalRuang, 'peminjamanRuang' => $peminjamanRuang);
 }
 
 
 // Fungsi untuk mengatur cookie Remember Me
-function setRememberMeCookie($userID, $token) {
+function checkRoomAvailability($koneksi, $ruangID, $Mulai, $Akhir)
+{
+    $check = cekJadwalPeminjamanRuang($koneksi, $ruangID, $Mulai, $Akhir);
+
+    // Check if there are any rows in the result set
+    if (!empty($check)) {
+        // Room is not available
+        return false;
+    } else {
+        // Room is available
+        return true;
+    }
+}
+function setRememberMeCookie($userID, $token)
+{
     $cookieValue = $userID . ':' . $token;
     $cookieExpire = time() + (30 * 24 * 60 * 60); // Cookie berlaku selama 30 hari
 
     setcookie('remember_me', $cookieValue, $cookieExpire, '/');
 }
+
+
+
 ?>
