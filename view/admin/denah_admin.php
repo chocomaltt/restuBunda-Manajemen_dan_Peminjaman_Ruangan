@@ -9,7 +9,7 @@
             <h1>
                 Denah Ruang
             </h1>
-            <button class="tambah" style="float: right;">Tambah</button>
+            <!-- <button class="tambah" style="float: right;">Tambah</button> -->
         </div>
         <div class="denahruang" style="display: flex; flex-wrap: wrap; gap: 40px; width: 100%;">
             <div class="denah">
@@ -73,8 +73,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
                             class="bi bi-x-lg"></i>Ubah</button>
-                    <button type="submit" class="btn btn-danger" aria-hidden="true"><i
-                            class="bi bi-floppy"></i>Hapus</button>
+                    <button type="submit" class="btn btn-secondary" aria-hidden="true"><i
+                            class="bi bi-floppy"></i>Batal</button>
                 </div>
             </form>
         </div>
