@@ -1,4 +1,4 @@
-<div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
+<div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <p class="text-white fw-bold fs-2">DAFTAR RUANG</p>
     <form method="post" action="">
             <div class="d-flex gap-2" style="align-items: center;">
@@ -18,65 +18,36 @@
                     style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
             </div>
         </form>
+</div>
     <style>
         .table-striped-green{
             background-color: var(--warna-putih);
             border-radius: 5px;
         }
 
-        .table-striped-green tbody tr td{
-            padding: 0.9rem; 
-        }  
+.table-striped-green tbody tr td {
+    padding: 0.9rem;
+}
 
-            .table-striped-green tbody tr:nth-of-type(odd){
-                background-color: rgb(18, 119, 130,0.5) !important;
-            }
-
-            .dataTables_wrapper .dataTables_paginate .paginate_button {
-                background-color: var(--warna-putih) !important;
-                border: none !important;
-                border-radius: 20px !important:
-                color: var(--warna-biru) !important;
-                padding: 0.5rem 0.75rem !important;
-                margin: 0.30rem 0.30rem !important;
-                cursor: pointer !important;
-            }
-
-            .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-                background: rgb(18, 118, 129) !important;
-                /* background-color: var(--warna-biru) !important; */
-                border-color: var(--warna-biru) !important;
-                color: var(--warna-putih) !important;
-            }
-
-            .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-                background: rgb(18, 118, 129) !important;
-                background-color: rgb(18, 118, 129) !important;
-                color: var(--warna-putih) !important;
-            }
-
-            .dataTables_info {
-            color: var(--warna-putih) !important;
-            }
-
-            .dataTables_wrapper .dataTables_paginate .ellipsis {
-            color: var(--warna-putih) !important;
-            }
-    </style>
-        <table id="example" class="table-responsive table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
-            <thead>
-                <tr>
-                    <th class="tableHead">No</th>
-                    <th class="tableHead">Nama Ruang</th>
-                    <th class="tableHead">Jenis Ruang</th>
-                    <th class="tableHead">Deskripsi</th>
-                    <th class="tableHead">Lantai</th>
-                    <th class="tableHead">Kapasitas</th>
-                    <th class="tableHead">Status</th>
-                    <th class="tableHead">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
+.table-striped-green tbody tr:nth-of-type(odd) {
+    background-color: rgb(18, 119, 130, 0.5) !important;
+}
+</style>
+<div class="w-100 position-relative" style="z-index: 0;padding: 0 30px;">
+    <table id="example" class="table-responsive table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
+        <thead>
+            <tr>
+                <th class="tableHead">No</th>
+                <th class="tableHead">Nama Ruang</th>
+                <th class="tableHead">Jenis Ruang</th>
+                <th class="tableHead">Deskripsi</th>
+                <th class="tableHead">Lantai</th>
+                <th class="tableHead">Kapasitas</th>
+                <th class="tableHead">Status</th>
+                <th class="tableHead">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
                 // Include or define your functions (cekJadwalRuang, cekPeminjamanRuang, checkRoomAvailability)
                 

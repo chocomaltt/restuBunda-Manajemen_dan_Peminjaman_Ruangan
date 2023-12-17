@@ -54,15 +54,12 @@
     <form action="" class="d-flex flex-column gap-3 bg-white" method="post">
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordOld" placeholder="Password Lama" name="passwordOld" required>
-            <!-- <label for="floatingPasswordOld" class="ps-3">Password Lama :</label> -->
         </div>
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordNew" placeholder="Password Baru" name="passwordNew" required>
-            <!-- <label for="floatingPasswordNew" class="ps-3">Password Baru :</label> -->
         </div>
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingRepeat" placeholder="Ulangi Password" name="repeatPassword" required>
-            <!-- <label for="floatingRepeat" class="ps-3">Ulangi Password :</label> -->
         </div>
     </form>
     <div class="d-flex flex-row justify-content-center gap-5">
