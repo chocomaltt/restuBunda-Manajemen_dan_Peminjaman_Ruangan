@@ -1,22 +1,24 @@
 <div class="position-absolute end-0 w-100 vh-100 p-0" style="z-index: 0; max-width: 80%;">
     <div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
         <p class="text-white fw-bold fs-2">DAFTAR RUANG</p>
-        <div class="d-flex gap-2" style="align-items: center;">
-            <div style="width: 30%;">
-                <input type="search" name="keyword" id="" placeholder="Pilih Ruang"
-                    style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+        <form method="post" action="">
+            <div class="d-flex gap-2" style="align-items: center;">
+                <div style="width: 30%;">
+                    <input type="search" name="keyword" placeholder="Pilih Keyword"
+                        style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+                </div>
+                <div style="width: 18%;">
+                    <input type="datetime-local" name="tanggalMulai" id="" placeholder="Tentukan Tanggal"
+                        style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+                </div>
+                <div style="width: 18%;">
+                    <input type="datetime-local" name="tanggalAkhir" id="" placeholder="Tentukan Tanggal"
+                        style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
+                </div>
+                <button type="submit" name="search" class="bg-biru text-white"
+                    style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
             </div>
-            <div style="width: 18%;">
-                <input type="datetime-local" name="tanggalMulai" id="" placeholder="Tentukan Tanggal"
-                    style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <div style="width: 18%;">
-                <input type="datetime-local" name="tanggalAkhir" id="" placeholder="Tentukan Tanggal"
-                    style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <button class="bg-biru text-white"
-                style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
-        </div>
+        </form>
         <style>
             .table-striped-green {
                 background-color: var(--warna-putih);
@@ -61,6 +63,7 @@
                 color: var(--warna-putih) !important;
             }
         </style>
+
         <table id="example" class="table-responsive table-striped-green biru w-100"
             style="margin-top: 0.5rem;table-layout: auto;">
             <thead>
@@ -77,56 +80,37 @@
             </thead>
             <tbody>
                 <?php
-                $joinConditions = array(
-                    "jadwalruang" => "jadwalruang.RuangID = ruang.RuangID"
-                );
-
-                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    // Cek apakah form pencarian dikirimkan
-                    if (isset($_POST['search'])) {
-                        $keyword = $_POST['keyword'];
-                        $tanggalMulai = $_POST['tanggalMulai'];
-                        $tanggalAkhir = $_POST['tanggalAkhir'];
-                        // Inisialisasi kondisi pencarian
-                        // $searchConditions = array();
+                // Include or define your functions (cekJadwalRuang, cekPeminjamanRuang, checkRoomAvailability)
                 
-                        // Buat kondisi pencarian berdasarkan keyword jika diisi
-                        if (!empty($keyword) && empty($tanggalMulai) && empty($tanggalAkhir)) {
-                            $searchConditions = "(
-                                    RuangID LIKE '%$keyword%' OR
-                                    NamaRuang LIKE '%$keyword%' OR
-                                    DeskripsiRuang LIKE '%$keyword%'
-                                    )";
-                        }
-                        // Buat kondisi pencarian berdasarkan tanggal jika diisi
-                        if (!empty($tanggalMulai) && empty($tanggalAkhir) && empty($keyword)) {
-                            $hari = date('N', strtotime($tanggalMulai));
-                            $searchConditions = "jadwalruang.HariID = '$hari' ORDER BY hari.HariID ASC";
-                        }
 
-                        if (!empty($tanggalMulai) && !empty($tanggalAkhir)) {
-                            $Mulai = date('N', strtotime($tanggalMulai));
-                            $Akhir = date('N', strtotime($tanggalAkhir));
-                            $ruangDipinjam = NULL;
-                            $jadwalRuang = cekJadwalRuang($koneksi, $ruangDipinjam, $Mulai, $Akhir);
-                            $peminjamanRuang = cekPeminjamanRuang($koneksi, $ruangDipinjam, $Mulai, $Akhir);
 
-                            if (empty($jadwalRuang) && empty($peminjamanRuang)) {
-                                $searchConditions = "jadwalruang.HariID = '$hari' ORDER BY hari.HariID ASC";
-                            }
-                        }
-                        // Gabungkan kondisi pencarian dengan kondisi join sebelumnya
-                        // $conditions = array_merge($joinConditions, $searchConditions);
-                
-                        // Lakukan query dengan kondisi pencarian
-                        $query = readData($koneksi, "ruang", '', $joinConditions, $searchConditions);
+                $status = false;
+                $roomAvailable = '';
+                // Check if the form is submitted
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
+                    $keyword = $_POST['keyword'];
+                    $tanggalMulai = $_POST['tanggalMulai'];
+                    $tanggalAkhir = $_POST['tanggalAkhir'];
+                    // Create search conditions based on the input
+                    if (!empty($keyword)) {
+                        $searchConditions = "(
+                            ruang.RuangID LIKE '%$keyword%' OR
+                            ruang.NamaRuang LIKE '%$keyword%' OR
+                            ruang.DeskripsiRuang LIKE '%$keyword%'
+                            )";
+                        
+                        $query = readData($koneksi, "ruang", '', '', $searchConditions);
+                    } else if($keyword == '' || !empty($tanggalMulai) || !empty($tanggalAkhir)){
+                        $query = readData($koneksi, "ruang", '', '');
                     }
+
                 } else {
-                    // Jika form pencarian tidak dikirimkan, tampilkan semua data
-                    $query = readData($koneksi, "ruang", '', $joinConditions);
+                    // If the form is not submitted, fetch all data
+                    $query = readData($koneksi, "ruang", '', '');
                 }
-                $no=1;
-                $query = readData($koneksi, "ruang", '', $joinConditions);
+                // echo $roomAvailable ? 'ya' : 'tidak';
+                // Initialize a counter for table rows
+                $no = 1;
                 if (!empty($query)) {
                     foreach ($query as $row) {
                         ?>
@@ -149,11 +133,24 @@
                             <td>
                                 <?= $row['Kapasitas']; ?>
                             </td>
-                            <td><span class="py-2 px-4 bg-warning me-2 rounded fw-bold" style="font-size:small">Terpakai</span>
-                                <!-- <span class="p-2 bg-secondary-subtle rounded fw-bold" style="font-size:small">Tidak Terpakai</span> -->
+                            <td>
+                                <?php
+                                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
+                                    if(!empty($_POST['tanggalMulai']) && !empty($_POST['tanggalAkhir'])){
+                                        $roomAvailable = checkRoomAvailability($koneksi, $row['RuangID'], $_POST['tanggalMulai'], $_POST['tanggalAkhir']);
+                                    }
+                                }
+                                ?>
+                                <span
+                                    class="py-2 px-4 <?php echo $roomAvailable ? 'bg-success' : 'bg-warning'; ?> me-2 rounded fw-bold"
+                                    style="font-size:small">
+                                    <?php echo $roomAvailable ? 'Tersedia' : 'Terpakai'; ?>
+                                </span>
                             </td>
-                            <td><a href="index.php?page=pinjam-ruangan.php" class="btn bg-primary px-3 py-1 text-white"
-                                    role="button" style="font-size: small">Pinjam</a></td>
+                            <td>
+                                <?php echo $roomAvailable ? '<a href="index.php?page=pinjam-ruangan.php&id=' . $row['RuangID'] . '" class="btn bg-primary px-3 py-1 text-white"
+                                    role="button" style="font-size: small">Pinjam</a>' : '' ?>
+                            </td>
                             <?php
                     }
                 } else {
@@ -186,5 +183,4 @@
             }
         });
     });
-</script>
 </script>

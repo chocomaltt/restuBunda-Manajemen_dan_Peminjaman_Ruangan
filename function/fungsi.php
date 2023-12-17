@@ -84,15 +84,18 @@ function deleteData($koneksi, $table, $columnIDName, $id)
     return $result;
 }
 
-function cekJadwalRuang($koneksi, $ruangID, $pinjam, $kembali)
+function cekJadwalPeminjamanRuang($koneksi, $ruangID, $pinjam, $kembali)
 {
     $waktuPinjam = date("H:i:s", strtotime($pinjam));
-    $waktuKembali = date("H:i:s", strtotime($kembali));
+    $waktuKembali = !empty($kembali) ? date("H:i:s", strtotime($kembali)) : null;
+
+    $tanggalPinjam = date("Y-m-d", strtotime($pinjam));
+    $tanggalKembali = !empty($kembali) ? date("Y-m-d", strtotime($kembali)) : null;
 
     $hariPinjam = date('N', strtotime($waktuPinjam));
-    $hariKembali = date('N', strtotime($waktuKembali));
+    $hariKembali = !empty($waktuKembali) ? date('N', strtotime($waktuKembali)) : null;
 
-    $selisihWaktu = strtotime($waktuKembali) - strtotime($waktuPinjam);
+    $selisihWaktu = !empty($waktuKembali) ? strtotime($waktuKembali) - strtotime($waktuPinjam) : null;
     $minggu = 60 * 60 * 24 * 7; // Detik dalam satu minggu
 
     $joinConditions = array(
@@ -100,35 +103,77 @@ function cekJadwalRuang($koneksi, $ruangID, $pinjam, $kembali)
         'sesi p' => "jadwalruang.SesiAkhirID = p.SesiID"
     );
 
-    if ($selisihWaktu > $minggu) {
-        // Jika lebih dari 1 minggu, lakukan pengecekan selama 7 hari
-        $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
-            (jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= 7) AND 
+    // Check for all rooms based on the provided time and day conditions
+    if (empty($ruangID)) {
+        $whereConditionsJadwal = "(jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= $hariKembali) AND 
             (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        $whereConditionsPeminjaman = "(peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam') ";
     } else {
-        // Jika tidak, lakukan pengecekan pada hari pinjam sampai hari kembali
-        $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
-            ((jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= $hariKembali) OR 
-            (jadwalruang.HariID >= 1 AND jadwalruang.HariID <= $hariKembali)) AND 
-            (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        // Jika lebih dari 1 minggu, lakukan pengecekan selama 7 hari
+        if (!empty($selisihWaktu) && $selisihWaktu > $minggu) {
+            $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
+                (jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= 7) AND 
+                (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        } else {
+            // Jika tidak, lakukan pengecekan pada hari pinjam sampai hari kembali
+            $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangID' AND 
+                ((jadwalruang.HariID >= $hariPinjam AND jadwalruang.HariID <= $hariKembali) OR 
+                (jadwalruang.HariID >= 1 AND jadwalruang.HariID <= $hariKembali)) AND 
+                (s.WaktuMulai <= '$waktuKembali' AND p.WaktuSelesai >= '$waktuPinjam')";
+        }
+
+        $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangID' AND 
+            (peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam') ";
     }
 
-    return readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
-}
+    $jadwalRuang = readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
+    $peminjamanRuang = readData($koneksi, "peminjaman", '', '', $whereConditionsPeminjaman);
 
-function cekPeminjamanRuang($koneksi, $ruangID, $pinjam, $kembali)
-{
-    $waktuPinjam = date("Y-m-d H:i:s", strtotime($pinjam));
-    $waktuKembali = date("Y-m-d H:i:s", strtotime($kembali));
-
-    $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangID' AND 
-        (peminjaman.WaktuPinjam <= '$waktuKembali' AND peminjaman.WaktuKembali >= '$waktuPinjam') ";
-
-    return readData($koneksi, "peminjaman", '', '', $whereConditionsPeminjaman);
+    return array('jadwalRuang' => $jadwalRuang, 'peminjamanRuang' => $peminjamanRuang);
 }
 
 
 // Fungsi untuk mengatur cookie Remember Me
+function checkRoomAvailability($koneksi, $ruangID, $Mulai, $Akhir)
+{
+    $hariMulai = date('N', strtotime($Mulai));
+    $hariSelesai = date('N', strtotime($Akhir));
+
+    $tanggalMulai = date("H:i:s", strtotime($Mulai));
+    $tanggalAkhir = date("H:i:s", strtotime($Akhir));
+
+    // Calculate the difference in days
+    $hariDifference = ($hariSelesai - $hariMulai + 7) % 7;
+
+    // Initialize the condition for HariMulai and HariSelesai
+    $hariCondition = " AND jadwalruang.HariID IN ($hariMulai, $hariSelesai)";
+
+    // Check if the difference in days is greater than 7
+    if ($hariDifference > 0) {
+        $hariCondition .= " OR (jadwalruang.HariID >= $hariMulai AND jadwalruang.HariID <= $hariSelesai)";
+    }
+
+    // Query to check if there are any schedules or bookings for the given room and time range
+    $query = "SELECT * FROM jadwalruang 
+              JOIN sesi p ON jadwalruang.SesiMulaiID = p.SesiID 
+              JOIN sesi s ON jadwalruang.SesiAkhirID = s.SesiID
+              WHERE RuangID = '$ruangID' AND (
+              (p.WaktuMulai <= '$tanggalMulai' AND s.WaktuSelesai >= '$tanggalMulai') OR
+              (p.WaktuMulai <= '$tanggalAkhir' AND s.WaktuSelesai >= '$tanggalAkhir') OR
+              (p.WaktuMulai >= '$tanggalMulai' AND s.WaktuSelesai <= '$tanggalAkhir') ) $hariCondition";
+    
+    // Execute the query
+    $result = mysqli_query($koneksi, $query);
+
+    // Check if there are any rows in the result set
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Room is not available
+        return false;
+    } else {
+        // Room is available
+        return true;
+    }
+}
 function setRememberMeCookie($userID, $token)
 {
     $cookieValue = $userID . ':' . $token;
@@ -136,4 +181,7 @@ function setRememberMeCookie($userID, $token)
 
     setcookie('remember_me', $cookieValue, $cookieExpire, '/');
 }
+
+
+
 ?>

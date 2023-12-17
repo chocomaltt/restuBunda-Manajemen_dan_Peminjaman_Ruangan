@@ -7,25 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $waktuPinjam = $data[3];
     $waktuKembali = $data[4];
 
-    $jadwalRuang = cekJadwalRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
-    $peminjamanRuang = cekPeminjamanRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
+    $jadwalRuang = cekJadwalPeminjamanRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
 
-    if (empty($jadwalRuang) && empty($peminjamanRuang)) {
-        // $queryiInsert = insertData($koneksi, 'peminjaman', $data);
-        // if ($queryiInsert) {
-        //     // Jika penyisipan berhasil
-        //     echo '<script>alert("Data berhasil disimpan.");</script>';
-        //     echo '<script>window.location.href = "index.php?page=pinjam-ruangan.php";</script>';
-        // }
-        $waktuinjam = date("Y-m-d H:i:s", strtotime($waktuPinjam));
-        $waktuembali = date("Y-m-d H:i:s", strtotime($waktuKembali));
+    if (empty($jadwalRuang)) {
+        $queryiInsert = insertData($koneksi, 'peminjaman', $data);
+        if ($queryiInsert) {
+            // Jika penyisipan berhasil
+            echo '<script>alert("Data berhasil disimpan.");</script>';
+            echo '<script>window.location.href = "index.php?page=pinjam-ruangan.php";</script>';
+        }
+        // $waktuinjam = date("Y-m-d H:i:s", strtotime($waktuPinjam));
+        // $waktuembali = date("Y-m-d H:i:s", strtotime($waktuKembali));
     
-        $whereConditionsPeminjaman = "peminjaman.RuangID = '$ruangDipinjam' AND 
-            (peminjaman.WaktuPinjam <= '$waktuembali' AND peminjaman.WaktuKembali >= '$waktuinjam') ";
-    
-
-        // $hariPinjam = date('N', strtotime($waktuPinjam));
-        echo $whereConditionsPeminjaman;
+        // // $hariPinjam = date('N', strtotime($waktuPinjam));
+        // echo $whereConditionsPeminjaman;
     } else {
         // Menampilkan pesan jika waktu dan ruang tidak tersedia
         echo '<script>alert("Jadwal ruang tidak tersedia. Pilih waktu dan ruang lain.");</script>';
