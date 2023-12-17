@@ -18,6 +18,7 @@
                     style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
             </div>
         </form>
+</div>
     <style>
         .table-striped-green{
             background-color: var(--warna-putih);

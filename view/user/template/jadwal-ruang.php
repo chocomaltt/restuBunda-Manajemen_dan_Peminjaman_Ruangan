@@ -16,26 +16,23 @@
                 style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
         </div>
     </form>
-
+</div>
         <style>
             .table-striped-green {
                 background-color: var(--warna-putih);
                 border-radius: 5px;
-                padding-left: 10px;
-                padding-right: 10px;
             }
 
             .table-striped-green tbody tr td {
-                padding: 0.9rem;
+                padding: 0.9rem;    
             }
 
     .table-striped-green tbody tr:nth-of-type(odd) {
         background-color: rgb(18, 119, 130, 0.5) !important;
     }
     </style>
-</div>
-<div class="w-100 position-relative" style="z-index: 0; padding: 0 30px;">
-    <table id="example" class="table-responsive table-striped-green biru" style="margin-top: 0.5rem;table-layout: auto;">
+<div class="w-100 position-relative" style="z-index: 0;padding: 0 30px;">
+    <table id="example" class="table-responsive table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
         <thead>
             <tr>
                 <th class="tableHead">Kelas</th>
@@ -146,9 +143,6 @@
                                 }
                                 ?>
                             </td>
-                            <td>
-                                <?= $row['NamaMataKuliah']; ?>
-                            </td>
                         </tr>
                         <?php
                     }
@@ -164,3 +158,23 @@
         </table>
     </div>
 </div>
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "pageLength": 5, // Jumlah baris per halaman
+                "language": {
+                    "paginate": {
+                        "previous": "&lt;",
+                        "next": "&gt;"
+                    }
+                }
+            });
+        });
+    </script>
