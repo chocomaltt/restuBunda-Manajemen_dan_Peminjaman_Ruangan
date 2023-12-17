@@ -13,10 +13,8 @@
             <input class="search-box" type="text" placeholder=" Pilih ID Ruang">
             <button class="search-button">Cari</button>
 
-            <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                data-bs-whatever="@mdo">
-                <i class="bi bi-person-add"></i>Tambah
-            </button>
+            <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+                <i class="bi bi-person-add"></i>Tambah</button>
         </div>
         <table class="table " style="table-layout: auto;">
             <thead>
@@ -74,8 +72,7 @@
 </main>
 
 <!-- TAMBAH RUANG -->
-<div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
-    aria-labelledby="modalTitleId" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
