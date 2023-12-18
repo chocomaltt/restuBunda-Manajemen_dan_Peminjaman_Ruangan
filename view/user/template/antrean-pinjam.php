@@ -73,7 +73,7 @@
                     }
                 } else {
                     ?>
-                        <td colspan="4">Tidak Ada Data Tersedia</td>
+                        <td colspan="6">Tidak Ada Data Tersedia</td>
                         <?php
                 }
                 ?>

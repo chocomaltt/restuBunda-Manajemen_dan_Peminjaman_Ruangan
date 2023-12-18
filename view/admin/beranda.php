@@ -13,7 +13,7 @@
             <h2 class="judul">Pengguna</h2>
             <?php
                         // include "function/fungsi.php";
-                        $result = readData($koneksi,'Akun',["COUNT(*) AS total"]);
+                        $result = readData($koneksi,'Akun',"COUNT(*) AS total");
                     ?>
             <h1 class="angka"><?php echo $result[0]['total']; ?></h1>
             <a href="index.php?page=daftar_pengguna.php" class="link">
@@ -36,7 +36,7 @@
             <h2 class="judul">Ruang yang dipinjam</h2>
             <?php
                         // include "function/fungsi.php";
-                        $result = readData($koneksi,'Peminjaman',["COUNT(*) AS total"]);
+                        $result = readData($koneksi,'Peminjaman',"COUNT(*) AS total");
                     ?>
             <h1 class="angka"><?php echo $result[0]['total']; ?></h1>
             <a href="index.php?page=kelola_ruang.php" class="link">
@@ -59,7 +59,7 @@
             <h2 class="judul">Antrean Peminjaman</h2>
             <?php
                         // include "function/fungsi.php";
-                        $result = readData($koneksi,'Peminjaman',["COUNT(*) AS total"], '',"StatusPeminjaman='Menunggu Konfirmasi'");
+                        $result = readData($koneksi,'Peminjaman',"COUNT(*) AS total", '',"StatusPeminjaman='Menunggu Konfirmasi'");
                     ?>
             <h1 class="angka"><?php echo$result[0]['total'];?></h1>
             <a href="index.php?page=peminjaman.php" class="link">
@@ -82,7 +82,7 @@
             <h2 class="judul">Antrean Pengembalian</h2>
             <?php
                         // include "function/fungsi.php";
-                        $result = readData($koneksi,'Peminjaman',["COUNT(*) AS total"], '',"StatusPengembalian='Menunggu Konfirmasi'");
+                        $result = readData($koneksi,'Peminjaman',"COUNT(*) AS total", '',"StatusPengembalian='Menunggu Konfirmasi'");
                     ?>
             <h1 class="angka"><?php echo$result[0]['total'];?></h1>
             <a href="index.php?page=pengembalian.php" class="link">
