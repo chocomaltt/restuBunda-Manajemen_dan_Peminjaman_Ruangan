@@ -1,11 +1,14 @@
-<div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
+<div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <p class="text-white fw-bold fs-2">PEMINJAMAN</p>
     <div class="d-flex flex-column align-items-center">
-        <div class="w-75 bg-white p-2 m-0">
-            <span class="bg-white biru fw-bold ms-4">Data Peminjaman Ruang</span>
-        </div>
-        <?php
 
+</div>
+</div>
+<div class="w-100 position-relative d-flex flex-column align-items-center mt-3" style="z-index: 0; padding: 0 30px;">
+        <div class="w-75 bg-white p-2">
+            <span class="bg-white biru fw-bold ms-4">Data Peminjaman Ruang</span>
+        </div>  
+        <?php
         $query = readData($koneksi, "akun", '', '', 'AkunID =' . $_SESSION['idUser']);
         foreach ($query as $row) {
             ?>
