@@ -1,14 +1,9 @@
-<div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
-    <p class="text-white fw-bold fs-2">PENGEMBALIAN</p>
-    <!-- <div class="d-flex gap-2" style="align-items: center;">
-            <div style="width: 30%;">
-                <input type="search" name="" id="" placeholder="Pilih Ruang" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <div style="width: 18%;">
-                <input type="search" name="" id="" placeholder="Tentukan Tanggal" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <button class="bg-biru text-white" style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
-        </div> -->
+<div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
+    <div class="w-75" style=" justify-content: start; margin: 4rem 25 0 23  rem;">
+        <p class="text-white fw-bold fs-2">PENGEMBALIAN</p>
+</div>
+</div>
+<div class="w-100 position-relative mt-2" style="z-index: 0;padding: 0 30px;">
     <style>
         .table-striped-green {
             background-color: var(--warna-putih);

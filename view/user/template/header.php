@@ -27,7 +27,7 @@
 </head>
 <body>
     <div class="d-flex flex-row position-fixed" style="width: 80vw;">
-        <header class="navbar sticky-top bg-biru flex-md-nowrap shadow pe-4 shadow-none w-100">
+    <header class="navbar sticky-top bg-biru flex-md-nowrap shadow pe-4 shadow-none w-100">
             <!-- <i class="h2 bi bi-list putih"></i> -->
             <div class="d-flex flex-row w-100 justify-content-end">
                 <div class="dropdown z-4">
@@ -54,15 +54,12 @@
     <form action="" class="d-flex flex-column gap-3 bg-white" method="post">
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordOld" placeholder="Password Lama" name="passwordOld" required>
-            <!-- <label for="floatingPasswordOld" class="ps-3">Password Lama :</label> -->
         </div>
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordNew" placeholder="Password Baru" name="passwordNew" required>
-            <!-- <label for="floatingPasswordNew" class="ps-3">Password Baru :</label> -->
         </div>
         <div class="">
             <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingRepeat" placeholder="Ulangi Password" name="repeatPassword" required>
-            <!-- <label for="floatingRepeat" class="ps-3">Ulangi Password :</label> -->
         </div>
     </form>
     <div class="d-flex flex-row justify-content-center gap-5">
