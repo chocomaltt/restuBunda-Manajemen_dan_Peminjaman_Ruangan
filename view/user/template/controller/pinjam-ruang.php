@@ -7,10 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $waktuPinjam = $data[3];
     $waktuKembali = $data[4];
 
-    $jadwalRuang = cekJadwalRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
-    $jadwalPeminjaman = cekPeminjamanRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
+    $jadwalRuang = cekJadwalPeminjamanRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
 
-    if (empty($jadwalRuang) && empty($jadwalRuang)) {
+    if (empty($jadwalRuang)) {
         $queryiInsert = insertData($koneksi, 'peminjaman', $data);
         if ($queryiInsert) {
             // Jika penyisipan berhasil

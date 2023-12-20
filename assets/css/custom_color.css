@@ -109,13 +109,7 @@ body::-webkit-scrollbar{
     background-position: center;
 }
 
-/* SUBMENU SIDEBAR */
-.hover-effect:hover, .list-group-item.aktif{
-    border-radius: 3px !important;
-    background-color: #F3C623;
-}
 
-/* TABLE CONTENT */
 .tableHead{
     padding: 1rem;
 }
@@ -132,11 +126,13 @@ body::-webkit-scrollbar{
 
 .dataTables_wrapper .dataTables_paginate .paginate_button.current {
     background: rgb(18, 118, 129) !important;
+    /* background-color: var(--warna-biru) !important; */
     color: var(--warna-putih) !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     background: rgb(18, 118, 129) !important;
+    /* background-color: rgb(18, 118, 129) !important; */
     color: var(--warna-putih) !important;
 }
 

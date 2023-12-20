@@ -1,4 +1,4 @@
-<div class="w-100 position-relative d-flex flex-column justify-content-center align-items-center" style="z-index: -1; margin-top: 100px; padding: 0 30px;">
+<div class="w-100 vh-100 position-relative d-flex flex-column justify-content-center align-items-center" style="z-index: 0; margin-top: 50px; padding: 0 30px;">
     <h1 class="text-light fw-normal">SISTEM PEMINJAMAN RUANGAN</h1>
     <h2 class="text-light fw-normal mb-5">JURUSAN TEKNOLOGI INFORMASI</h2>
 

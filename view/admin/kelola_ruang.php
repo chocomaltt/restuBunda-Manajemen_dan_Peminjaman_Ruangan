@@ -46,9 +46,9 @@
                             </td>
                             <td>
                                 <?= $row['Lantai']; ?>
-                            </td>
+                            </td>   
                             <td>
-                                <a role="button" class="btn btn-warning" data-bs-toggle="modal"
+                                <a href="index.php?page=controller/kelola_ruang.php&aksi=ubah&id" role="button" class="btn btn-warning" data-bs-toggle="modal"
                                     data-bs-target="#editModal<?= $row['RuangID']; ?>" data-bs-whatever="@mdo">Edit</a>
                                 <a href="index.php?page=controller/kelola_ruang.php&aksi=hapus&id=<?= $row['RuangID']; ?>"
                                     onclick="javascript:return confirm('Hapus Data Anggota ?');"

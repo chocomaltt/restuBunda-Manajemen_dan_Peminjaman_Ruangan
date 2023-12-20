@@ -1,4 +1,4 @@
-<div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
+<div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <div class="w-75" style=" justify-content: start; margin: 4rem 25 0 23  rem;">
         <p class="text-white fw-bold fs-2">DAFTAR RUANG</p>
     </div>
