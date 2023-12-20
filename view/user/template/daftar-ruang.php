@@ -7,11 +7,11 @@
                         style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
                 </div>
                 <div style="width: 18%;">
-                    <input type="datetime-local" name="tanggalMulai" id="" placeholder="Tentukan Tanggal"
+                    <input type="datetime-local" name="tanggalMulai" id="tanggalMulai" placeholder="Tentukan Tanggal"
                         style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
                 </div>
                 <div style="width: 18%;">
-                    <input type="datetime-local" name="tanggalAkhir" id="" placeholder="Tentukan Tanggal"
+                    <input type="datetime-local" name="tanggalAkhir" id="tanggalAkhir" placeholder="Tentukan Tanggal"
                         style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
                 </div>
                 <button type="submit" name="search" class="bg-biru text-white"
@@ -153,3 +153,23 @@
             });
         });
     </script>
+<script>
+    // Function to set the min attribute for datetime-local inputs
+    function setMinDatetime() {
+        // Get the current date and time in the required format (YYYY-MM-DDTHH:mm)
+        const currentDate = new Date().toISOString().slice(0, 16);
+
+        // Set the min attribute for the datetime-local inputs
+        document.getElementById('tanggalMulai').min = currentDate;
+        document.getElementById('tanggalAkhir').min = currentDate;
+
+        // Add an event listener to "tanggalMulai" to update the min attribute of "tanggalAkhir"
+        document.getElementById('tanggalMulai').addEventListener('input', function () {
+            // Update the min attribute of "tanggalAkhir" based on the selected value of "tanggalMulai"
+            document.getElementById('tanggalAkhir').min = this.value;
+        });
+    }
+
+    // Call the function to set the min attribute when the page loads
+    window.onload = setMinDatetime;
+</script>
