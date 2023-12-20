@@ -1,14 +1,5 @@
-<div class="w-100 vh-100 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
+<div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <p class="text-white fw-bold fs-2">ANTREAN PEMINJAMAN</p>
-    <!-- <div class="d-flex gap-2" style="align-items: center;">
-            <div style="width: 30%;">
-                <input type="search" name="" id="" placeholder="Pilih Ruang" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <div style="width: 18%;">
-                <input type="search" name="" id="" placeholder="Tentukan Tanggal" style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">
-            </div>
-            <button class="bg-biru text-white" style="border-radius: 1.25rem;padding: 0.4rem 1.5rem;border: none;">Cari</button>
-        </div> -->
     <style>
         .table-striped-green {
             background-color: var(--warna-putih);
@@ -23,6 +14,7 @@
             background-color: rgb(18, 119, 130, 0.5) !important;
         }
     </style>
+    <div class="w-100 position-relative mt-2" style="z-index: 0;padding: 0 30px;">
     <div class="table-responsive">
         <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
             <thead>
@@ -64,9 +56,17 @@
                                     ?>
                                     <span class="py-2 px-3 bg-biru me-2 rounded-pill fw-bold text-white"
                                         style="font-size:small">Menunggu</span>
-                                    <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white"
-                                        style="font-size:small" onclick="confirmCancellation()">Batalkan</span>
-                                <?php }
+                                    <!-- <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white"
+                                        style="font-size:small" onclick="confirmCancellation()">Batalkan</span> -->
+                                        <a role="button" href="index.php?page=form/birokrasi.php" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white link-underline link-underline-opacity-0">Cetak Form</a>
+
+                                <?php 
+                                
+                                } else {
+                                    ?>
+                                    <span role="button" href="index.php?page=assets/form/form_birokrasi.htm" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white">Cetak Form</span>
+                                    <?php
+                                }
                                 ?>
                             </td>
                             <?php
@@ -80,6 +80,7 @@
                 </tr>
             </tbody>
         </table>
+    </div>
     </div>
 </div>
 <script>
