@@ -4,7 +4,7 @@
 
 </div>
 </div>
-<div class="w-100 position-relative d-flex flex-column align-items-center mt-3" style="z-index: 0; padding: 0 30px;">
+<div class="w-100 position-relative d-flex flex-column align-items-center " style="z-index: 0; padding: 0 30px;">
         <div class="w-75 bg-white p-2">
             <span class="bg-white biru fw-bold ms-4">Data Peminjaman Ruang</span>
         </div>  
