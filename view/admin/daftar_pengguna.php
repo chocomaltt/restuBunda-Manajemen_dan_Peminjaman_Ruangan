@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
+                    <button type="submit" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
                             class="bi bi-x-lg"></i>Simpan</button>
                     <button type="submit" class="btn btn-danger" aria-hidden="true"><i
                             class="bi bi-floppy"></i>Hapus</button>
