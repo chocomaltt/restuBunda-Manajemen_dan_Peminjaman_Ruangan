@@ -163,5 +163,4 @@ function setRememberMeCookie($userID, $token)
 }
 
 
-
 ?>

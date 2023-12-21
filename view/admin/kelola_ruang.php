@@ -10,7 +10,7 @@
             </h1>
         </div>
         <div class="cari" style="display: flex; gap: 16px; align-items: center;">
-            <input class="search-box" type="text" placeholder=" Pilih ID Ruang">
+            <input class="search-box" id="searchRuangID" name="searchRuangID" type="text" placeholder=" Pilih ID Ruang">
             <button class="search-button">Cari</button>
 
             <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
