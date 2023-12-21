@@ -277,6 +277,8 @@ if (!empty($query)) {
             </div>
             <form action="index.php?page=controller/jadwal_ruang.php&aksi=tambah" method="post">
                 <div class="modal-body">
+                <input type="hidden" name="data[]" class="form-control" id="id">
+
                     <div class="mb-3">
                         <label for="id" class="col-form-label">Kelas :</label>
                         <select name="data[]" id="label" class="form-select">
