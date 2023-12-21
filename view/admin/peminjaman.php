@@ -98,22 +98,22 @@
                                     readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="id" class="col-form-label">Nama Peminjam :</label>
+                                <label for="id" class="col-form-label">Nama Ruang :</label>
                                 <input type="text" name="data[]" class="form-control" id="id" value="<?= $row['NamaRuang']; ?>"
                                     readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="id" class="col-form-label">Nama Peminjam :</label>
+                                <label for="id" class="col-form-label">Waktu Peminjam :</label>
                                 <input type="text" name="data[]" class="form-control" id="id" value="<?= $row['WaktuPinjam']; ?>"
                                     readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="id" class="col-form-label">Nama Peminjam :</label>
+                                <label for="id" class="col-form-label">Waktu Kembali :</label>
                                 <input type="text" name="data[]" class="form-control" id="id" value="<?= $row['WaktuKembali']; ?>"
                                     readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="id" class="col-form-label">Nama Peminjam :</label>
+                                <label for="id" class="col-form-label">Keperluan :</label>
                                 <input type="text" name="data[]" class="form-control" id="id" value="<?= $row['Keperluan']; ?>"
                                     readonly>
                             </div>
