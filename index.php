@@ -15,6 +15,9 @@ if(!empty($_SESSION['level'])){
         }
         include 'view/admin/template/footer.php';
     } else if ($_SESSION['level']==2||$_SESSION['level']==3){
+        if(($_GET['page']) == 'form/coba.php' || ($_GET['page']) == 'form/coba.html'){
+            include 'view/user/template/' . $_GET['page'];
+        } else {
         ?>
 <body class="container-fluid bg-user-default m-0 p-0">
     <div class="d-flex vw-100 vh-100">
@@ -29,6 +32,8 @@ if(!empty($_SESSION['level'])){
             include "view/user/template/header.php";
                 if(!empty($_GET['page'])){
                     include 'view/user/template/' . $_GET['page'];
+                } elseif (($_GET['page']) == 'form/coba.php'){
+                    
                 } else {
                     include 'view/user/template/beranda.php';
                 }
@@ -38,6 +43,7 @@ if(!empty($_SESSION['level'])){
     </div>
 </body>
 <?php
+        }
     }
     }else {
     header("Location: login.php");

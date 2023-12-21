@@ -14,6 +14,7 @@
             background-color: rgb(18, 119, 130, 0.5) !important;
         }
     </style>
+    </div>
     <div class="w-100 position-relative mt-2" style="z-index: 0;padding: 0 30px;">
     <div class="table-responsive">
         <table class="table-striped-green biru w-100" style="margin-top: 0.5rem;table-layout: auto;">
@@ -58,13 +59,14 @@
                                         style="font-size:small">Menunggu</span>
                                     <!-- <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white"
                                         style="font-size:small" onclick="confirmCancellation()">Batalkan</span> -->
-                                        <a role="button" href="index.php?page=form/birokrasi.php" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white link-underline link-underline-opacity-0">Cetak Form</a>
+                                        <a role="button" href="index.php?page=form/coba.html" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white link-underline link-underline-opacity-0">Cetak Form</a>
 
                                 <?php 
                                 
                                 } else {
                                     ?>
-                                    <span role="button" href="index.php?page=assets/form/form_birokrasi.htm" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white">Cetak Form</span>
+                                    <span class="py-2 px-2 bg-danger me-2 rounded-pill fw-bold text-white fs-small">Ditolak</span>
+                                    <span class="py-2 px-2 bg-success me-2 rounded-pill fw-bold text-white fs-small">Diterima</span>
                                     <?php
                                 }
                                 ?>
@@ -81,7 +83,7 @@
             </tbody>
         </table>
     </div>
-    </div>
+    <!-- </div> -->
 </div>
 <script>
     function confirmCancellation() {

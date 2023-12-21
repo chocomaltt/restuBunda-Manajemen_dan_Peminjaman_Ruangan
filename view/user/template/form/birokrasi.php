@@ -1493,6 +1493,10 @@ style='font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-fam
 </span><span id="idPeminjam" lang=IN style='font-size:12.0pt;font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman";mso-ansi-language:IN'>ISI ID PEMINJAM<o:p></o:p></span></p>
 
+<?php
+include "birokrasi_files/footer.php";
+?>
+
 <p class=MsoNormal style='line-height:115%;tab-stops:108.0pt 139.5pt'><span
 style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
 mso-fareast-font-family:"Times New Roman"'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><br
@@ -1585,6 +1589,11 @@ style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&n
 style='font-size:10.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:
 "Times New Roman"'><o:p></o:p></span></p>
 
+<span style="height: 100%; width: 100%; display: flex; flex-direction: column; align-items: end; justify-content: start;">
+<?php
+include "birokrasi_files/footer.php";
+?>
+</span>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
