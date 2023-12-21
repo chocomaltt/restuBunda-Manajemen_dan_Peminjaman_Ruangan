@@ -15,11 +15,11 @@
                 <input class="search-box" type="text" name="keyword" placeholder=" Cari Pengguna">
                 <button class="search-button" name="search">Cari</button>
                 <!-- <button class="tambah">Tambah</button> -->
+            </form>
                 <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"
                     data-bs-whatever="@mdo">
                     <i class="bi bi-person-add"></i>Tambah
                 </button>
-            </form>
         </div>
         <table class="table" style="table-layout: auto;">
             <thead>

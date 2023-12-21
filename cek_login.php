@@ -60,18 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['level'] = $row['LevelID'];
                     
                     // Check if Remember Me is selected
-                    $rememberMe = isset($_POST['rememberMe']) ? $_POST['rememberMe'] : 0;
-    
-                    // if ($rememberMe) {
-                    //     // Generate a unique token
-                    //     $token = generateToken();
-    
-                    //     // Save the token in the database (you need a table for this purpose)
-                    //     saveRememberMeToken($row['AkunID'], $token);
-    
-                    //     // Set the Remember Me cookie
-                    //     setRememberMeCookie($row['AkunID'], $token);
-                    // }
+                    if (isset($_POST['rememberMe']) && $_POST['rememberMe'] == 1) {
+                        // Set cookie with user ID and an additional token (you can generate a secure token)
+                        $cookieToken = generateSecureToken(); // Implement your function to generate a secure token
+                        setcookie('rememberMe', $row['AkunID'] . ':' . $cookieToken, time() + (86400 * 30), '/'); // 30 days expiration
+                    }
+                    
                     header("location:index.php");
                 } else {
                     echo "Login gagal. Password Anda Salah.";
