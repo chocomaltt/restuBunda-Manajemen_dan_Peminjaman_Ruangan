@@ -1,7 +1,7 @@
 <div class="w-75 position-relative" style="z-index: 0; margin-top: 59px; padding: 0 30px;">
     <p class="text-white fw-bold fs-2">DAFTAR RUANG</p>
     <div class="d-flex gap-2" style="align-items: center;">
-        <div style="width: 30%;">
+        <div class="pt-3" style="width: 30%;">
             <form method="post" action="">
                     <input type="search" name="keyword" placeholder="Pilih Keyword"
                         style="border-radius: 3.125rem;outline: none;border: none;padding: 0.5rem 1rem;font-size: 0.8rem;width: 100%;">

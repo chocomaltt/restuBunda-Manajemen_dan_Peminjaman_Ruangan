@@ -18,6 +18,7 @@
                     <th>Nama Ruang</th>
                     <th>Deskripsi</th>
                     <th>Lantai</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -47,6 +48,9 @@
                             </td>
                             <td>
                                 <?= $row['Lantai']; ?>
+                            </td>
+                            <td>
+                                fill here.
                             </td>
                             <td>
                                 <a href="#" role="button"
