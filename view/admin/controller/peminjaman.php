@@ -18,7 +18,21 @@ if (!empty($_GET['aksi'])) {
         ];
         $tolakResult = updateData($koneksi, $tableName, $idTable, $id, $updateValues);
     }
-    if ($setujuResult == true || $tolakResult == true) {
+    $now = new DateTime();
+    $currentTimestamp = $now->format('Y-m-d H:i:s');
+    $aksi = $_GET['aksi'];
+    $dataHistory = [
+        $idHistory,
+        $_SESSION['idUser'],
+        $aksi,
+        $tableName,
+        $id,
+        $currentTimestamp
+    ];
+    
+    $insertHistory = insertData($koneksi, 'riwayatakun', $dataHistory);
+    
+    if ($insertHistory==true && $setujuResult == true || $tolakResult == true) {
         echo '<script>alert("Berhasil.");</script>';
         echo '<script>window.location.href = "index.php?page=peminjaman.php";</script>';
     } else {
