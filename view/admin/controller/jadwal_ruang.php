@@ -13,11 +13,27 @@ if (!empty($_GET['aksi'])) {
     } else if ($aksi == "tambah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
-            if($data[7] > $data[6]){
-                $insertResult = insertData($koneksi, $tableName, $data);
-            } else {
-                $insertResult = false;
+
+            $ruangDipinjam = $data[2];
+            $hari = $data[3];
+            $sesiMulai = $data[6];
+            $sesiSelesai = $data[7];
+        
+            $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangDipinjam' AND 
+                    ((jadwalruang.HariID = $hari) AND 
+                    (jadwalruang.SesiMulaiID <= '$sesiMulai' AND jadwalruang.SesiAkhirID >= '$sesiSelesai')";
+            
+        
+            $jadwalRuang = readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
+
+            if (empty($jadwalRuang) && empty($jadwalRuang)) {
+                if ($data[7] > $data[6]) {
+                    $insertResult = insertData($koneksi, $tableName, $data);
+                } else {
+                    $insertResult = false;
+                }
             }
+
         }
     } else if ($aksi == "ubah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
