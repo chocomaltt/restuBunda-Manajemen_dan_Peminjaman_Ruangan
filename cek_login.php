@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         setcookie('rememberMe', $row['AkunID'] . ':' . $cookieToken, time() + (86400 * 30), '/'); // 30 days expiration
                     }
                     
-                    header("location:index.php");
+                    header("location:index.php?page=beranda.php");
                 } else {
                     echo "Login gagal. Password Anda Salah.";
                 }
