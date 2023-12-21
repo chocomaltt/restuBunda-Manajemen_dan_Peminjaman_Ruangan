@@ -25,8 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['aksi']) && $_GET['aksi
 
                 // Update password di database
                 $updateResult = updateData($koneksi, 'akun', 'AkunID', $idUser, ['Password' => $hashedPasswordBaru]);
-
-                if ($deleteResult == true || $insertResult == true || $updateResult == true) {
+                $now = new DateTime();
+                $currentTimestamp = $now->format('Y-m-d H:i:s');
+                $aksi = $_GET['aksi'];
+                $dataHistory = [
+                    $idHistory,
+                    $_SESSION['idUser'],
+                    $aksi,
+                    'akun',
+                    $idUser,
+                    $currentTimestamp
+                ];
+                
+                $insertHistory = insertData($koneksi, 'riwayatakun', $dataHistory);
+                
+                if ($insertHistory==true &&$deleteResult == true || $insertResult == true || $updateResult == true) {
                     echo '<script>alert("Berhasil.");</script>';
                     echo '<script>window.location.href = "index.php?page=header.php";</script>';
                 } else {

@@ -14,6 +14,7 @@ if (!empty($_GET['aksi'])) {
     } else if ($aksi == "tambah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
+            $id = $data[0];
             $password = $_POST['password'];
             $salt = bin2hex(random_bytes(16));
             $combined_password = $salt . $password;
@@ -25,7 +26,9 @@ if (!empty($_GET['aksi'])) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
             $id = $data[0];
-
+            if($data[2]==2){
+                $data[2] = NULL;
+            }
             $updateValues = [ //ubah isinya sesuai database
                 'Nama' => $data[1],
                 'LevelID' => $data[2],
@@ -38,7 +41,22 @@ if (!empty($_GET['aksi'])) {
         }
     }
 
-    if ($deleteResult == true || $insertResult == true || $updateResult == true) {
+    $now = new DateTime();
+    $currentTimestamp = $now->format('Y-m-d H:i:s');
+
+    $dataHistory = [
+        $idHistory,
+        $_SESSION['idUser'],
+        $aksi,
+        $tableName,
+        $id,
+        $currentTimestamp
+    ];
+
+    $insertHistory = insertData($koneksi, 'riwayatakun', $dataHistory);
+
+
+    if ($insertHistory == true && $deleteResult == true || $insertResult == true || $updateResult == true) {
         echo '<script>alert("Berhasil.");</script>';
         echo '<script>window.location.href = "index.php?page=daftar_pengguna.php";</script>';
     } else {
