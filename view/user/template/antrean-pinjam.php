@@ -57,9 +57,7 @@
                                     ?>
                                     <span class="py-2 px-3 bg-biru me-2 rounded-pill fw-bold text-white"
                                         style="font-size:small">Menunggu</span>
-                                    <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white"
-                                        style="font-size:small" onclick="confirmCancellation()">Batalkan</span>
-
+                                        <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white" style="font-size:small" onclick="confirmCancellation(<?= $row['PeminjamanID']; ?>)">Batalkan</span>
                                 <?php 
                                 
                                 } else if ($row['StatusPeminjaman'] == "Disetujui") {
@@ -90,14 +88,12 @@
     <!-- </div> -->
 </div>
 <script>
-    function confirmCancellation() {
-        // Use the built-in confirm dialog
-        const isConfirmed = confirm('Apakah Anda yakin ingin membatalkan peminjaman?');
+    function confirmCancellation(peminjamanID) {
+    const isConfirmed = confirm('Apakah Anda yakin ingin membatalkan peminjaman?');
 
-        // Check if the user clicked "OK"
-        if (isConfirmed) {
-            // Redirect to the specified page
-            window.location.href = 'index.php?page=controller/antrean-pinjam.php&id=<?= $row['PeminjamanID']; ?>';
-        }
+    if (isConfirmed) {
+        window.location.href = 'index.php?page=controller/antrean-pinjam.php&id=' + peminjamanID;
     }
+}
+
 </script>

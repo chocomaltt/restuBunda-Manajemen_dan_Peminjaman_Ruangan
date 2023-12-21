@@ -120,9 +120,9 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                    <a href="index.php?page=controller/peminjaman.php&aksi=setujui&id<?= $row['PeminjamanID']; ?>" role="button"
+                                    <a href="index.php?page=controller/peminjaman.php&aksi=setujui&id=<?= $row['PeminjamanID']; ?>" role="button"
                                     class="btn btn-warning">Disetujui</a>
-                                    <a href="index.php?page=controller/peminjaman.php&aksi=tolak&id<?= $row['PeminjamanID']; ?>" role="button"
+                                    <a href="index.php?page=controller/peminjaman.php&aksi=tolak&id=<?= $row['PeminjamanID']; ?>" role="button"
                                     class="btn btn-danger">Ditolak</a>
                             </div>
                         </form>
