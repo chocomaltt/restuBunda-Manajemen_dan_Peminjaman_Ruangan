@@ -34,7 +34,8 @@
             $joinConditions = array(
                 "ruang" => "peminjaman.RuangID = ruang.RuangID"
             );
-            $searchConditions = "AkunID = '" . $_SESSION['idUser'] . "' AND peminjaman.StatusPeminjaman = 'Disetujui'";
+            $tanggalSekarang = date("Y-m-d H:i:s");
+            $searchConditions = "AkunID = '" . $_SESSION['idUser'] . "' AND peminjaman.StatusPeminjaman = 'Disetujui' AND peminjaman.WaktuPinjam >= '".$tanggalSekarang."'";
             $query = readData($koneksi, "peminjaman", '', $joinConditions, $searchConditions);
             if (!empty($query)) {
                 foreach ($query as $row) {

@@ -42,21 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['aksi']) && $_GET['aksi
         );
 
         // Lakukan update data denah di database
-        $updateResult = updateData($koneksi, 'denah', $dataToUpdate, "DenahID = $denahID");
+        $updateResult = updateData($koneksi, 'denah', $idTable, $denahID, $dataToUpdate);
 
         if ($updateResult) {
             // Jika update berhasil, alihkan ke halaman yang sesuai
             header("Location: index.php?page=halaman_tujuan"); // Ganti halaman_tujuan dengan halaman yang sesuai
             exit();
-        } else {
-            // Jika update gagal, berikan pesan kesalahan atau tindakan lain sesuai kebutuhan Anda
-            echo "Update gagal. Silakan coba lagi atau hubungi administrator.";
-            exit();
         }
     }
-} else {
-    // Jika tidak ada aksi ubah atau metode bukan POST, alihkan ke halaman lain atau berikan tindakan sesuai kebutuhan Anda
-    header("Location: index.php"); // Ganti index.php dengan halaman yang sesuai
-    exit();
 }
 ?>
