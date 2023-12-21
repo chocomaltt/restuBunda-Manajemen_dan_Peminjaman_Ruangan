@@ -13,7 +13,11 @@ if (!empty($_GET['aksi'])) {
     } else if ($aksi == "tambah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
-            $insertResult = insertData($koneksi, $tableName, $data);
+            if($data[7] > $data[6]){
+                $insertResult = insertData($koneksi, $tableName, $data);
+            } else {
+                $insertResult = false;
+            }
         }
     } else if ($aksi == "ubah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

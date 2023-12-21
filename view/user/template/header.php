@@ -49,17 +49,23 @@
 
 <div id="popupOverlay" class="popupOff">
   <div id="popupContent">
-    <h2 class="fs-4 fw-regular border-dark border-bottom biru pb-3">Muhammad Ali</h2>
+  <?php
+    $no = 1;
+    $query = readData($koneksi, "akun",'','','AkunID = "'.$_SESSION['idUser'].'"');
+    if(!empty($query)) {
+        foreach ($query as $row){
+?>
+    <h2 class="fs-4 fw-regular border-dark border-bottom biru pb-3"><?= $row['Nama']; }}?></h2>
     <h3 class="fs-4 fw-semibold biru text-start p-2">Ganti Password</h3>
-    <form action="" class="d-flex flex-column gap-3 bg-white" method="post">
+    <form action="index.php?page=controller/gantipassword.php&aksi=ubah" class="d-flex flex-column gap-3 bg-white" method="post">
         <div class="">
-            <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordOld" placeholder="Password Lama" name="passwordOld" required>
+            <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordOld" placeholder="Password Lama" name="data[]" required>
         </div>
         <div class="">
-            <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordNew" placeholder="Password Baru" name="passwordNew" required>
+            <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingPasswordNew" placeholder="Password Baru" name="data[]" required>
         </div>
         <div class="">
-            <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingRepeat" placeholder="Ulangi Password" name="repeatPassword" required>
+            <input type="text" class="form-control form-control-lg rounded-pill ps-3 fs-6" id="floatingRepeat" placeholder="Ulangi Password" name="data[]" required>
         </div>
     </form>
     <div class="d-flex flex-row justify-content-center gap-5">
