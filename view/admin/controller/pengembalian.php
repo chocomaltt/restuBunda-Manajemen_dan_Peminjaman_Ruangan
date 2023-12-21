@@ -6,17 +6,13 @@ if (!empty($_GET['aksi'])) {
     $id = $_GET['id'];
     if ($aksi == "setuju") {
         $updateValues = [ //ubah isinya sesuai database
-            'StatusPeminjaman' => "Disetujui"
+            'CatatanPengembalian' => $_POST['CatatanPengembalian'],
+            'StatusPengembalian' => "Selesai"
         ];
         $setujuResult = updateData($koneksi, $tableName, $idTable, $id, $updateValues);
-    } else if ($aksi == "tolak") {
-        $updateValues = [ //ubah isinya sesuai database
-            'StatusPeminjaman' => "Ditolak"
-        ];
-        $tolakResult = updateData($koneksi, $tableName, $idTable, $id, $updateValues);
     }
 } 
-    if ($setujuResult == true || $tolakResult == true) {
+    if ($setujuResult == true) {
         echo '<script>alert("Berhasil.");</script>';
         echo '<script>window.location.href = "index.php?page=peminjaman.php";</script>';
     } else {

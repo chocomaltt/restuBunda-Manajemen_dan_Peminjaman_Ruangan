@@ -15,7 +15,6 @@ if (!empty($_GET['aksi'])) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
             $password = $_POST['password'];
-            echo $data[0];
             $salt = bin2hex(random_bytes(16));
             $combined_password = $salt . $password;
             $data[5] = password_hash($combined_password, PASSWORD_BCRYPT);

@@ -278,57 +278,61 @@ if (!empty($query)) {
             <form action="index.php?page=controller/jadwal_ruang.php&aksi=tambah" method="post">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nama" class="col-form-label">Nama Ruang :</label>
+                        <label for="id" class="col-form-label">Kelas :</label>
                         <select name="data[]" id="label" class="form-select">
+                        <option selected>Pilih Kelas</option>
+                            <?php
+                            $query2 = readData($koneksi, "kelas");
+                            foreach ($query2 as $row2) {
+                                echo "<option value='" . $row2['KelasID'] . "'>" . $row2['NamaKelas'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="col-form-label">Ruang :</label>
+                        <select name="data[]" id="label" class="form-select">
+                        <option selected>Pilih Ruang</option>
                             <?php
                             $query2 = readData($koneksi, "ruang");
                             foreach ($query2 as $row2) {
-                                $selected = ($row2['RuangID'] == $row['RuangID']) ? 'selected' : '';
-                                echo "<option value=" . $row2['RuangID'] . " $selected>" . $row2['NamaRuang'] . "</option>";
+                                echo "<option value='" . $row2['RuangID'] . "'>" . $row2['NamaRuang'] . "</option>";
                             }
                             ?>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="col-form-label">Hari :</label>
-                        <select name="data[]" id="label" class="form-select" required>
-                            <option selected>Pilih Kelas</option>
-                            <option value="1">Minggu</option>
-                            <option value="1">Senin</option>
-                            <option value="2">Selasa</option>
-                            <option value="3">Rabu</option>
-                            <option value="4">Kamis</option>
-                            <option value="5">Jumat</option>
-                            <option value="6">Sabtu</option>
-                        </select>
-                        <!-- <select name="data[]" id="label" class="form-select">
+                        <select name="data[]" id="label" class="form-select">
+                        <option selected>Pilih Hari</option>
                             <?php
                             $query2 = readData($koneksi, "hari");
                             foreach ($query2 as $row2) {
-                                $selected = ($row2['HariID'] == $row['HariID']) ? 'selected' : '';
-                                echo "<option value=" . $row2['HariID'] . " $selected>" . $row2['NamaHari'] . "</option>";
+                                echo "<option value='" . $row2['HariID'] . "'>" . $row2['NamaHari'] . "</option>";
                             }
                             ?>
                         </select> -->
                     </div>
                     <div class="mb-3">
-                        <label for="id" class="col-form-label">Kelas :</label>
-                        <!-- <select name="data[]" id="label" class="form-select" required>
-                            <option selected>Pilih Kelas</option>
-                            <option value="1">Minggu</option>
-                            <option value="1">Senin</option>
-                            <option value="2">Selasa</option>
-                            <option value="3">Rabu</option>
-                            <option value="4">Kamis</option>
-                            <option value="5">Jumat</option>
-                            <option value="6">Sabtu</option>
-                        </select> -->
+                        <label for="nama" class="col-form-label">Mata Kuliah :</label>
                         <select name="data[]" id="label" class="form-select">
+                        <option selected>Pilih Mata Kuliah</option>
                             <?php
-                            $query2 = readData($koneksi, "kelas");
+                            $query2 = readData($koneksi, "matakuliah");
                             foreach ($query2 as $row2) {
-                                $selected = ($row2['KelasID'] == $row['KelasID']) ? 'selected' : '';
-                                echo "<option value=" . $row2['NamaKelas'] . " $selected>" . $row2['NamaKelas'] . "</option>";
+                                echo "<option value='" . $row2['MataKuliahID'] . "'>" . $row2['NamaMataKuliah'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="col-form-label">Dosen :</label>
+                        <select name="data[]" id="label" class="form-select">
+                        <option selected>Pilih Dosen</option>
+                            <?php
+                            $query2 = readData($koneksi, "akun", '', '', 'LevelID = 2');
+                            foreach ($query2 as $row2) {
+                                echo "<option value='" . $row2['KelasID'] . "'>" . $row2['Nama'] . "</option>";
                             }
                             ?>
                         </select>
@@ -337,56 +341,22 @@ if (!empty($query)) {
                         <label for="label" class="col-form-label">Waktu Mulai :</label>
                         <select name="data[]" id="label" class="form-select" required>
                             <option selected>Pilih Waktu Sesi Mulai</option>
-                            <option value="1">07:00:00</option>
-                            <option value="2">07:50:00</option>
-                            <option value="3">08:40:00</option>
-                            <option value="4">09:40:00</option>
-                            <option value="5">10:30:00</option>
-                            <option value="6">11:20:00</option>
-                            <option value="7">12:50:00</option>
-                            <option value="8">13:40:00</option>
-                            <option value="9">14:30:00</option>
-                            <option value="10">15:30:00</option>
-                            <option value="11">16:20:00 </option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="label" class="col-form-label">Waktu Selesai :</label>
-                        <select name="data[]" id="label" class="form-select" required>
-                            <option selected>Pilih Waktu Sesi Selesai</option>
-                            <option value="1">07:50:00</option>
-                            <option value="2">08:40:00</option>
-                            <option value="3">09:30:00</option>
-                            <option value="4">10:30:00</option>
-                            <option value="5">11:20:00</option>
-                            <option value="6">12:10:00</option>
-                            <option value="7">13:40:00</option>
-                            <option value="8">14:30:00</option>
-                            <option value="9">15:20:00</option>
-                            <option value="10">16:20:00</option>
-                            <option value="11">17:10:00</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="nama" class="col-form-label">Mata Kuliah :</label>
-                        <!-- <select name="data[]" id="label" class="form-select">
                             <?php
-                            $query2 = readData($koneksi, "matakuliah");
+                            $query2 = readData($koneksi, "sesi");
                             foreach ($query2 as $row2) {
-                                $selected = ($row2['MataKuliahID'] == $row['MataKuliahID']) ? 'selected' : '';
-                                echo "<option value=" . $row2['MataKuliahID'] . " $selected>" . $row2['NamaMataKuliah'] . "</option>";
+                                echo "<option value=" . $row2['SesiID'] . ">(Sesi ke-" . $row2['JudulSesi'] . ") ".$row2['WaktuMulai']." - ".$row2['WaktuSelesai']."</option>";
                             }
                             ?>
                         </select> -->
                     </div>
                     <div class="mb-3">
-                        <label for="nama" class="col-form-label">Dosen Pengajar :</label>
-                        <select name="data[]" id="label" class="form-select">
+                        <label for="label" class="col-form-label">Waktu Selesai :</label>
+                        <select name="data[]" id="label" class="form-select" required>
+                        <option selected>Pilih Waktu Sesi Akhir</option>
                             <?php
-                            $query2 = readData($koneksi, "akun", '', '', 'LevelID = 2');
+                            $query2 = readData($koneksi, "sesi");
                             foreach ($query2 as $row2) {
-                                $selected = ($row2['AkunID'] == $row['AkunID']) ? 'selected' : '';
-                                echo "<option value=" . $row2['KelasID'] . " $selected>" . $row2['Nama'] . "</option>";
+                                echo "<option value=" . $row2['SesiID'] . ">(Sesi ke-" . $row2['JudulSesi'] . ") ".$row2['WaktuMulai']." - ".$row2['WaktuSelesai']."</option>";
                             }
                             ?>
                         </select>
