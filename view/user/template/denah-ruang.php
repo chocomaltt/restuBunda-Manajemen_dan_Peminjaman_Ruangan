@@ -11,7 +11,7 @@
                 foreach ($query as $row){
         ?>
             <div class="col">
-                <img src="<?= $row['File'];?>" alt="" style="width: 80%; margin: 30px;">
+                <img src="view/admin/img/<?= $row['File'];?>" alt="" style="width: 90%; margin: 30px;">
             </div>
         <?php
             }
