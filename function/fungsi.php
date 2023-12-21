@@ -163,5 +163,4 @@ function generateSecureToken($length = 32) {
 }
 
 
-
 ?>
