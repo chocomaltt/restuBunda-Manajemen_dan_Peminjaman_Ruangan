@@ -63,7 +63,7 @@
                                 } else if ($row['StatusPeminjaman'] == "Disetujui") {
                                     ?>
                                     <span class="py-2 px-2 bg-success me-2 rounded-pill fw-bold text-white fs-small">Diterima</span>
-                                    <a role="button" href="index.php?page=form/coba.html" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white link-underline link-underline-opacity-0">Cetak Form</a>
+                                    <a role="button" href="index.php?page=form/coba.php&idPinjam=<?=$row['PeminjamanID']?>" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white link-underline link-underline-opacity-0">Cetak Form</a>
                                     
                                     <?php
                                 } else if ($row['StatusPeminjaman'] == "Disetujui") {

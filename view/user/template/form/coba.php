@@ -1,3 +1,6 @@
+<?php
+$query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION['idPinjam']);  
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -66,6 +69,16 @@
     </style>
   </head>
   <body>
+    <?php
+    if(!emtpy($_GET['if'])){
+      $query = readData($koneksi, "peminjaman", '', '', "PeminjamanID = '" . $_GET['idPinjam'] . "'");
+    }
+    // $joinConditions = array (
+    //   "ruang" => "peminjaman.RuangID = ruang.RuangID",
+    //   "akun" => "peminjaman.AkunID = akun.AkunID"
+    // );
+    $searchConditions = ""
+    ?>
     <div class="header">
         <div>
             <img src="assets/img/logo-polinema.png" alt="logo kiri">
