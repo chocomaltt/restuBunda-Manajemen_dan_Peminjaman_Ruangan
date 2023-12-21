@@ -1,8 +1,8 @@
 <?php
 if (!empty($_GET['aksi'])) {
-    $tableName = "akun";
+    $tableName = "peminjaman";
     $aksi = $_GET['aksi'];
-    $idTable = 'AkunID'; //ubah ID tabel sesuai database
+    $idTable = 'PeminjamanID'; //ubah ID tabel sesuai database
     $deleteResult = "";
     $insertResult = "";
     $updateResult = "";
@@ -14,12 +14,6 @@ if (!empty($_GET['aksi'])) {
     } else if ($aksi == "tambah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
-            $password = $_POST['password'];
-            echo $data[0];
-            $salt = bin2hex(random_bytes(16));
-            $combined_password = $salt . $password;
-            $data[5] = password_hash($combined_password, PASSWORD_BCRYPT);
-            $data[6] = $salt;
             $insertResult = insertData($koneksi, $tableName, $data);
         }
     } else if ($aksi == "ubah") {
@@ -28,25 +22,28 @@ if (!empty($_GET['aksi'])) {
             $id = $data[0];
 
             $updateValues = [ //ubah isinya sesuai database
-                'Nama' => $data[1],
-                'LevelID' => $data[2],
-                'KelasID' => $data[3],
-                'Username' => $data[4]
+                'AkunID' => $data[1],
+                'RuangID' => $data[2],
+                'WaktuPinjam' => $data[3],
+                'WaktuKembali' => $data[4],
+                'Keperluan' => $data[5],
+
             ];
 
             $updateResult = updateData($koneksi, $tableName, $idTable, $id, $updateValues);
 
         }
-    }
+    } 
+} 
 
-    if ($deleteResult == true || $insertResult == true || $updateResult == true) {
+    if ($deleteResult == true || $insertResult == true || $updateResult == true || $approvalResult == true) {
         echo '<script>alert("Berhasil.");</script>';
-        echo '<script>window.location.href = "index.php?page=daftar_pengguna.php";</script>';
+        echo '<script>window.location.href = "index.php?page=peminjaman.php";</script>';
     } else {
         echo '<script>alert("Gagal.");</script>';
-        echo '<script>window.location.href = "index.php?page=daftar_pengguna.php";</script>';
+        echo '<script>window.location.href = "index.php?page=peminjaman.php";</script>';
     }
-}
+
 
 
 ?>

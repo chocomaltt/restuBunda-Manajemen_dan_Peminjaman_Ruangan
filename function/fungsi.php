@@ -154,14 +154,13 @@ function checkRoomAvailability($koneksi, $ruangID, $Mulai, $Akhir)
         return true;
     }
 }
-function setRememberMeCookie($userID, $token)
-{
-    $cookieValue = $userID . ':' . $token;
-    $cookieExpire = time() + (30 * 24 * 60 * 60); // Cookie berlaku selama 30 hari
 
-    setcookie('remember_me', $cookieValue, $cookieExpire, '/');
+function generateSecureToken($length = 32) {
+    // Generate a random string using secure means
+    $token = bin2hex(random_bytes($length));
+
+    return $token;
 }
-
 
 
 ?>
