@@ -13,7 +13,7 @@ if (!empty($_GET['aksi'])) {
     } else if ($aksi == "tambah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
-
+            
             $ruangDipinjam = $data[2];
             $hari = $data[3];
             $sesiMulai = $data[6];
