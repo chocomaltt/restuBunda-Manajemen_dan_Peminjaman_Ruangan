@@ -15,7 +15,7 @@ if(!empty($_SESSION['level'])){
         }
         include 'view/admin/template/footer.php';
     } else if ($_SESSION['level']==2||$_SESSION['level']==3){
-        if(($_GET['page']) == 'form/coba.php' || ($_GET['page']) == 'form/coba.html'){
+        if(!empty($_GET['page']) && ($_GET['page']) == 'form/coba.php' || ($_GET['page']) == 'form/coba.html'){
             include 'view/user/template/' . $_GET['page'];
         } else {
         ?>
