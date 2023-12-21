@@ -85,10 +85,10 @@
                                 <i class='bx bx-group'></i>
                                 <a href="index.php?page=daftar_pengguna.php">Daftar Pengguna</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <i class='bx bx-exit'></i>
                                 <a href="logout.php">Keluar</a>
-                            </li>
+                            </li> -->
                         </ul>
                     </li>
                 </ul>
