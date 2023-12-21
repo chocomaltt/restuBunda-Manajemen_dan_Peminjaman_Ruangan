@@ -10,9 +10,11 @@
             </h1>
         </div>
         <div class="cari" style="display: flex; gap: 16px; align-items: center;">
-            <input class="search-box" id="searchRuangID" name="searchRuangID" type="text" placeholder=" Pilih ID Ruang">
-            <button class="search-button">Cari</button>
+        <form method="post" action="">
+            <input class="search-box" name="keyword" type="text" placeholder="Cari Ruang">
+            <button class="search-button" name="search">Cari</button>
 
+        </form>
             <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
                 <i class="bi bi-person-add"></i>Tambah</button>
         </div>
@@ -29,7 +31,25 @@
             <tbody>
                 <?php
                 $no = 1;
-                $query = readData($koneksi, "ruang");
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'])) {
+                    $keyword = $_POST['keyword'];
+                    $searchConditions = "(
+                                    NamaRuang LIKE '%$keyword%' OR
+                                    JenisRuang LIKE '%$keyword%'OR
+                                    DeskripsiRuang LIKE '%$keyword%'OR
+                                    Lantai LIKE '%$keyword%'
+                                    )";
+
+                                    $query = readData($koneksi, "ruang", '','', $searchConditions);
+
+
+                } else {
+                    // If the form is not submitted, fetch all data
+                    $query = readData($koneksi, "ruang");
+                }
+
+
+                
                 if (!empty($query)) {
                     foreach ($query as $row) {
                         ?>
