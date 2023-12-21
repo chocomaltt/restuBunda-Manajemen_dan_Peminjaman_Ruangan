@@ -3,8 +3,9 @@ if (!empty($_GET['aksi'])) {
     $tableName = "peminjaman";
     $aksi = $_GET['aksi'];
     $idTable = 'PeminjamanID'; //ubah ID tabel sesuai database
-    $id = $_GET['id'];
-    if ($aksi == "setuju") {
+    $setujuResult = "";
+    if ($aksi == "setujui") {
+        $id = $_GET['id'];
         $updateValues = [ //ubah isinya sesuai database
             'CatatanPengembalian' => $_POST['CatatanPengembalian'],
             'StatusPengembalian' => "Selesai"
