@@ -10,11 +10,13 @@
     <div class="cari" style="display: flex; gap: 16px; align-items: center;">
         <form method="post" action="">
             <input class="search-box" name="keyword" type="text" placeholder="Cari Jadwal" style="width: 296px;">
-            <input class="date" name="tanggal" type="text" placeholder=" Tentukan Tanggal" style="width: 168px;">
+            <input class="search-box pe-2" name="tanggal" type="date" placeholder=" Tentukan Tanggal"
+                style="width: 168px;">
             <button class="search-button" name="search">Cari</button>
         </form>
-        <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
-                <i class="bi bi-person-add"></i>Tambah</button>
+        <button type="button" class="tambah" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">
+            <i class="bi bi-person-add"></i>Tambah</button>
 
     </div>
     <table class="table " style="table-layout: auto;">
@@ -52,7 +54,7 @@
                     $tanggal = $_POST['tanggal'];
                     // Inisialisasi kondisi pencarian
                     // $searchConditions = array();
-            
+
                     // Buat kondisi pencarian berdasarkan keyword jika diisi
                     if (!empty($keyword) && empty($tanggal)) {
                         $searchConditions = "(
@@ -85,7 +87,7 @@
                     }
                     // Gabungkan kondisi pencarian dengan kondisi join sebelumnya
                     // $conditions = array_merge($joinConditions, $searchConditions);
-            
+
                     // Lakukan query dengan kondisi pencarian
                     $query = readData($koneksi, "jadwalruang", '*, s.WaktuMulai AS WM, p.WaktuSelesai AS WS', $joinConditions, $searchConditions);
                 }
@@ -95,49 +97,49 @@
             }
             if (!empty($query)) {
                 foreach ($query as $row) {
-                    ?>
-                    <tr>
-                        <th scope="row">
-                            <?= $no++; ?>
-                        </th>
-                        <td>
-                            <?= $row['NamaRuang']; ?>
-                        </td>
-                        <td>
-                            <?= $row['NamaHari']; ?>
-                        </td>
-                        <td>
-                            <?= $row['NamaKelas']; ?>
-                        </td>
-                        <!-- <td><?= $row['JudulSesi']; ?></td> -->
-                        <td>
-                            <?= $row['WM']; ?>
-                        </td>
-                        <td>
-                            <?= $row['WS']; ?>
-                        </td>
-                        <td>
-                            <?= $row['NamaMataKuliah']; ?>
-                        </td>
-                        <td>
-                            <?= $row['Nama']; ?>
-                        </td>
-                        <td>
-                            <a href="index.php?page=controller/jadwal_ruang.php&aksi=ubah&id" role="button"
-                                class="btn btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#editModal<?= $row['JadwalRuangID']; ?>" data-bs-whatever="@mdo">Edit</a>
-                            <a href="index.php?page=controller/jadwal_ruang.php&aksi=hapus&id=<?php echo $row['JadwalRuangID']; ?>"
-                                onclick="javascript:return confirm('Hapus Data Anggota ?');" class="btn btn-danger btn-xs"><i
-                                    class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
-                        </td>
-                        <?php
+            ?>
+            <tr>
+                <th scope="row">
+                    <?= $no++; ?>
+                </th>
+                <td>
+                    <?= $row['NamaRuang']; ?>
+                </td>
+                <td>
+                    <?= $row['NamaHari']; ?>
+                </td>
+                <td>
+                    <?= $row['NamaKelas']; ?>
+                </td>
+                <!-- <td><?= $row['JudulSesi']; ?></td> -->
+                <td>
+                    <?= $row['WM']; ?>
+                </td>
+                <td>
+                    <?= $row['WS']; ?>
+                </td>
+                <td>
+                    <?= $row['NamaMataKuliah']; ?>
+                </td>
+                <td>
+                    <?= $row['Nama']; ?>
+                </td>
+                <td>
+                    <a href="index.php?page=controller/jadwal_ruang.php&aksi=ubah&id" role="button"
+                        class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#editModal<?= $row['JadwalRuangID']; ?>" data-bs-whatever="@mdo">Edit</a>
+                    <a href="index.php?page=controller/jadwal_ruang.php&aksi=hapus&id=<?php echo $row['JadwalRuangID']; ?>"
+                        onclick="javascript:return confirm('Hapus Data Anggota ?');" class="btn btn-danger btn-xs"><i
+                            class="fa fa-trash-o" aria-hidden="true"></i> Hapus</a>
+                </td>
+                <?php
                 }
             } else {
-                ?>
-                    <td colspan="4">Tidak Ada Data Tersedia</td>
-                    <?php
+                    ?>
+                <td colspan="4">Tidak Ada Data Tersedia</td>
+                <?php
             }
-            ?>
+                ?>
             </tr>
         </tbody>
     </table>
@@ -157,76 +159,76 @@ $joinConditions = array(
 $query = readData($koneksi, "jadwalruang", '', $joinConditions);
 if (!empty($query)) {
     foreach ($query as $row) {
-        ?>
-        <div class="modal fade" id="editModal<?= $row['JadwalRuangID']; ?>" tabindex="-1" data-bs-backdrop="static"
-            data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editModalLabel<?= $row['JadwalRuangID']; ?>">Edit Ruangan
+?>
+<div class="modal fade" id="editModal<?= $row['JadwalRuangID']; ?>" tabindex="-1" data-bs-backdrop="static"
+    data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editModalLabel<?= $row['JadwalRuangID']; ?>">Edit Ruangan
 
-                        </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="index.php?page=controller/jadwal_ruang.php&aksi=ubah" method="post">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">ID Ruang :</label>
+                        <input type="text" name="data[]" class="form-control" id="id" value="<?= $row['RuangID']; ?>"
+                            readonly>
                     </div>
-                    <form action="index.php?page=controller/jadwal_ruang.php&aksi=ubah" method="post">
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="id" class="col-form-label">ID Ruang :</label>
-                                <input type="text" name="data[]" class="form-control" id="id" value="<?= $row['RuangID']; ?>"
-                                    readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="id" class="col-form-label">Kelas :</label>
-                                <select name="data[]" id="label" class="form-select">
-                                    <?php
+                    <div class="mb-3">
+                        <label for="id" class="col-form-label">Kelas :</label>
+                        <select name="data[]" id="label" class="form-select">
+                            <?php
                                     $query2 = readData($koneksi, "kelas");
                                     foreach ($query2 as $row2) {
                                         $selected = ($row2['KelasID'] == $row['KelasID']) ? 'selected' : '';
                                         echo "<option value=" . $row2['KelasID'] . " $selected>" . $row['NamaKelas'] . "</option>";
                                     }
                                     ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nama" class="col-form-label">Hari :</label>
-                                <select name="data[]" id="label" class="form-select">
-                                    <?php
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="col-form-label">Hari :</label>
+                        <select name="data[]" id="label" class="form-select">
+                            <?php
                                     $query2 = readData($koneksi, "hari");
                                     foreach ($query2 as $row2) {
                                         $selected = ($row2['HariID'] == $row['HariID']) ? 'selected' : '';
                                         echo "<option value=" . $row2['HariID'] . " $selected>" . $row2['NamaHari'] . "</option>";
                                     }
                                     ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nama" class="col-form-label">Mata Kuliah :</label>
-                                <select name="data[]" id="label" class="form-select">
-                                    <?php
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="col-form-label">Mata Kuliah :</label>
+                        <select name="data[]" id="label" class="form-select">
+                            <?php
                                     $query2 = readData($koneksi, "matakuliah");
                                     foreach ($query2 as $row2) {
                                         $selected = ($row2['MataKuliahID'] == $row['MataKuliahID']) ? 'selected' : '';
                                         echo "<option value=" . $row2['MataKuliahID'] . " $selected>" . $row2['NamaMataKuliah'] . "</option>";
                                     }
                                     ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nama" class="col-form-label">Akun :</label>
-                                <select name="data[]" id="label" class="form-select">
-                                    <?php
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="col-form-label">Akun :</label>
+                        <select name="data[]" id="label" class="form-select">
+                            <?php
                                     $query2 = readData($koneksi, "akun", '', '', 'LevelID = 2');
                                     foreach ($query2 as $row2) {
                                         $selected = ($row2['AkunID'] == $row['AkunID']) ? 'selected' : '';
                                         echo "<option value=" . $row2['AkunID'] . " $selected>" . $row2['Username'] . "</option>";
                                     }
                                     ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nama" class="col-form-label">SesiMulai :</label>
-                                <select name="data[]" id="labelmulai<?= $row['JadwalRuangID']; ?>" class="form-select">
-                                    <?php
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nama" class="col-form-label">SesiMulai :</label>
+                        <select name="data[]" id="labelmulai<?= $row['JadwalRuangID']; ?>" class="form-select">
+                            <?php
                                     $query2 = readData($koneksi, "sesi");
                                     foreach ($query2 as $row2) {
                                         // $selected = ($row2['SesiMulaiID'] == $row['SesiID']) ? 'selected' : '';
@@ -234,33 +236,33 @@ if (!empty($query)) {
                                         echo "<option value=" . $row2['SesiID'] . " $selected>" . $row2['WaktuMulai'] . "</option>";
                                     }
                                     ?>
-                                </select>
-                            </div>
+                        </select>
+                    </div>
 
-                            <div class="mb-3">
-                                <label for="nama" class="col-form-label">SesiAkhir :</label>
-                                <select name="data[]" id="labelakhir<?= $row['JadwalRuangID']; ?>" class="form-select">
-                                    <?php
+                    <div class="mb-3">
+                        <label for="nama" class="col-form-label">SesiAkhir :</label>
+                        <select name="data[]" id="labelakhir<?= $row['JadwalRuangID']; ?>" class="form-select">
+                            <?php
                                     $query2 = readData($koneksi, "sesi");
                                     foreach ($query2 as $row2) {
                                         $selected = ($row2['SesiID'] == $row['SesiAkhirID']) ? 'selected' : '';
                                         echo "<option value=" . $row2['SesiID'] . " $selected>" . $row2['WaktuSelesai'] . "</option>";
                                     }
                                     ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
-                                    class="bi bi-x-lg"></i>Ubah</button>
-                            <button type="submit" class="btn btn-danger" aria-hidden="true"><i
-                                    class="bi bi-floppy"></i>Hapus</button>
-                        </div>
-                    </form>
+                        </select>
+                    </div>
                 </div>
-            </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
+                            class="bi bi-x-lg"></i>Ubah</button>
+                    <button type="submit" class="btn btn-danger" aria-hidden="true"><i
+                            class="bi bi-floppy"></i>Hapus</button>
+                </div>
+            </form>
         </div>
-        <?php
+    </div>
+</div>
+<?php
     }
 }
 ?>
@@ -276,7 +278,7 @@ if (!empty($query)) {
             <form action="index.php?page=controller/jadwal_ruang.php&aksi=tambah" method="post">
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nama" class="col-form-label">Mata Ruang :</label>
+                        <label for="nama" class="col-form-label">Nama Ruang :</label>
                         <select name="data[]" id="label" class="form-select">
                             <?php
                             $query2 = readData($koneksi, "ruang");
@@ -289,7 +291,17 @@ if (!empty($query)) {
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="col-form-label">Hari :</label>
-                        <select name="data[]" id="label" class="form-select">
+                        <select name="data[]" id="label" class="form-select" required>
+                            <option selected>Pilih Kelas</option>
+                            <option value="1">Minggu</option>
+                            <option value="1">Senin</option>
+                            <option value="2">Selasa</option>
+                            <option value="3">Rabu</option>
+                            <option value="4">Kamis</option>
+                            <option value="5">Jumat</option>
+                            <option value="6">Sabtu</option>
+                        </select>
+                        <!-- <select name="data[]" id="label" class="form-select">
                             <?php
                             $query2 = readData($koneksi, "hari");
                             foreach ($query2 as $row2) {
@@ -297,10 +309,20 @@ if (!empty($query)) {
                                 echo "<option value=" . $row2['HariID'] . " $selected>" . $row2['NamaHari'] . "</option>";
                             }
                             ?>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="mb-3">
                         <label for="id" class="col-form-label">Kelas :</label>
+                        <!-- <select name="data[]" id="label" class="form-select" required>
+                            <option selected>Pilih Kelas</option>
+                            <option value="1">Minggu</option>
+                            <option value="1">Senin</option>
+                            <option value="2">Selasa</option>
+                            <option value="3">Rabu</option>
+                            <option value="4">Kamis</option>
+                            <option value="5">Jumat</option>
+                            <option value="6">Sabtu</option>
+                        </select> -->
                         <select name="data[]" id="label" class="form-select">
                             <?php
                             $query2 = readData($koneksi, "kelas");
@@ -347,7 +369,7 @@ if (!empty($query)) {
                     </div>
                     <div class="mb-3">
                         <label for="nama" class="col-form-label">Mata Kuliah :</label>
-                        <select name="data[]" id="label" class="form-select">
+                        <!-- <select name="data[]" id="label" class="form-select">
                             <?php
                             $query2 = readData($koneksi, "matakuliah");
                             foreach ($query2 as $row2) {
@@ -355,10 +377,10 @@ if (!empty($query)) {
                                 echo "<option value=" . $row2['MataKuliahID'] . " $selected>" . $row2['NamaMataKuliah'] . "</option>";
                             }
                             ?>
-                        </select>
+                        </select> -->
                     </div>
                     <div class="mb-3">
-                        <label for="nama" class="col-form-label">Akun :</label>
+                        <label for="nama" class="col-form-label">Dosen Pengajar :</label>
                         <select name="data[]" id="label" class="form-select">
                             <?php
                             $query2 = readData($koneksi, "akun", '', '', 'LevelID = 2');
@@ -387,4 +409,4 @@ if (!empty($query)) {
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+</script>
