@@ -116,8 +116,7 @@ $query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION
         </p>
       </div>
       <p style="margin-top: 0;">
-        Sehubungan dengan adanya kegiatan Open Recruitment Information
-        Technology Department English Community 2023, kami mohon bantuan
+        Sehubungan dengan adanya kegiatan <!--DIISI KETERANGAN UTK NAMA KEGIATAN--> <?=$row['Keterangan'];?>, kami mohon bantuan
         peminjaman Gedung Teknik Sipil Politeknik Negeri Malang beserta
         fasilitas yang ada didalamnya dan daya listrik di gedung tersebut.
         <br />
@@ -125,9 +124,9 @@ $query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION
     <!-- &nbsp; = tab -->
     <p>
         Kegiatan ini akan diselenggarakan pada: <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hari, tanggal&nbsp;&nbsp;: Sabtu, 21 Oktober 2023 dan Minggu, 22 Oktober 2023 <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pukul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 11.00 WIB - selesai <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: LKJ 1, LPR 1, LPR 2, LPR 3, LPR 4, LPR 5, LPR 6, LPR 7 Lantai 7
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hari, tanggal&nbsp;&nbsp;:<!--DIISI TANGGAL MULAI DAN KEMBALI--> <?=$row['WaktuPinjam'];?> dan <?=$row['WaktuKembali'];?> <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pukul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <!--DIISI JAM MULAI--> <?=$row[''];?> - selesai <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?=$row[''];?> Lantai 7
         Gedung Teknik Sipil, Politeknik Negeri Malang <br>
         Demikian surat peminjaman ini kami buat, atas izin dan bantuan yang
         diberikan kami sampaikan terima kasih. <br />
@@ -142,8 +141,8 @@ $query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION
         <div>
             Hormat kami,<br>
             Ketua Pelaksana <br><br><br><br>
-            Reza Arya Wijaya <br>
-            NIM. 2241720252
+            Reza Arya Wijaya <!--DIISI NAMA PEMINJAM--> <br>
+            NIM. 2241720252 <!--DIISI ID PEMINJAM-->
         </div>
     </div>
     <p style="text-align: center;">
