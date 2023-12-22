@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
+                    <button type="submitg" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i
                             class="bi bi-x-lg"></i>Ubah</button>
                     <button type="reset" class="btn btn-secondary" aria-hidden="true"><i
                             class="bi bi-floppy"></i>Batal</button>
