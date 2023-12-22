@@ -7,12 +7,14 @@ function insertData($koneksi, $table, $data)
     $result = $koneksi->query($sql);
 
     if ($result === false) {
-        // Handle error here if needed
+        // Handle error and log detailed information
+        echo "Error: " . $koneksi->error;
         return false;
     }
 
     return $result;
 }
+
 
 
 function readData($koneksi, $mainTable, $columns = '', $conditions = array(), $whereCondition = "")
