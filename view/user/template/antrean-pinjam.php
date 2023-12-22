@@ -33,7 +33,7 @@
                 $joinConditions = array(
                     "ruang" => "peminjaman.RuangID = ruang.RuangID"
                 );
-                $searchConditions = "AkunID = '".$_SESSION['idUser']."' AND peminjaman.StatusPeminjaman = 'Menunggu Konfirmasi' OR peminjaman.StatusPeminjaman = 'Disetujui'";
+                $searchConditions = "AkunID = '".$_SESSION['idUser']."' AND peminjaman.StatusPeminjaman = 'Menunggu Konfirmasi' OR peminjaman.StatusPeminjaman = 'Disetujui' OR peminjaman.StatusPeminjaman = 'Ditolak' AND peminjaman.StatusPengembalian = NULL";
                 $query = readData($koneksi, "peminjaman", '', $joinConditions, $searchConditions);
                 if (!empty($query)) {
                     foreach ($query as $row) {
@@ -57,16 +57,20 @@
                                     ?>
                                     <span class="py-2 px-3 bg-biru me-2 rounded-pill fw-bold text-white"
                                         style="font-size:small">Menunggu</span>
-                                    <!-- <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white"
-                                        style="font-size:small" onclick="confirmCancellation()">Batalkan</span> -->
-                                        <a role="button" href="index.php?page=form/coba.html" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white link-underline link-underline-opacity-0">Cetak Form</a>
+                                    <span role="button" class="py-2 px-4 bg-danger rounded-pill fw-bold text-white"
+                                        style="font-size:small" onclick="confirmCancellation()">Batalkan</span>
 
                                 <?php 
                                 
-                                } else {
+                                } else if ($row['StatusPeminjaman'] == "Disetujui") {
+                                    ?>
+                                    <span class="py-2 px-2 bg-success me-2 rounded-pill fw-bold text-white fs-small">Diterima</span>
+                                    <a role="button" href="index.php?page=form/coba.html" class="py-2 px-3 bg-hijau me-2 rounded-pill fw-bold fs-small text-white link-underline link-underline-opacity-0">Cetak Form</a>
+                                    
+                                    <?php
+                                } else if ($row['StatusPeminjaman'] == "Disetujui") {
                                     ?>
                                     <span class="py-2 px-2 bg-danger me-2 rounded-pill fw-bold text-white fs-small">Ditolak</span>
-                                    <span class="py-2 px-2 bg-success me-2 rounded-pill fw-bold text-white fs-small">Diterima</span>
                                     <?php
                                 }
                                 ?>
