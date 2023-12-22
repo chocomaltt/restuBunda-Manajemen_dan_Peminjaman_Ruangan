@@ -1,6 +1,6 @@
 <?php
 if (!empty($_GET['aksi'])) {
-    $tableName = "jadwalruangruang";
+    $tableName = "jadwalruang";
     $aksi = $_GET['aksi'];
     $idTable = 'JadwalRuangID'; //ubah ID tabel sesuai database
     $deleteResult = "";
@@ -21,10 +21,10 @@ if (!empty($_GET['aksi'])) {
         
             $whereConditionsJadwal = "jadwalruang.RuangID = '$ruangDipinjam' AND 
                     ((jadwalruang.HariID = $hari) AND 
-                    (jadwalruang.SesiMulaiID <= '$sesiMulai' AND jadwalruang.SesiAkhirID >= '$sesiSelesai')";
+                    (jadwalruang.SesiMulaiID <= '$sesiMulai' AND jadwalruang.SesiAkhirID >= '$sesiSelesai'))";
             
         
-            $jadwalRuang = readData($koneksi, "jadwalruang", '', $joinConditions, $whereConditionsJadwal);
+            $jadwalRuang = readData($koneksi, "jadwalruang", '', '', $whereConditionsJadwal);
 
             if (empty($jadwalRuang) && empty($jadwalRuang)) {
                 if ($data[7] > $data[6]) {
