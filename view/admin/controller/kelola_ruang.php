@@ -14,6 +14,7 @@ if (!empty($_GET['aksi'])) {
     } else if ($aksi == "tambah") {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data = $_POST['data'];
+            $id = $data[0];
             $insertResult = insertData($koneksi, $tableName, $data);
         }
     } else if ($aksi == "ubah") {
@@ -33,8 +34,21 @@ if (!empty($_GET['aksi'])) {
 
         }
     }
-
-    if ($deleteResult == true || $insertResult == true || $updateResult == true) {
+    $now = new DateTime();
+    $currentTimestamp = $now->format('Y-m-d H:i:s');
+    $aksi = $_GET['aksi'];
+    $dataHistory = [
+        $idHistory,
+        $_SESSION['idUser'],
+        $aksi,
+        $tableName,
+        $id,
+        $currentTimestamp
+    ];
+    
+    $insertHistory = insertData($koneksi, 'riwayatakun', $dataHistory);
+    
+    if ($insertHistory==true && $deleteResult == true || $insertResult == true || $updateResult == true) {
         echo '<script>alert("Berhasil.");</script>';
         echo '<script>window.location.href = "index.php?page=kelola_ruang.php";</script>';
     } else {

@@ -23,14 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['aksi']) && $_GET['aksi
 
             // Lakukan update data denah di database
             $updateResult = updateData($koneksi, $tableName, $idTable, $denahID, $dataToUpdate);
-
-            if ($updateResult == true) {
-                echo '<script>alert("Berhasil.");</script>';
-                echo '<script>window.location.href = "index.php?page=denah_admin.php";</script>';
-            } else {
-                echo '<script>alert("Gagal.");</script>';
-                echo '<script>window.location.href = "index.php?page=denah_admin.php";</script>';
-            }
         } else {
             echo "Gagal mengupload file.";
             exit();
@@ -43,12 +35,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['aksi']) && $_GET['aksi
 
         // Lakukan update data denah di database
         $updateResult = updateData($koneksi, 'denah', $idTable, $denahID, $dataToUpdate);
+    }
 
-        if ($updateResult) {
-            // Jika update berhasil, alihkan ke halaman yang sesuai
-            header("Location: index.php?page=halaman_tujuan"); // Ganti halaman_tujuan dengan halaman yang sesuai
-            exit();
-        }
+    $now = new DateTime();
+    $currentTimestamp = $now->format('Y-m-d H:i:s');
+    $aksi = $_GET['aksi'];
+    $dataHistory = [
+        $idHistory,
+        $_SESSION['idUser'],
+        $aksi,
+        $tableName,
+        $denahID,
+        $currentTimestamp
+    ];
+
+    $insertHistory = insertData($koneksi, 'riwayatakun', $dataHistory);
+
+    if ($insertHistory == true && $updateResult == true) {
+        echo '<script>alert("Berhasil.");</script>';
+        echo '<script>window.location.href = "index.php?page=denah_admin.php";</script>';
+    } else {
+        echo '<script>alert("Gagal.");</script>';
+        echo '<script>window.location.href = "index.php?page=denah_admin.php";</script>';
     }
 }
-?>

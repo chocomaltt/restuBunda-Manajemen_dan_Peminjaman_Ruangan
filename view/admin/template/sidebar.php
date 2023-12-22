@@ -63,7 +63,7 @@
                         <ul class="sub-menu">
                             <li>
                                 <i class='bx bx-book-bookmark'></i>
-                                <a href="index.php?page=peminjaman.php">Antrean Peminjaman</a>
+                                <a href="index.php?page=peminjaman.php">Daftar Peminjaman</a>
                             </li>
                             <li>
                                 <i class='bx bx-book-bookmark'></i>

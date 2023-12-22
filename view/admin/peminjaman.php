@@ -18,6 +18,7 @@
                     <th>Nama Ruang</th>
                     <th>Deskripsi</th>
                     <th>Lantai</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -28,7 +29,7 @@
                     "ruang" => "peminjaman.RuangID = ruang.RuangID",
                     "akun" => "peminjaman.AkunID = akun.AkunID"
                 );
-                $query = readData($koneksi, "peminjaman", '', $joinConditions, 'peminjaman.StatusPeminjaman = "Menunggu Konfirmasi"');
+                $query = readData($koneksi, "peminjaman", '', $joinConditions, 'peminjaman.StatusPeminjaman = "Menunggu Konfirmasi" OR peminjaman.StatusPeminjaman = "Disetujui" ORDER BY peminjaman.StatusPeminjaman DESC, peminjaman.WaktuPinjam ASC;');
                 if (!empty($query)) {
                     foreach ($query as $row) {
                         ?>
@@ -47,6 +48,9 @@
                             </td>
                             <td>
                                 <?= $row['Lantai']; ?>
+                            </td>
+                            <td>
+                                fill here.
                             </td>
                             <td>
                                 <a href="#" role="button"
@@ -72,7 +76,7 @@
         "ruang" => "peminjaman.RuangID = ruang.RuangID",
         "akun" => "peminjaman.AkunID = akun.AkunID"
     );
-    $query = readData($koneksi, "peminjaman", '', $joinConditions, 'peminjaman.StatusPeminjaman = "Menunggu Konfirmasi"');
+    $query = readData($koneksi, "peminjaman", '', $joinConditions);
     if (!empty($query)) {
         foreach ($query as $row) {
             ?>
@@ -119,12 +123,16 @@
                                         value="<?= $row['Keperluan']; ?>" readonly>
                                 </div>
                             </div>
+                            <?php
+                                if($row['StatusPeminjaman']=="Menunggu Konfirmasi"){
+                            ?>
                             <div class="modal-footer">
-                                    <a href="index.php?page=controller/peminjaman.php&aksi=setujui&id<?= $row['PeminjamanID']; ?>" role="button"
+                                    <a href="index.php?page=controller/peminjaman.php&aksi=setujui&id=<?= $row['PeminjamanID']; ?>" role="button"
                                     class="btn btn-warning">Disetujui</a>
-                                    <a href="index.php?page=controller/peminjaman.php&aksi=tolak&id<?= $row['PeminjamanID']; ?>" role="button"
+                                    <a href="index.php?page=controller/peminjaman.php&aksi=tolak&id=<?= $row['PeminjamanID']; ?>" role="button"
                                     class="btn btn-danger">Ditolak</a>
                             </div>
+                            <?php } ?>
                         </form>
                     </div>
                 </div>

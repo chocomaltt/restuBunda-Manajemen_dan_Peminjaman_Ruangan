@@ -66,6 +66,16 @@
     </style>
   </head>
   <body>
+    <?php
+      if(!empty($_GET['idPinjam'])){
+      $joinConditions = [
+        "akun" => "peminjaman.AkunID = akun.AkunID",
+        "ruang" => "peminjaman.RuangID = ruang.RuangID"
+      ];
+      $query = readData($koneksi, "peminjaman", '',$joinConditions, "PeminjamanID = '" . $_GET['idPinjam'] . "'");
+    
+      foreach($query as $row){
+    ?>
     <div class="header">
         <div>
             <img src="assets/img/logo-polinema.png" alt="logo kiri">
@@ -103,18 +113,24 @@
         </p>
       </div>
       <p style="margin-top: 0;">
-        Sehubungan dengan adanya kegiatan Open Recruitment Information
-        Technology Department English Community 2023, kami mohon bantuan
+        Sehubungan dengan adanya kegiatan <!--DIISI KETERANGAN UTK NAMA KEGIATAN--> <?=$row['Keperluan'];?>, kami mohon bantuan
         peminjaman Gedung Teknik Sipil Politeknik Negeri Malang beserta
         fasilitas yang ada didalamnya dan daya listrik di gedung tersebut.
         <br />
     </p>
     <!-- &nbsp; = tab -->
+    <?php
+      $hariMulai = date('N', strtotime($row['WaktuPinjam']));
+      $hariSelesai = date('N', strtotime($row['WaktuKembali']));
+      $tanggalMulai = date('d-m-Y', strtotime($row['WaktuPinjam']));
+      $tanggalSelesai = date('d-m-Y', strtotime($row['WaktuKembali']));
+      $waktuMulai = date('H:i:s', strtotime($row['WaktuPinjam']));
+    ?>
     <p>
         Kegiatan ini akan diselenggarakan pada: <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hari, tanggal&nbsp;&nbsp;: Sabtu, 21 Oktober 2023 dan Minggu, 22 Oktober 2023 <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pukul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 11.00 WIB - selesai <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: LKJ 1, LPR 1, LPR 2, LPR 3, LPR 4, LPR 5, LPR 6, LPR 7 Lantai 7
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hari, tanggal&nbsp;&nbsp;:<!--DIISI TANGGAL MULAI DAN KEMBALI--> <?= $hariMulai.",".$tanggalMulai; ?> dan <?= $hariSelesai.",".$tanggalSelesai; ?> <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pukul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <!--DIISI JAM MULAI--> <?=$waktuMulai;?> - selesai <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?=$row['NamaRuang'];?> Lantai <?=$row['Lantai'];?>
         Gedung Teknik Sipil, Politeknik Negeri Malang <br>
         Demikian surat peminjaman ini kami buat, atas izin dan bantuan yang
         diberikan kami sampaikan terima kasih. <br />
@@ -129,8 +145,8 @@
         <div>
             Hormat kami,<br>
             Ketua Pelaksana <br><br><br><br>
-            Reza Arya Wijaya <br>
-            NIM. 2241720252
+            <?=$row['Nama'];?><!--DIISI NAMA PEMINJAM--> <br>
+            <?=$row['Username'];?> <!--DIISI ID PEMINJAM-->
         </div>
     </div>
     <p style="text-align: center;">
@@ -168,7 +184,7 @@
         2. SATPAM
       </p>
     </div>
-
+<?php } } ?>
     <!-- untuk mengubah dari html ke pdf -->
     <script>
       window.onload = function () {

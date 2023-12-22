@@ -11,7 +11,21 @@ if (!empty($_GET['id'])) {
         'PeminjamanID',
         $id, $updateValues
     );
-    if($query == true){
+    $now = new DateTime();
+    $currentTimestamp = $now->format('Y-m-d H:i:s');
+    
+    $dataHistory = [
+        $idHistory,
+        $_SESSION['idUser'],
+        'ubah',
+        'peminjaman',
+        $id,
+        $currentTimestamp
+    ];
+    
+    $insertHistory = insertData($koneksi, 'riwayatakun', $dataHistory);
+    
+    if ($insertHistory==true && $query == true){
         echo '<script>alert("Berhasil.");</script>';
         echo '<script>window.location.href = "index.php?page=antrean-pinjam.php";</script>';
     } else {

@@ -10,16 +10,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jadwalRuang = cekJadwalRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
     $jadwalPeminjaman = cekPeminjamanRuang($koneksi, $ruangDipinjam, $waktuPinjam, $waktuKembali);
 
-    if (empty($jadwalRuang) && empty($jadwalRuang)) {
+    if (!empty($jadwalRuang) && !empty($jadwalPeminjaman)) {
         $queryiInsert = insertData($koneksi, 'peminjaman', $data);
-        if ($queryiInsert) {
+        $now = new DateTime();
+        $currentTimestamp = $now->format('Y-m-d H:i:s');
+        $idHistory = '';
+        $dataHistory = [
+            $idHistory,
+            $_SESSION['idUser'],
+            'tambah',
+            'peminjaman',
+            $data[2],
+            $currentTimestamp
+        ];
+
+        $insertHistory = insertData($koneksi, 'riwayatakun', $dataHistory);
+
+        if ($insertHistory == true && $queryiInsert == true) {
             // Jika penyisipan berhasil
             echo '<script>alert("Data berhasil disimpan.");</script>';
             echo '<script>window.location.href = "index.php?page=pinjam-ruangan.php";</script>';
         }
         // $waktuinjam = date("Y-m-d H:i:s", strtotime($waktuPinjam));
         // $waktuembali = date("Y-m-d H:i:s", strtotime($waktuKembali));
-    
+
         // // $hariPinjam = date('N', strtotime($waktuPinjam));
         // echo $whereConditionsPeminjaman;
     } else {
