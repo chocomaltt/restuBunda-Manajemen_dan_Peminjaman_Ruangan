@@ -20,8 +20,9 @@
                     <div class="denah">
                         <img src="view/admin/img/<?= $row['File']; ?>" alt="" style="width: 540px; height: 363px; border-radius: 20px;">
                         <div class="lt">
-                            Denah Ruang Lantai <?= $row['DeskripsiLantai']; ?>
-                            <a role="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModalDenah<?= $row['DenahID']; ?>" data-bs-whatever="@mdo">Edit</a>
+                            Denah Ruang Lantai
+                            <?= $row['DeskripsiLantai']; ?>
+                            <a role="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModalDenah<?= $row['DenahID']; ?>" data-bs-whatever="@mdo">Detail</a>
                         </div>
                     </div>
             <?php }
@@ -42,12 +43,12 @@ if (!empty($query)) {
                         <h1 class="modal-title fs-5" id="exampleModalLabel<?= $row['DenahID']; ?>">Edit Denah</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="index.php?page=controller/denah_admin.php&aksi=ubah" method="post">
+                    <form action="index.php?page=controller/denah_admin.php&aksi=ubah" method="post" enctype="multipart/form-data">>
                         <div class="modal-body">
-                            <input type="text" name="data[]" class="form-control" id="id" value="<?= $row['DeskripsiLantai']; ?>">
+                            <input type="hidden" name="data[]" class="form-control" id="id" value="<?= $row['DenahID']; ?>">
                             <div class="mb-3">
                                 <label for="id" class="col-form-label">Upload Denah :</label>
-                                <input type="file" name="data[]" class="form-control" id="id" accept=".png, .jpg, .jpeg, .svg, .heic" value="<?= $row['File']; ?>">
+                                <input type="file" name="file" class="form-control" id="id" accept=".png, .jpg, .jpeg, .svg, .heic">
                             </div>
                             <div class="mb-3">
                                 <label for="id" class="col-form-label">Deskripsi Lantai :</label>
@@ -55,7 +56,7 @@ if (!empty($query)) {
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submitg" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x-lg"></i>Ubah</button>
+                            <button type="submit" class="btn btn-warning" data-bs-dismiss="modal" aria-hidden="true"><i class="bi bi-x-lg"></i>Ubah</button>
                             <button type="reset" class="btn btn-secondary" aria-hidden="true"><i class="bi bi-floppy"></i>Batal</button>
                         </div>
                     </form>
