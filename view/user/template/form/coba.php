@@ -1,6 +1,3 @@
-<?php
-$query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION['idPinjam']);  
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,14 +67,14 @@ $query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION
   </head>
   <body>
     <?php
-    if(!emtpy($_GET['if'])){
-      $query = readData($koneksi, "peminjaman", '', '', "PeminjamanID = '" . $_GET['idPinjam'] . "'");
-    }
-    // $joinConditions = array (
-    //   "ruang" => "peminjaman.RuangID = ruang.RuangID",
-    //   "akun" => "peminjaman.AkunID = akun.AkunID"
-    // );
-    $searchConditions = ""
+      if(!empty($_GET['idPinjam'])){
+      $joinConditions = [
+        "akun" => "peminjaman.AkunID = akun.AkunID",
+        "ruang" => "peminjaman.RuangID = ruang.RuangID"
+      ];
+      $query = readData($koneksi, "peminjaman", '',$joinConditions, "PeminjamanID = '" . $_GET['idPinjam'] . "'");
+    
+      foreach($query as $row){
     ?>
     <div class="header">
         <div>
@@ -116,17 +113,24 @@ $query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION
         </p>
       </div>
       <p style="margin-top: 0;">
-        Sehubungan dengan adanya kegiatan <!--DIISI KETERANGAN UTK NAMA KEGIATAN--> <?=$row['Keterangan'];?>, kami mohon bantuan
+        Sehubungan dengan adanya kegiatan <!--DIISI KETERANGAN UTK NAMA KEGIATAN--> <?=$row['Keperluan'];?>, kami mohon bantuan
         peminjaman Gedung Teknik Sipil Politeknik Negeri Malang beserta
         fasilitas yang ada didalamnya dan daya listrik di gedung tersebut.
         <br />
     </p>
     <!-- &nbsp; = tab -->
+    <?php
+      $hariMulai = date('N', strtotime($row['WaktuPinjam']));
+      $hariSelesai = date('N', strtotime($row['WaktuKembali']));
+      $tanggalMulai = date('d-m-Y', strtotime($row['WaktuPinjam']));
+      $tanggalSelesai = date('d-m-Y', strtotime($row['WaktuKembali']));
+      $waktuMulai = date('H:i:s', strtotime($row['WaktuPinjam']));
+    ?>
     <p>
         Kegiatan ini akan diselenggarakan pada: <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hari, tanggal&nbsp;&nbsp;:<!--DIISI TANGGAL MULAI DAN KEMBALI--> <?=$row['WaktuPinjam'];?> dan <?=$row['WaktuKembali'];?> <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pukul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <!--DIISI JAM MULAI--> <?=$row[''];?> - selesai <br />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?=$row[''];?> Lantai 7
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hari, tanggal&nbsp;&nbsp;:<!--DIISI TANGGAL MULAI DAN KEMBALI--> <?= $hariMulai.",".$tanggalMulai; ?> dan <?= $hariSelesai.",".$tanggalSelesai; ?> <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pukul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <!--DIISI JAM MULAI--> <?=$waktuMulai;?> - selesai <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tempat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?=$row['NamaRuang'];?> Lantai <?=$row['Lantai'];?>
         Gedung Teknik Sipil, Politeknik Negeri Malang <br>
         Demikian surat peminjaman ini kami buat, atas izin dan bantuan yang
         diberikan kami sampaikan terima kasih. <br />
@@ -141,8 +145,8 @@ $query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION
         <div>
             Hormat kami,<br>
             Ketua Pelaksana <br><br><br><br>
-            Reza Arya Wijaya <!--DIISI NAMA PEMINJAM--> <br>
-            NIM. 2241720252 <!--DIISI ID PEMINJAM-->
+            <?=$row['Nama'];?><!--DIISI NAMA PEMINJAM--> <br>
+            <?=$row['Username'];?> <!--DIISI ID PEMINJAM-->
         </div>
     </div>
     <p style="text-align: center;">
@@ -180,7 +184,7 @@ $query = readData($koneksi, "peminjaman" , '' ,'' , 'PeminjamanID =' . $_SESSION
         2. SATPAM
       </p>
     </div>
-
+<?php } } ?>
     <!-- untuk mengubah dari html ke pdf -->
     <script>
       window.onload = function () {
